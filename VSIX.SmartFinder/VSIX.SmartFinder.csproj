@@ -22,7 +22,7 @@
     <VsixType>v3</VsixType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Geeks.VSIX.SmartFinder</RootNamespace>
-    <AssemblyName>VSIX.SmartFinder</AssemblyName>
+    <AssemblyName>GeeksVSIX.SmartFinder</AssemblyName>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
@@ -55,10 +55,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\dotless.1.5.1\lib\dotless.Core.dll</HintPath>
       <Private>True</Private>
-    </Reference>
-    <Reference Include="envdte1001">
-      <HintPath>..\..\..\Program Files (x86)\Common Files\Microsoft Shared\MSEnv\PublicAssemblies\envdte100.dll</HintPath>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="Esent.Interop, Version=1.9.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\ManagedEsent.1.9.4\lib\net40\Esent.Interop.dll</HintPath>
@@ -336,7 +332,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="GeeksProductivityToolsPackage.cs" />
+    <Compile Include="SmartFinderPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\GlobalSettings.cs" />
     <Compile Include="Structures\Gadget.cs" />
@@ -386,10 +382,20 @@
     <None Include="Key.snk" />
   </ItemGroup>
   <ItemGroup>
-    <VSCTCompile Include="GeeksProductivityTools.vsct">
+    <VSCTCompile Include="SmartFinder.vsct">
       <ResourceName>Menus.ctmenu</ResourceName>
       <SubType>Designer</SubType>
     </VSCTCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Preview.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Resources\icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
@@ -420,10 +426,51 @@
   <ItemGroup>
     <Content Include="Lib\dotless.Core.dll" />
     <Content Include="Lib\ICSharpCode.NRefactory.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\icon.png" />
-    <Resource Include="Resources\Preview.png" />
+    <Resource Include="Resources\csproj.png" />
+    <Resource Include="Resources\Package.ico" />
+    <Resource Include="Resources\options1.png" />
+    <Resource Include="Resources\user.png" />
+    <Resource Include="Resources\vb.png" />
+    <Resource Include="Resources\vbproj.png" />
+    <Resource Include="Resources\vdproj.png" />
+    <Resource Include="Resources\xml.png" />
+    <Resource Include="Resources\7z.png" />
+    <Resource Include="Resources\klass.png" />
+    <Resource Include="Resources\less.PNG" />
+    <Resource Include="Resources\property.png" />
+    <Resource Include="Resources\resx.png" />
+    <Resource Include="Resources\sass.png" />
+    <Resource Include="Resources\sitemap.png" />
+    <Resource Include="Resources\sln.png" />
+    <Resource Include="Resources\suo.png" />
+    <Resource Include="Resources\swf.png" />
+    <Resource Include="Resources\ts.PNG" />
+    <Resource Include="Resources\txt.png" />
+    <Resource Include="Resources\dll.png" />
+    <Resource Include="Resources\doc.png" />
+    <Resource Include="Resources\exe.png" />
+    <Resource Include="Resources\generic.png" />
+    <Resource Include="Resources\gif.png" />
+    <Resource Include="Resources\htm.png" />
+    <Resource Include="Resources\icon.bmp" />
+    <Resource Include="Resources\js.png" />
+    <Resource Include="Resources\loading2.gif" />
+    <Resource Include="Resources\method.png" />
+    <Resource Include="Resources\msi.png" />
+    <Resource Include="Resources\options.png" />
+    <Resource Include="Resources\pdb.png" />
+    <Resource Include="Resources\pdf.png" />
+    <Resource Include="Resources\addin.png" />
+    <Resource Include="Resources\asax.png" />
+    <Resource Include="Resources\ascx.png" />
+    <Resource Include="Resources\ashx.png" />
+    <Resource Include="Resources\aspx.png" />
+    <Resource Include="Resources\config.png" />
+    <Resource Include="Resources\cs.png" />
+    <Resource Include="Resources\cshtml.PNG" />
+    <Resource Include="Resources\css-big.png" />
+    <Resource Include="Resources\css.png" />
+    <Resource Include="Resources\designer_cs.png" />
   </ItemGroup>
   <PropertyGroup>
     <UseCodebase>true</UseCodebase>

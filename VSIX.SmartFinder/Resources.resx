@@ -117,19 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="PrivateModifierCleanUpFailed" xml:space="preserve">
-    <value>PrivateModifierRemover: The file path is either null or the file does not exist</value>
-  </data>
-  <data name="WarningCaptionCleanup" xml:space="preserve">
-    <value>Warning - C# Code Cleanup</value>
-  </data>
-  <data name="WarnOnCodeCleanUp" xml:space="preserve">
-    <value>It is strongly recommended that you close all open windows before starting this process.</value>
-  </data>
-  <data name="WarnOnOrganizeUsings" xml:space="preserve">
-    <value>It is strongly recommended that you close all open windows before starting this process.</value>
-  </data>
-  <data name="WarningCaptionOrganizeUsing" xml:space="preserve">
-    <value>Warning - Organize using directives</value>
-  </data>
 </root>

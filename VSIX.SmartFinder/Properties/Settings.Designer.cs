@@ -132,29 +132,5 @@ namespace Geeks.VSIX.SmartFinder.Properties {
                 this["ShowProperties"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string RemoteMachines {
-            get {
-                return ((string)(this["RemoteMachines"]));
-            }
-            set {
-                this["RemoteMachines"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string CleanupChoices {
-            get {
-                return ((string)(this["CleanupChoices"]));
-            }
-            set {
-                this["CleanupChoices"] = value;
-            }
-        }
     }
 }

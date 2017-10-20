@@ -59,50 +59,5 @@ namespace Geeks.VSIX.SmartFinder {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to PrivateModifierRemover: The file path is either null or the file does not exist.
-        /// </summary>
-        public static string PrivateModifierCleanUpFailed {
-            get {
-                return ResourceManager.GetString("PrivateModifierCleanUpFailed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Warning - C# Code Cleanup.
-        /// </summary>
-        public static string WarningCaptionCleanup {
-            get {
-                return ResourceManager.GetString("WarningCaptionCleanup", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Warning - Organize using directives.
-        /// </summary>
-        public static string WarningCaptionOrganizeUsing {
-            get {
-                return ResourceManager.GetString("WarningCaptionOrganizeUsing", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to It is strongly recommended that you close all open windows before starting this process..
-        /// </summary>
-        public static string WarnOnCodeCleanUp {
-            get {
-                return ResourceManager.GetString("WarnOnCodeCleanUp", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to It is strongly recommended that you close all open windows before starting this process..
-        /// </summary>
-        public static string WarnOnOrganizeUsings {
-            get {
-                return ResourceManager.GetString("WarnOnOrganizeUsings", resourceCulture);
-            }
-        }
     }
 }
