@@ -1,0 +1,282 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <!--This is the file that defines the IDs for all the commands exposed by VisualStudio. -->
+  <Extern href="stdidcmd.h" />
+  <!--This header contains the command ids for the menus provided by the shell. -->
+  <Extern href="vsshlids.h" />
+  <!--<Extern href="msobtnid.h" xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" />-->
+  <Commands package="guidGeeksProductivityToolsPkg">
+
+    <Groups>
+      <Group guid="GuidGeeksProductivityToolsCmdSet" id="GeeksMenuGroup" priority="0x0600">
+        <Parent guid="GuidGeeksProductivityToolsCmdSet" id="GeeksSubMenu" />
+      </Group>
+      <!-- Open in M# -->
+      <Group guid="GuidMSharpEditorCmdSet" id="MSharpCodeEditorsContextMenuGroup" priority="0x0000">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_CODEWIN" />
+      </Group>
+      <Group guid="GuidMSharpEditorCmdSet" id="MSharpCodeEditorsContextMenuGroup" priority="0x0000">
+        <Parent guid="guidAspxMenuParent" id="cmidAspxMenu" />
+      </Group>
+      <Group guid="GuidMSharpEditorCmdSet" id="MSharpCodeEditorsContextMenuGroup" priority="0x0000">
+        <Parent guid="guidHtmlMenuParent" id="cmidHtmlMenu" />
+      </Group>
+      <!--/Open in M# -->
+
+      <Group guid="GuidOpenInMSharpSlnCmdSet" id="OpenInMSharpSlnCmdSetContextMenuGroup" priority="0x0001">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_ITEMNODE"/>
+      </Group>
+      <Group guid="GuidCompileTsCmdSet" id="CompileTypeScriptContextMenuGroup" priority="0x0600">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_WEBITEMNODE"/>
+      </Group>
+      <Group guid="GuidRunBatchFileCmdSet" id="RunBatchFileCmdSetContextMenuGroup" priority="0x0001">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_ITEMNODE"/>
+      </Group>
+
+      <!--Clean-up-->
+
+      <Group guid="GuidCleanupCmdSet" id="CleanupContextMenuGroup" priority="0x0000">
+        <Parent guid="guidSolutionExplorerMenu" id="menuidSolutionExplorerItemMenu" />
+      </Group>
+      <Group guid="GuidCleanupCmdSet" id="MySubMenuGroup">
+        <Parent guid="GuidCleanupCmdSet" id="CustomCleanUpCommand" />
+      </Group>
+    </Groups>
+    <!--/Clean-up-->
+
+    <Menus>
+
+      <Menu guid="GuidGeeksProductivityToolsCmdSet" id="GeeksSubMenu" priority="0x0000" type="Menu">
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_TOOLS_OTHER2" />
+        <Strings>
+          <ButtonText>Geeks</ButtonText>
+          <CommandName>Geeks</CommandName>
+        </Strings>
+      </Menu>
+    </Menus>
+
+    <Buttons>
+      <Button guid="GuidCleanupCmdSet" id="CustomCleanUpCommand" priority="0x0100" type="Button">
+        <Parent guid="GuidCleanupCmdSet" id="CleanupContextMenuGroup" />
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <Strings>
+          <ButtonText>Clean up C#...</ButtonText>
+        </Strings>
+      </Button>
+      
+      <Button guid="GuidOpenInMSharpSlnCmdSet" id="cmdOpenInMSharpSln" priority="0x0100" type="Button">
+        <Parent guid="GuidOpenInMSharpSlnCmdSet" id="OpenInMSharpSlnCmdSetContextMenuGroup" />
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <Strings>
+          <CommandName>cmdOpenInMSharpSln</CommandName>
+          <ButtonText>Open in M#</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="GuidRunBatchFileCmdSet" id="cmdRunBatchFile" priority="0x0100" type="Button">
+        <Parent guid="GuidRunBatchFileCmdSet" id="RunBatchFileCmdSetContextMenuGroup" />
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <Strings>
+          <CommandName>cmdRunBatchFile</CommandName>
+          <ButtonText>Run batch file</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="GuidTrimBlankLinesCmdSet" id="cmdTrimBlankLines" priority="0x0100" type="Button">
+        <Parent guid="GuidRunBatchFileCmdSet" id="RunBatchFileCmdSetContextMenuGroup" />
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <Strings>
+          <CommandName>cmdTrimBlankLines</CommandName>
+          <ButtonText>Trim blank lines</ButtonText>
+        </Strings>
+      </Button>
+
+      <Button guid="GuidMSharpEditorCmdSet" id="cmdOpenInMSharp" priority="0x0100" type="Button">
+        <Parent guid="GuidMSharpEditorCmdSet" id="MSharpCodeEditorsContextMenuGroup" />
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <Strings>
+          <CommandName>cmdOpenInMSharp</CommandName>
+          <ButtonText>Open in M#</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="GuidCompileTsCmdSet" id="cmdCompileTsFiles" priority="0x0100" type="Button">
+        <Parent guid="GuidCompileTsCmdSet" id="CompileTypeScriptContextMenuGroup" />
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <CommandFlag>TextChanges</CommandFlag>
+        <Strings>
+          <CommandName>cmdCompileTsFiles</CommandName>
+          <ButtonText>Compile TS into JS</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="GuidGeeksProductivityToolsCmdSet" id="cmdidAttacher" priority="0x0100" type="Button">
+        <Parent guid="GuidGeeksProductivityToolsCmdSet" id="GeeksMenuGroup" />
+        <Strings>
+          <CommandName>cmdidAttacher</CommandName>
+          <ButtonText>Attacher...</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="GuidGeeksProductivityToolsCmdSet" id="cmdidWebFileToggle" priority="0x0100" type="Button">
+        <Parent guid="GuidGeeksProductivityToolsCmdSet" id="GeeksMenuGroup" />
+        <Strings>
+          <CommandName>cmdidWebFileToggle</CommandName>
+          <ButtonText>Web File Toggle</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="GuidGeeksProductivityToolsCmdSet" id="cmdidFixtureFileToggle" priority="0x0100" type="Button">
+        <Parent guid="GuidGeeksProductivityToolsCmdSet" id="GeeksMenuGroup" />
+        <Strings>
+          <CommandName>cmdidFixtureFileToggle</CommandName>
+          <ButtonText>Fixture File Toggle</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="GuidGeeksProductivityToolsCmdSet" id="cmdidFileFinder" priority="0x0100" type="Button">
+        <Parent guid="GuidGeeksProductivityToolsCmdSet" id="GeeksMenuGroup" />
+        <Strings>
+          <CommandName>cmdidFileFinder</CommandName>
+          <ButtonText>File Finder...</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="GuidGeeksProductivityToolsCmdSet" id="cmdidMemberFinder" priority="0x0100" type="Button">
+        <Parent guid="GuidGeeksProductivityToolsCmdSet" id="GeeksMenuGroup" />
+        <Strings>
+          <CommandName>cmdidMemberFinder</CommandName>
+          <ButtonText>Member Finder...</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="GuidGeeksProductivityToolsCmdSet" id="cmdidCSSFinder" priority="0x0100" type="Button">
+        <Parent guid="GuidGeeksProductivityToolsCmdSet" id="GeeksMenuGroup" />
+        <Strings>
+          <CommandName>cmdidCSSFinder</CommandName>
+          <ButtonText>Style Finder...</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="GuidGeeksProductivityToolsCmdSet" id="cmdidGotoNextFoundItem" priority="0x0100" type="Button">
+        <Parent guid="GuidGeeksProductivityToolsCmdSet" id="GeeksMenuGroup" />
+        <Strings>
+          <CommandName>cmdidGotoNextFoundItem</CommandName>
+          <ButtonText>Go to Next Found Item</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="GuidGeeksProductivityToolsCmdSet" id="cmdidGotoPreviousFoundItem" priority="0x0100" type="Button">
+        <Parent guid="GuidGeeksProductivityToolsCmdSet" id="GeeksMenuGroup" />
+        <Strings>
+          <CommandName>cmdidGotoPreviousFoundItem</CommandName>
+          <ButtonText>Go to Previous Found Item</ButtonText>
+        </Strings>
+      </Button>
+    </Buttons>
+  </Commands>
+  <CommandPlacements>
+    <CommandPlacement guid="GuidCleanupCmdSet" id="CleanupContextMenuGroup" priority="0x0000">
+      <Parent guid="guidSolutionExplorerMenu" id="menuidSolutionExplorerFolderMenu" />
+    </CommandPlacement>
+    <CommandPlacement guid="GuidCleanupCmdSet" id="CleanupContextMenuGroup" priority="0x0000">
+      <Parent guid="guidSolutionExplorerMenu" id="menuidSolutionExplorerProjectMenu" />
+    </CommandPlacement>
+    <CommandPlacement guid="GuidCleanupCmdSet" id="CleanupContextMenuGroup" priority="0x0000">
+      <Parent guid="guidSolutionExplorerMenu" id="menuidSolutionExplorerSolutionMenu" />
+    </CommandPlacement>
+    <CommandPlacement guid="GuidCleanupCmdSet" id="CleanupContextMenuGroup" priority="0x0000">
+      <Parent guid="guidSolutionExplorerMenu" id="menuidSolutionExplorerWebProjectMenu" />
+    </CommandPlacement>
+    <CommandPlacement guid="GuidCleanupCmdSet" id="CleanupContextMenuGroup" priority="0x0000">
+      <Parent guid="guidSolutionExplorerMenu" id="menuidSolutionExplorerWebFolderMenu" />
+    </CommandPlacement>
+    <CommandPlacement guid="GuidCleanupCmdSet" id="CleanupContextMenuGroup" priority="0x0000">
+      <Parent guid="guidSolutionExplorerMenu" id="menuidSolutionExplorerWebItemMenu" />
+    </CommandPlacement>
+    <CommandPlacement guid="GuidCleanupCmdSet" id="CleanupContextMenuGroup" priority="0x0000">
+      <Parent guid="guidSolutionExplorerMenu" id="menuidSolutionExplorerWebSubnodeMenu" />
+    </CommandPlacement>
+    <CommandPlacement guid="GuidCleanupCmdSet" id="CleanupContextMenuGroup" priority="0x0000">
+      <Parent guid="guidSolutionExplorerMenu" id="menuidSolutionExplorerAppDesignerFolderMenu" />
+    </CommandPlacement>
+    
+    
+    <CommandPlacement guid="GuidCleanupCmdSet" id="CleanupContextMenuGroup" priority="0x0000">
+      <Parent guid="guidSolutionExplorerMenu" id="menuidCodeWindowContextMenu" />
+    </CommandPlacement>
+    <CommandPlacement guid="GuidCleanupCmdSet" id="CleanupContextMenuGroup" priority="0x0000">
+      <Parent guid="guidSolutionExplorerMenu" id="menuidEasyMdiContextMenu" />
+    </CommandPlacement>
+  </CommandPlacements>
+  <KeyBindings>
+    <KeyBinding guid="GuidGeeksProductivityToolsCmdSet" editor="guidVSStd97" id="cmdidAttacher" key1="P" mod1="Control Alt" />
+    <KeyBinding guid="GuidGeeksProductivityToolsCmdSet" editor="guidVSStd97" id="cmdidWebFileToggle" key1="VK_F7" />
+    <KeyBinding guid="GuidGeeksProductivityToolsCmdSet" editor="guidVSStd97" id="cmdidFixtureFileToggle" key1="VK_F7" mod1="Shift" />
+    <KeyBinding guid="GuidGeeksProductivityToolsCmdSet" editor="guidVSStd97" id="cmdidFileFinder" key1="F" mod1="Control Alt" />
+    <KeyBinding guid="GuidGeeksProductivityToolsCmdSet" editor="guidVSStd97" id="cmdidFileFinder" key1="F" mod1="Control Alt" />
+    <KeyBinding guid="GuidGeeksProductivityToolsCmdSet" editor="guidVSStd97" id="cmdidMemberFinder" key1="M" mod1="Control Alt" />
+    <KeyBinding guid="GuidGeeksProductivityToolsCmdSet" editor="guidVSStd97" id="cmdidCSSFinder" key1="S" mod1="Control Alt" />
+    <KeyBinding guid="GuidGeeksProductivityToolsCmdSet" editor="guidVSStd97" id="cmdidGotoNextFoundItem" key1="VK_F8" mod1="Control" />
+    <KeyBinding guid="GuidGeeksProductivityToolsCmdSet" editor="guidVSStd97" id="cmdidGotoPreviousFoundItem" key1="VK_F7" mod1="Control" />
+  </KeyBindings>
+  <Symbols>
+    <GuidSymbol name="guidAspxMenuParent" value="{D7E8C5E1-BDB8-11D0-9C88-0000F8040A53}">
+      <IDSymbol name="cmidAspxMenu" value="0x035" />
+    </GuidSymbol>
+    <GuidSymbol name="guidHtmlMenuParent" value="{78F03954-2FB8-4087-8CE7-59D71710B3BB}">
+      <IDSymbol name="cmidHtmlMenu" value="0x01" />
+    </GuidSymbol>
+    <GuidSymbol name="guidGeeksProductivityToolsPkg" value="{c6176957-c61c-4beb-8dd8-e7c0170b0bf4}" />
+    <!--Clean-up-->
+    
+    <GuidSymbol name="GuidCleanupCmdSet" value="{53366ba1-1788-42c8-922a-034d6dc89b12}">
+      <IDSymbol name="CleanupContextMenuGroup" value="0x1020" />
+      <IDSymbol name="MySubMenuGroup" value="0x0137" />
+      <IDSymbol name="CustomCleanUpCommand" value="0x0138" />
+    </GuidSymbol>
+
+    <GuidSymbol name="guidVSPackage1CmdSet" value="{cf31800b-e941-4f53-891d-65b895fa033a}">
+      <IDSymbol name="CleanupContextMenuGroup" value="0x1020" />
+    </GuidSymbol>
+    <GuidSymbol name="guidSolutionExplorerMenu" value="{D309F791-903F-11D0-9EFC-00A0C911004F}">
+      <IDSymbol name="menuidSolutionExplorerItemMenu" value="1072" />
+      <IDSymbol name="menuidSolutionExplorerFolderMenu" value="1073" />
+      <IDSymbol name="menuidSolutionExplorerProjectMenu" value="1026" />
+      <IDSymbol name="menuidSolutionExplorerSolutionMenu" value="1043" />
+      <IDSymbol name="menuidSolutionExplorerWebProjectMenu" value="1136" />
+      <IDSymbol name="menuidSolutionExplorerWebFolderMenu" value="1137" />
+      <IDSymbol name="menuidSolutionExplorerWebItemMenu" value="1138" />
+      <IDSymbol name="menuidSolutionExplorerWebSubnodeMenu" value="1140" />
+      <IDSymbol name="menuidSolutionExplorerAppDesignerFolderMenu" value="1107" />
+      <IDSymbol name="menuidCodeWindowContextMenu" value="1037" />
+      <IDSymbol name="menuidEasyMdiContextMenu" value="1067" />
+    </GuidSymbol>
+
+
+    <!--/Clean-up-->
+    <GuidSymbol name="GuidGeeksProductivityToolsCmdSet" value="{8d55b43e-5f7c-44dd-8b02-71c751d8c440}">
+      <IDSymbol name="GeeksMenuGroup" value="0x1020" />
+      <IDSymbol name="GeeksSubMenu" value="0x1021" />
+      <IDSymbol name="cmdidGeeksSubMenu" value="0x1022" />
+      <IDSymbol name="cmdidAttacher" value="0x0100" />
+      <IDSymbol name="cmdidWebFileToggle" value="0x0101" />
+      <IDSymbol name="cmdidFixtureFileToggle" value="0x0107" />
+      <IDSymbol name="cmdidFileFinder" value="0x0102" />
+      <IDSymbol name="cmdidMemberFinder" value="0x0103" />
+      <IDSymbol name="cmdidCSSFinder" value="0x0104" />
+      <IDSymbol name="cmdidGotoNextFoundItem" value="0x0105" />
+      <IDSymbol name="cmdidGotoPreviousFoundItem" value="0x0106" />
+    </GuidSymbol>
+    <GuidSymbol name="GuidCompileTsCmdSet" value="{b280ef5d-91d2-43b7-a482-224d04bcb2ef}">
+      <IDSymbol name="CompileTypeScriptContextMenuGroup" value="0x1020" />
+      <IDSymbol name="cmdCompileTsFiles" value="0x010e" />
+    </GuidSymbol>
+    <GuidSymbol name="GuidMSharpEditorCmdSet" value="{5b066d90-2a03-4176-81cb-a88921683988}">
+      <IDSymbol name="MSharpCodeEditorsContextMenuGroup" value="0x1021" />
+      <IDSymbol name="cmdOpenInMSharp" value="0x0108" />
+    </GuidSymbol>
+    <GuidSymbol name="GuidRunBatchFileCmdSet" value="{af7f4c9e-13a9-4081-b87a-e5016ad1a301}">
+      <IDSymbol name="RunBatchFileCmdSetContextMenuGroup" value="0x1022" />
+      <IDSymbol name="cmdRunBatchFile" value="0x010a" />
+    </GuidSymbol>
+    <GuidSymbol name="GuidTrimBlankLinesCmdSet" value="{9554734e-0c47-4173-96f0-466c505fc3cd}">
+      <IDSymbol name="TrimBlankLinesCmdSetContextMenuGroup" value="0x1022" />
+      <IDSymbol name="cmdTrimBlankLines" value="0x010b" />
+    </GuidSymbol>
+
+    <GuidSymbol name="GuidOpenInMSharpSlnCmdSet" value="{54fb8f31-e4d8-4258-a86d-5b35af2a6208}">
+      <IDSymbol name="OpenInMSharpSlnCmdSetContextMenuGroup" value="0x1024" />
+      <IDSymbol name="cmdOpenInMSharpSln" value="0x010f" />
+    </GuidSymbol>
+  </Symbols>
+</CommandTable>
