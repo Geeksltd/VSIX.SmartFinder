@@ -388,11 +388,11 @@
     </VSCTCompile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Preview.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="Resources\icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Resources\icon.png">
+    <Content Include="Resources\Preview.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
@@ -427,7 +427,6 @@
     <Content Include="Lib\dotless.Core.dll" />
     <Content Include="Lib\ICSharpCode.NRefactory.dll" />
     <Resource Include="Resources\csproj.png" />
-    <Resource Include="Resources\Package.ico" />
     <Resource Include="Resources\options1.png" />
     <Resource Include="Resources\user.png" />
     <Resource Include="Resources\vb.png" />
