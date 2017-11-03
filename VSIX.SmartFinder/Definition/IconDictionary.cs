@@ -6,6 +6,14 @@ namespace Geeks.GeeksProductivityTools.Definition
 {
     public class IconDictionary
     {
+        public static Image MSharpIcon
+        {
+            get
+            {
+                return FileTypesResources.MSharp;
+            }
+        }
+
         public static Dictionary<string, Image> Icons;
         static IconDictionary()
         {

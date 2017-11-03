@@ -127,9 +127,18 @@ namespace GeeksAddin.FileFinder
         }
 
         // -------------------------------------------- </Drawing Items> --------------------------------------------- //
+        const string MSharp_File1 = "@Model";
+        const string MSharp_File2 = "@UI";
 
         Image GetItemImage(Item item)
         {
+            var fileName = System.IO.Path.GetFileName(item.FileName);
+
+            if (string.Compare(MSharp_File1, fileName, true) == 0 || string.Compare(MSharp_File2, fileName, true) == 0)
+            {
+                return IconDictionary.MSharpIcon;
+            }
+
             if (item.Icon == IconType.Auto)
             {
                 var file = item.FileName.ToLowerInvariant();
