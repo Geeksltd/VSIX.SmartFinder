@@ -1,4 +1,4 @@
-namespace Geeks.GeeksProductivityTools.FileFinder
+namespace Geeks.VSIX.SmartFinder.FileFinder
 {
     public class FinderLiterals
     {

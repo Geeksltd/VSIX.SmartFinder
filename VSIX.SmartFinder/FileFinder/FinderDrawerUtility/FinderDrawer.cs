@@ -1,10 +1,10 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using GeeksAddin.FileFinder;
-using Geeks.GeeksProductivityTools.Definition;
+using Geeks.VSIX.SmartFinder.Definition;
+using Geeks.VSIX.SmartFinder.FileFinder;
 
-namespace Geeks.GeeksProductivityTools.FileFinder.FinderDrawerUtility
+namespace Geeks.VSIX.SmartFinder.FileFinder.FinderDrawerUtility
 {
     internal class FinderDrawer
     {

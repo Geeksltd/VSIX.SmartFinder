@@ -1,9 +1,9 @@
 using System;
 using System.IO;
 using System.Linq;
-using Geeks.GeeksProductivityTools.Definition;
+using Geeks.VSIX.SmartFinder.Definition;
 
-namespace GeeksAddin.FileFinder
+namespace Geeks.VSIX.SmartFinder.FileFinder
 {
     internal class Item : IEquatable<Item>
     {

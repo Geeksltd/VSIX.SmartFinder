@@ -1,9 +1,10 @@
 using System;
 using System.IO;
 using EnvDTE80;
-using Geeks.GeeksProductivityTools;
+using GeeksAddin;
+using Geeks.VSIX.SmartFinder.Base;
 
-namespace GeeksAddin.FileToggle
+namespace Geeks.VSIX.SmartFinder.FileToggle
 {
     internal class FixtureFileToggleGadget : Gadget
     {

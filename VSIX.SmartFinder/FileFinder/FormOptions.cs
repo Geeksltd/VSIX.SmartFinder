@@ -2,7 +2,7 @@ using Geeks.VSIX.SmartFinder.Properties;
 using System;
 using System.Windows.Forms;
 
-namespace GeeksAddin.FileFinder
+namespace Geeks.VSIX.SmartFinder.FileFinder
 {
     public partial class FormOptions : Form
     {

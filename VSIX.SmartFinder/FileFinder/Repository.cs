@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace GeeksAddin.FileFinder
+namespace Geeks.VSIX.SmartFinder.FileFinder
 {
     internal class Repository
     {

@@ -1,13 +1,13 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Geeks.GeeksProductivityTools.Definition;
-using Geeks.GeeksProductivityTools.FileFinder.FileDrawers;
-using Geeks.GeeksProductivityTools.FileFinder.FinderDrawerUtility;
-using Geeks.GeeksProductivityTools.FileFinder.MemberDrawers;
-using Geeks.VSIX.SmartFinder.FileFinder;
+using Geeks.VSIX.SmartFinder.Definition;
+using Geeks.VSIX.SmartFinder.FileFinder.FileDrawers;
+using Geeks.VSIX.SmartFinder.FileFinder.FinderDrawerUtility;
+using Geeks.VSIX.SmartFinder.FileFinder.MemberDrawers;
+using Geeks.VSIX.SmartFinder.FileFinder.FileFinder;
 
-namespace GeeksAddin.FileFinder
+namespace Geeks.VSIX.SmartFinder.FileFinder
 {
     public class FlickerFreeListBox : ListBox
     {
@@ -127,8 +127,8 @@ namespace GeeksAddin.FileFinder
         }
 
         // -------------------------------------------- </Drawing Items> --------------------------------------------- //
-        const string MSharp_File1 = "@Model";
-        const string MSharp_File2 = "@UI";
+        const string MSharp_File1 = "@Model.cs";
+        const string MSharp_File2 = "@UI.cs";
 
         Image GetItemImage(Item item)
         {

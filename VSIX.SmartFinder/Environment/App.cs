@@ -1,8 +1,9 @@
 using System;
 using EnvDTE80;
 using Microsoft.VisualStudio.Shell.Interop;
+using Geeks.GeeksProductivityTools;
 
-namespace Geeks.GeeksProductivityTools
+namespace Geeks.VSIX.SmartFinder.Base
 {
     public static class App
     {
@@ -14,7 +15,7 @@ namespace Geeks.GeeksProductivityTools
         {
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(GlobalExceptionHandlerEvent);
 
-            DTE = (DTE2)GeeksProductivityToolsPackage.GetGlobalService(typeof(SDTE));
+            DTE = (DTE2)SmartFinderPackage.GetGlobalService(typeof(SDTE));
 
             Settings = new GlobalSettings();
             Settings.Load();

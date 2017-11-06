@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Drawing;
 using Geeks.VSIX.SmartFinder.FileFinder;
+using Geeks.VSIX.SmartFinder.FileFinder.FileFinder;
 
-namespace Geeks.GeeksProductivityTools.Definition
+namespace Geeks.VSIX.SmartFinder.Definition
 {
     public class IconDictionary
     {

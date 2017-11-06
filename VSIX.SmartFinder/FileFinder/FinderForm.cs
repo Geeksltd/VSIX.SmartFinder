@@ -1,4 +1,4 @@
-using Geeks.GeeksProductivityTools.Definition;
+using Geeks.VSIX.SmartFinder.Definition;
 using Geeks.VSIX.SmartFinder.Properties;
 using System;
 using System.ComponentModel;
@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace GeeksAddin.FileFinder
+namespace Geeks.VSIX.SmartFinder.FileFinder
 {
     partial class FinderForm : Form
     {

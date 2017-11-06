@@ -1,6 +1,8 @@
+using Geeks.VSIX.SmartFinder.FileFinder;
+using GeeksAddin;
 using System.Linq;
 
-namespace GeeksAddin.FileFinder
+namespace Geeks.VSIX.SmartFinder.GoTo
 {
     internal class GotoPreviousFoundItemGadget : Gadget
     {

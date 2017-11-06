@@ -1,9 +1,9 @@
 using System.Drawing;
 using System.Windows.Forms;
-using Geeks.GeeksProductivityTools.FileFinder.FinderDrawerUtility;
-using GeeksAddin.FileFinder;
+using Geeks.VSIX.SmartFinder.FileFinder.FinderDrawerUtility;
+using Geeks.VSIX.SmartFinder.FileFinder;
 
-namespace Geeks.GeeksProductivityTools.FileFinder.FileDrawers
+namespace Geeks.VSIX.SmartFinder.FileFinder.FileDrawers
 {
     internal class StyleSheetDrawer : FinderDrawer
     {

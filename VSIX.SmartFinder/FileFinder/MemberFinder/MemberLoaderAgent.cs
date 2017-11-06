@@ -6,12 +6,12 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using Geeks.GeeksProductivityTools.Definition;
+using Geeks.VSIX.SmartFinder.Definition;
 using ICSharpCode.NRefactory;
 using ICSharpCode.NRefactory.Ast;
 using Geeks.VSIX.SmartFinder.Properties;
 
-namespace GeeksAddin.FileFinder
+namespace Geeks.VSIX.SmartFinder.FileFinder
 {
     class MemberLoaderAgent : Loader
     {

@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace Geeks.GeeksProductivityTools.FileFinder
+namespace Geeks.VSIX.SmartFinder.FileFinder
 {
     internal class StyleFinderUtils
     {

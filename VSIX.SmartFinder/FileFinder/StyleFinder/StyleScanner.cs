@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using GeeksAddin.FileFinder;
 
-namespace Geeks.GeeksProductivityTools.FileFinder
+namespace Geeks.VSIX.SmartFinder.FileFinder
 {
     internal class StyleScanner
     {

@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace Geeks.GeeksProductivityTools
+namespace Geeks.VSIX.SmartFinder.Base
 {
     internal static class ErrorNotification
     {

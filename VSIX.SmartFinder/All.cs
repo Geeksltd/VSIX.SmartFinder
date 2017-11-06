@@ -1,9 +1,11 @@
+using Geeks.VSIX.SmartFinder.FileFinder;
+using Geeks.VSIX.SmartFinder.FileToggle;
+using Geeks.VSIX.SmartFinder.GoTo;
+using GeeksAddin;
 using System.Collections.Generic;
 ////using GeeksAddin.Attacher;
-using GeeksAddin.FileFinder;
-using GeeksAddin.FileToggle;
 
-namespace GeeksAddin
+namespace Geeks.VSIX.SmartFinder
 {
     public static class All
     {

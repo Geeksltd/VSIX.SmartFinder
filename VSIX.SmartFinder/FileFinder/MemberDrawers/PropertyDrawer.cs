@@ -1,9 +1,9 @@
 using System.Drawing;
 using System.Windows.Forms;
-using Geeks.GeeksProductivityTools.FileFinder.FinderDrawerUtility;
+using Geeks.VSIX.SmartFinder.FileFinder.FinderDrawerUtility;
 using Geeks.VSIX.SmartFinder.Properties;
 
-namespace Geeks.GeeksProductivityTools.FileFinder.MemberDrawers
+namespace Geeks.VSIX.SmartFinder.FileFinder.MemberDrawers
 {
     internal class PropertyDrawer : FinderDrawer
     {

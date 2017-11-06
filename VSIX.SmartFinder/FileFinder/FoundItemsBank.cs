@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace GeeksAddin.FileFinder
+namespace Geeks.VSIX.SmartFinder.FileFinder
 {
     internal static class FoundItemsBank
     {

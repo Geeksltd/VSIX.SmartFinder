@@ -3,11 +3,11 @@ using System.Drawing;
 using System.Linq;
 using EnvDTE;
 using EnvDTE80;
-using Geeks.GeeksProductivityTools.FileFinder;
 using Geeks.VSIX.SmartFinder.Properties;
-using Geeks.GeeksProductivityTools;
+using GeeksAddin;
+using Geeks.VSIX.SmartFinder.Base;
 
-namespace GeeksAddin.FileFinder
+namespace Geeks.VSIX.SmartFinder.FileFinder
 {
     internal abstract class FinderBaseGadget : Gadget
     {

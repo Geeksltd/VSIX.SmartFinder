@@ -1,4 +1,4 @@
-namespace Geeks.GeeksProductivityTools.Definition
+namespace Geeks.VSIX.SmartFinder.Definition
 {
     public static class FileExtensionTypes
     {

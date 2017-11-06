@@ -14,8 +14,10 @@ using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Text.Operations;
 using Microsoft.VisualStudio.Utilities;
+using Geeks.GeeksProductivityTools;
+using Geeks.VSIX.SmartFinder.Base;
 
-namespace Geeks.GeeksProductivityTools
+namespace Geeks.VSIX.SmartFinder.GoTo
 {
     [Export(typeof(IKeyProcessorProvider))]
     [TextViewRole(PredefinedTextViewRoles.Document)]

@@ -2,14 +2,15 @@ using System;
 using System.ComponentModel.Design;
 using System.Runtime.InteropServices;
 using EnvDTE80;
-using GeeksAddin;
-using GeeksAddin.FileFinder;
-using GeeksAddin.FileToggle;
 using Microsoft.VisualStudio.ComponentModelHost;
 using Microsoft.VisualStudio.Shell;
-using System.Linq;
+using Geeks.VSIX.SmartFinder.FileFinder;
+using Geeks.VSIX.SmartFinder.GoTo;
+using Geeks.VSIX.SmartFinder.FileToggle;
+using Geeks.GeeksProductivityTools;
+using Geeks.VSIX.SmartFinder.Base;
 
-namespace Geeks.GeeksProductivityTools
+namespace Geeks.VSIX.SmartFinder
 {
     [ProvideAutoLoad("ADFC4E64-0397-11D1-9F4E-00A0C911004F")]    // Microsoft.VisualStudio.VSConstants.UICONTEXT_NoSolution
     [PackageRegistration(UseManagedResourcesOnly = true)]
@@ -17,16 +18,17 @@ namespace Geeks.GeeksProductivityTools
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [ProvideOptionPage(typeof(OptionsPage), "Geeks productivity tools", "General", 0, 0, true)]
     [Guid(GuidList.GuidGeeksProductivityToolsPkgString)]
-    public sealed class GeeksProductivityToolsPackage : Package
+    ////[ProvideService(typeof(SMyService))]
+    public sealed class SmartFinderPackage : Package
     {
-        public GeeksProductivityToolsPackage() { }
+        public SmartFinderPackage() { }
 
         // Strongly reference events so that it's not GC'd
         EnvDTE.DocumentEvents docEvents;
         EnvDTE.SolutionEvents solEvents;
         EnvDTE.Events events;
 
-        public static GeeksProductivityToolsPackage Instance { get; private set; }
+        public static SmartFinderPackage Instance { get; private set; }
 
         protected override void Initialize()
         {
@@ -42,9 +44,21 @@ namespace Geeks.GeeksProductivityTools
 
             if (null != menuCommandService)
             {
-                menuCommandService.AddCommand(new MenuCommand(CallWebFileToggle,
-                                               new CommandID(GuidList.GuidGeeksProductivityToolsCmdSet,
-                                                            (int)PkgCmdIDList.CmdidWebFileToggle)));
+                ////var mainMenu = new CommandID(GuidList.GuidGeeksProductivityToolsCmdSet, (int)PkgCmdIDList.CmdidMainMenu);
+                ////var founded = menuCommandService.FindCommand(mainMenu);
+                ////if (founded == null)
+                ////{
+                ////    var menuCommand2 = new OleMenuCommand(null, mainMenu);
+                ////    menuCommandService.AddCommand(menuCommand2);
+                ////    menuCommand2.BeforeQueryStatus += MenuCommand2_BeforeQueryStatus;
+                ////    menuCommand2.Visible = false;
+                ////}
+                var menuCommand = new OleMenuCommand(CallWebFileToggle,
+                    new CommandID(GuidList.GuidGeeksProductivityToolsCmdSet,
+                                                            (int)PkgCmdIDList.CmdidWebFileToggle));
+                menuCommand.BeforeQueryStatus += MenuCommand_BeforeQueryStatus;
+
+                menuCommandService.AddCommand(menuCommand);
 
                 menuCommandService.AddCommand(new MenuCommand(CallFixtureFileToggle,
                                                new CommandID(GuidList.GuidGeeksProductivityToolsCmdSet,
@@ -80,6 +94,43 @@ namespace Geeks.GeeksProductivityTools
             solEvents = events.SolutionEvents;
             docEvents.DocumentSaved += DocumentEvents_DocumentSaved;
             solEvents.Opened += delegate { App.Initialize(GetDialogPage(typeof(OptionsPage)) as OptionsPage); };
+
+            ////ServiceCreatorCallback callback = new ServiceCreatorCallback(CreateService);
+
+            ////((IServiceContainer)this).AddService(typeof(SMyService), callback);
+        }
+
+        ////private object CreateService(IServiceContainer container, Type serviceType)
+        ////{
+        ////    if (typeof(SMyService) == serviceType)
+        ////        return new MyService(this);
+        ////    return null;
+        ////}
+
+        private void MenuCommand2_BeforeQueryStatus(object sender, EventArgs e)
+        {
+            var menuCommandService = GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
+            const uint CmdidAttacher = 0x100;
+            var CmdidAttacherId = new CommandID(GuidList.GuidGeeksProductivityToolsCmdSet, (int)CmdidAttacher);
+            var mainMenuCommand = menuCommandService.FindCommand(CmdidAttacherId);
+
+            var cmd = sender as OleMenuCommand;
+            if (mainMenuCommand == null)
+            {
+                cmd.Visible = true;
+            }
+        }
+
+        protected void MenuCommand_BeforeQueryStatus(object sender, EventArgs e)
+        {
+            var cmd = sender as OleMenuCommand;
+            //var activeDoc = App.DTE.ActiveDocument;
+
+            //if (null != cmd && activeDoc != null)
+            //{
+            //    var fileName = App.DTE.ActiveDocument.FullName.ToUpper();
+            //    cmd.Visible = true;
+            //}
         }
 
         void DocumentEvents_DocumentSaved(EnvDTE.Document document)

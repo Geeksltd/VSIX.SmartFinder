@@ -1,7 +1,7 @@
 using System.IO;
 using Newtonsoft.Json;
 
-namespace Geeks.GeeksProductivityTools
+namespace Geeks.VSIX.SmartFinder.Base
 {
     public class GlobalSettings
     {
@@ -43,7 +43,7 @@ namespace Geeks.GeeksProductivityTools
                 return new GlobalSettings();
 
             var json = File.ReadAllText(FilePath);
-            Geeks.GeeksProductivityTools.App.Settings = JsonConvert.DeserializeObject<GlobalSettings>(json);
+            App.Settings = JsonConvert.DeserializeObject<GlobalSettings>(json);
 
             return App.Settings;
         }

@@ -2,7 +2,7 @@
 // MUST match guids.h
 using System;
 
-namespace Geeks.GeeksProductivityTools
+namespace Geeks.VSIX.SmartFinder
 {
     static class GuidList
     {

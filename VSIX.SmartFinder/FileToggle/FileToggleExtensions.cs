@@ -1,9 +1,9 @@
 using System;
 using System.IO;
 using System.Linq;
-using Geeks.GeeksProductivityTools.Definition;
+using Geeks.VSIX.SmartFinder.Definition;
 
-namespace Geeks.GeeksProductivityTools.FileToggle
+namespace Geeks.VSIX.SmartFinder.FileToggle
 {
     internal static class FileToggleExtensions
     {

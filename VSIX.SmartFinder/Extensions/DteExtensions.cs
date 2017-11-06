@@ -5,7 +5,7 @@ namespace GeeksAddin
     using System.Linq;
     using EnvDTE;
     using EnvDTE80;
-    using Geeks.GeeksProductivityTools;
+    using Geeks.VSIX.SmartFinder.Base;
 
     static class DteExtensions
     {

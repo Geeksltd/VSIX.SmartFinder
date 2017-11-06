@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.Shell;
+using Geeks.GeeksProductivityTools;
 
-namespace Geeks.GeeksProductivityTools
+namespace Geeks.VSIX.SmartFinder.Base
 {
     public static class ErrorList
     {
@@ -52,7 +53,7 @@ namespace Geeks.GeeksProductivityTools
         {
             if (_errorListProvider == null)
             {
-                _errorListProvider = new ErrorListProvider(GeeksProductivityToolsPackage.Instance);
+                _errorListProvider = new ErrorListProvider(SmartFinderPackage.Instance);
             }
 
             // Check if this error is already in the error list, don't report more than once  

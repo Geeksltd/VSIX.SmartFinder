@@ -1,6 +1,6 @@
-using Geeks.GeeksProductivityTools.Definition;
+using Geeks.VSIX.SmartFinder.Definition;
 
-namespace GeeksAddin.FileFinder
+namespace Geeks.VSIX.SmartFinder.FileFinder
 
 {
     partial class FinderForm
@@ -38,7 +38,7 @@ namespace GeeksAddin.FileFinder
             this.mnuOptions = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.btnOptions = new System.Windows.Forms.Button();
             this.btnShowOptions = new System.Windows.Forms.Button();
-            this.lstFiles = new GeeksAddin.FileFinder.FlickerFreeListBox();
+            this.lstFiles = new FlickerFreeListBox();
             this.SuspendLayout();
             // 
             // btnSelect
@@ -84,7 +84,7 @@ namespace GeeksAddin.FileFinder
             // btnOptions
             // 
             this.btnOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnOptions.Image = global::Geeks.VSIX.SmartFinder.FileFinder.FileTypesResources.options;
+            this.btnOptions.Image = global::Geeks.VSIX.SmartFinder.FileFinder.FileFinder.FileTypesResources.options;
             this.btnOptions.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnOptions.Location = new System.Drawing.Point(12, 418);
             this.btnOptions.Name = "btnOptions";
@@ -153,7 +153,7 @@ namespace GeeksAddin.FileFinder
 
         System.Windows.Forms.Button btnSelect;
         System.Windows.Forms.Button btnCancel;
-        FileFinder.FlickerFreeListBox lstFiles;
+        FlickerFreeListBox lstFiles;
         System.Windows.Forms.TextBox txtSearchBox;
         System.Windows.Forms.Button btnOptions;
         public System.Windows.Forms.ContextMenuStrip mnuOptions;

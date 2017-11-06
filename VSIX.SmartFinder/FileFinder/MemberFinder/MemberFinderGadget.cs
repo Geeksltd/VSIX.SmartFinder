@@ -1,6 +1,6 @@
-using Geeks.GeeksProductivityTools.FileFinder;
+using Geeks.VSIX.SmartFinder.FileFinder;
 
-namespace GeeksAddin.FileFinder
+namespace Geeks.VSIX.SmartFinder.FileFinder
 {
     internal class MemberFinderGadget : FinderBaseGadget
     {

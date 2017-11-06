@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Geeks.VSIX.SmartFinder.FileFinder {
+namespace Geeks.VSIX.SmartFinder.FileFinder.FileFinder {
     using System;
     
     

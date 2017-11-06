@@ -1,4 +1,4 @@
-namespace GeeksAddin.FileFinder
+namespace Geeks.VSIX.SmartFinder.FileFinder.FileFinder
 {
     internal class WordRange
     {

@@ -2,13 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using System.Web.Script.Serialization;
 using EnvDTE;
 using EnvDTE80;
-using Geeks.GeeksProductivityTools;
 using Microsoft.VisualStudio.Shell.Interop;
+using Geeks.VSIX.SmartFinder.Base;
+using Geeks.VSIX.SmartFinder;
 
 namespace GeeksAddin
 {
@@ -38,7 +36,7 @@ namespace GeeksAddin
             app.StatusBar.Text = "No solution or project is identified. app.Solution is " +
                 (app.Solution?.GetType().Name).Or("NULL");
 
-            App.DTE = (DTE2)GeeksProductivityToolsPackage.GetGlobalService(typeof(SDTE));
+            App.DTE = (DTE2)SmartFinderPackage.GetGlobalService(typeof(SDTE));
 
             return null;
         }

@@ -1,7 +1,7 @@
 // PkgCmdID.cs
 // MUST match PkgCmdID.h
 
-namespace Geeks.GeeksProductivityTools
+namespace Geeks.VSIX.SmartFinder
 {
     static class PkgCmdIDList
     {

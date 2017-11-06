@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace GeeksAddin.FileFinder
+namespace Geeks.VSIX.SmartFinder.FileFinder
 {
     class FileLoaderAgent : Loader
     {
@@ -109,7 +109,7 @@ namespace GeeksAddin.FileFinder
                             {
                                 LineNumber = index + 1,
                                 Phrase = className,
-                                Icon = Geeks.GeeksProductivityTools.Definition.IconType.Class
+                                Icon = Geeks.VSIX.SmartFinder.Definition.IconType.Class
                             };
                         }
                     }

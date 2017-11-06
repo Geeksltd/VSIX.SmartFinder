@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using EnvDTE;
 using EnvDTE80;
+using Geeks.VSIX.SmartFinder.Base;
 
 namespace Geeks.GeeksProductivityTools.Utils
 {
