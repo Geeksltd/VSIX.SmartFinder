@@ -7,64 +7,64 @@
   <!--<Extern href="msobtnid.h" xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" />-->
   <Commands package="guidGeeksProductivityToolsPkg">
     <Groups>
-      <Group guid="GuidGeeksProductivityToolsCmdSet" id="GeeksMenuGroup" priority="0x0600">
-        <Parent guid="GuidGeeksProductivityToolsCmdSet" id="GeeksSubMenu" />
+      <Group guid="GuidGeeksProductivityToolsCmdSet" id="GeeksMenuGroup1" priority="0x0600">
+        <Parent guid="GuidGeeksProductivityToolsCmdSet" id="GeeksSubMenu5" />
       </Group>
     </Groups>
-    <Menus>
+    <!--<Menus>
       <Menu guid="GuidGeeksProductivityToolsCmdSet" id="GeeksSubMenu" priority="0x0000" type="Menu">
         <Parent guid="guidSHLMainMenu" id="IDG_VS_TOOLS_OTHER2" />
         <Strings>
-          <ButtonText>Geeks</ButtonText>
-          <CommandName>Geeks</CommandName>
+          <ButtonText>Geeks2</ButtonText>
+          <CommandName>Geeks2</CommandName>
         </Strings>
       </Menu>
-    </Menus>
+    </Menus>-->
     <Buttons>
       <Button guid="GuidGeeksProductivityToolsCmdSet" id="cmdidWebFileToggle" priority="0x0100" type="Button">
-        <Parent guid="GuidGeeksProductivityToolsCmdSet" id="GeeksMenuGroup" />
+        <Parent guid="GuidGeeksProductivityToolsCmdSet" id="GeeksMenuGroup1" />
         <Strings>
           <CommandName>cmdidWebFileToggle</CommandName>
-          <ButtonText>Web File Toggle</ButtonText>
+          <ButtonText>Web File Toggle2</ButtonText>
         </Strings>
       </Button>
       <Button guid="GuidGeeksProductivityToolsCmdSet" id="cmdidFixtureFileToggle" priority="0x0100" type="Button">
-        <Parent guid="GuidGeeksProductivityToolsCmdSet" id="GeeksMenuGroup" />
+        <Parent guid="GuidGeeksProductivityToolsCmdSet" id="GeeksMenuGroup1" />
         <Strings>
           <CommandName>cmdidFixtureFileToggle</CommandName>
           <ButtonText>Fixture File Toggle</ButtonText>
         </Strings>
       </Button>
       <Button guid="GuidGeeksProductivityToolsCmdSet" id="cmdidFileFinder" priority="0x0100" type="Button">
-        <Parent guid="GuidGeeksProductivityToolsCmdSet" id="GeeksMenuGroup" />
+        <Parent guid="GuidGeeksProductivityToolsCmdSet" id="GeeksMenuGroup1" />
         <Strings>
           <CommandName>cmdidFileFinder</CommandName>
           <ButtonText>File Finder...</ButtonText>
         </Strings>
       </Button>
       <Button guid="GuidGeeksProductivityToolsCmdSet" id="cmdidMemberFinder" priority="0x0100" type="Button">
-        <Parent guid="GuidGeeksProductivityToolsCmdSet" id="GeeksMenuGroup" />
+        <Parent guid="GuidGeeksProductivityToolsCmdSet" id="GeeksMenuGroup1" />
         <Strings>
           <CommandName>cmdidMemberFinder</CommandName>
           <ButtonText>Member Finder...</ButtonText>
         </Strings>
       </Button>
       <Button guid="GuidGeeksProductivityToolsCmdSet" id="cmdidCSSFinder" priority="0x0100" type="Button">
-        <Parent guid="GuidGeeksProductivityToolsCmdSet" id="GeeksMenuGroup" />
+        <Parent guid="GuidGeeksProductivityToolsCmdSet" id="GeeksMenuGroup1" />
         <Strings>
           <CommandName>cmdidCSSFinder</CommandName>
           <ButtonText>Style Finder...</ButtonText>
         </Strings>
       </Button>
       <Button guid="GuidGeeksProductivityToolsCmdSet" id="cmdidGotoNextFoundItem" priority="0x0100" type="Button">
-        <Parent guid="GuidGeeksProductivityToolsCmdSet" id="GeeksMenuGroup" />
+        <Parent guid="GuidGeeksProductivityToolsCmdSet" id="GeeksMenuGroup1" />
         <Strings>
           <CommandName>cmdidGotoNextFoundItem</CommandName>
           <ButtonText>Go to Next Found Item</ButtonText>
         </Strings>
       </Button>
       <Button guid="GuidGeeksProductivityToolsCmdSet" id="cmdidGotoPreviousFoundItem" priority="0x0100" type="Button">
-        <Parent guid="GuidGeeksProductivityToolsCmdSet" id="GeeksMenuGroup" />
+        <Parent guid="GuidGeeksProductivityToolsCmdSet" id="GeeksMenuGroup1" />
         <Strings>
           <CommandName>cmdidGotoPreviousFoundItem</CommandName>
           <ButtonText>Go to Previous Found Item</ButtonText>
@@ -73,7 +73,6 @@
     </Buttons>
   </Commands>
   <KeyBindings>
-    <KeyBinding guid="GuidGeeksProductivityToolsCmdSet" editor="guidVSStd97" id="cmdidAttacher" key1="P" mod1="Control Alt" />
     <KeyBinding guid="GuidGeeksProductivityToolsCmdSet" editor="guidVSStd97" id="cmdidWebFileToggle" key1="VK_F7" />
     <KeyBinding guid="GuidGeeksProductivityToolsCmdSet" editor="guidVSStd97" id="cmdidFixtureFileToggle" key1="VK_F7" mod1="Shift" />
     <KeyBinding guid="GuidGeeksProductivityToolsCmdSet" editor="guidVSStd97" id="cmdidFileFinder" key1="F" mod1="Control Alt" />
@@ -87,10 +86,8 @@
     <GuidSymbol name="guidGeeksProductivityToolsPkg" value="{c6176957-c61c-4beb-8dd8-e7c0170b0bf4}" />
     
     <GuidSymbol name="GuidGeeksProductivityToolsCmdSet" value="{8d55b43e-5f7c-44dd-8b02-71c751d8c440}">
-      <IDSymbol name="GeeksMenuGroup" value="0x1020" />
-      <IDSymbol name="GeeksSubMenu" value="0x1021" />
-      <IDSymbol name="cmdidGeeksSubMenu" value="0x1022" />
-      <IDSymbol name="cmdidAttacher" value="0x0100" />
+      <IDSymbol name="GeeksMenuGroup1" value="0x1020" />
+      <IDSymbol name="GeeksSubMenu5" value="0x3021" />
       <IDSymbol name="cmdidWebFileToggle" value="0x0101" />
       <IDSymbol name="cmdidFixtureFileToggle" value="0x0107" />
       <IDSymbol name="cmdidFileFinder" value="0x0102" />

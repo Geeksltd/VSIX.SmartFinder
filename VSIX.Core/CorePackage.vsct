@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <!--This is the file that defines the IDs for all the commands exposed by VisualStudio. -->
+  <Extern href="stdidcmd.h" />
+  <!--This header contains the command ids for the menus provided by the shell. -->
+  <Extern href="vsshlids.h" />
+  <!--<Extern href="msobtnid.h" xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" />-->
+  <Commands package="guidGeeksProductivityToolsPkg">
+    <Groups>
+      <Group guid="GuidGeeksProductivityToolsCmdSet" id="GeeksMenuGroup3" priority="0x0600">
+        <Parent guid="GuidGeeksProductivityToolsCmdSet" id="GeeksSubMenu5" />
+      </Group>
+    </Groups>
+    <Menus>
+      <Menu guid="GuidGeeksProductivityToolsCmdSet" id="GeeksSubMenu5" priority="0x0000" type="Menu">
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_TOOLS_OTHER2" />
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <Strings>
+          <ButtonText>Geeks</ButtonText>
+          <CommandName>Geeks</CommandName>
+        </Strings>
+      </Menu>
+    </Menus>
+  </Commands>
+  <Symbols>
+    <GuidSymbol name="guidGeeksProductivityToolsPkg" value="{54F0BFED-B628-47FC-82A5-EBBF9BE03F9B}" />
+
+    <GuidSymbol name="GuidGeeksProductivityToolsCmdSet" value="{8d55b43e-5f7c-44dd-8b02-71c751d8c440}">
+      <IDSymbol name="GeeksMenuGroup3" value="0x3020" />
+      <IDSymbol name="GeeksSubMenu5" value="0x3021" />
+    </GuidSymbol>
+  </Symbols>
+</CommandTable>
