@@ -7,12 +7,12 @@
   <!--<Extern href="msobtnid.h" xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" />-->
   <Commands package="guidGeeksProductivityToolsPkg">
     <Groups>
-      <Group guid="GuidGeeksProductivityToolsCmdSet" id="GeeksMenuGroup" priority="0x0600">
-        <Parent guid="GuidGeeksProductivityToolsCmdSet" id="GeeksSubMenu" />
+      <Group guid="GuidGeeksProductivityToolsCmdSet" id="GeeksMenuGroup" priority="0x0500">
+        <Parent guid="GuidGeeksProductivityToolsCmdSet" id="GeeksSubMenu2" />
       </Group>
     </Groups>
     <Menus>
-      <Menu guid="GuidGeeksProductivityToolsCmdSet" id="GeeksSubMenu" priority="0x0000" type="Menu">
+      <Menu guid="GuidGeeksProductivityToolsCmdSet" id="GeeksSubMenu2" priority="0x0500" type="Menu">
         <Parent guid="guidSHLMainMenu" id="IDG_VS_TOOLS_OTHER2" />
         <Strings>
           <ButtonText>Geeks</ButtonText>
@@ -88,8 +88,8 @@
     
     <GuidSymbol name="GuidGeeksProductivityToolsCmdSet" value="{8d55b43e-5f7c-44dd-8b02-71c751d8c440}">
       <IDSymbol name="GeeksMenuGroup" value="0x1020" />
-      <IDSymbol name="GeeksSubMenu" value="0x1021" />
-      <IDSymbol name="cmdidGeeksSubMenu" value="0x1022" />
+      <IDSymbol name="GeeksSubMenu2" value="0x2021" />
+      <IDSymbol name="cmdidGeeksSubMenu2" value="0x1022" />
       <IDSymbol name="cmdidAttacher" value="0x0100" />
       <IDSymbol name="cmdidWebFileToggle" value="0x0101" />
       <IDSymbol name="cmdidFixtureFileToggle" value="0x0107" />
