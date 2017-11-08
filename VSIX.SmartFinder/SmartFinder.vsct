@@ -15,8 +15,8 @@
       <Menu guid="GuidGeeksProductivityToolsCmdSet" id="GeeksSubMenu2" priority="0x0500" type="Menu">
         <Parent guid="guidSHLMainMenu" id="IDG_VS_TOOLS_OTHER2" />
         <Strings>
-          <ButtonText>Geeks</ButtonText>
-          <CommandName>Geeks</CommandName>
+          <ButtonText>Smart Finder</ButtonText>
+          <CommandName>Smart Finder</CommandName>
         </Strings>
       </Menu>
     </Menus>
