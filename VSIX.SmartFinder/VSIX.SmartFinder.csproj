@@ -318,11 +318,13 @@
     <Compile Include="Definition\IconDictionary.cs" />
     <Compile Include="Definition\IconType.cs" />
     <Compile Include="Definition\MemberType.cs" />
-    <Compile Include="Infra\Environment\App.cs" />
-    <Compile Include="Infra\Environment\ErrorList.cs" />
-    <Compile Include="Infra\ErrorNotification\ErrorNotification.cs" />
-    <Compile Include="Infra\Extensions\DteExtensions.cs" />
-    <Compile Include="Infra\Extensions\FileExtensions.cs" />
+    <Compile Include="Environment\App.cs" />
+    <Compile Include="Environment\ErrorList.cs" />
+    <Compile Include="ErrorNotification\ErrorNotification.cs" />
+    <Compile Include="Extensions\ControlExtensions.cs" />
+    <Compile Include="Extensions\DteExtensions.cs" />
+    <Compile Include="Extensions\Extentions.cs" />
+    <Compile Include="Extensions\FileExtensions.cs" />
     <Compile Include="FileFinder\CssDrawers\StyleSheetDrawer.cs" />
     <Compile Include="FileFinder\FileDrawers\FileDrawer.cs" />
     <Compile Include="FileFinder\FileFinder\FileFinderGadget.cs" />
@@ -398,11 +400,12 @@
     <Compile Include="SmartFinderPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\GlobalSettings.cs" />
-    <Compile Include="Infra\Structures\Gadget.cs" />
+    <Compile Include="Structures\Gadget.cs" />
     <Compile Include="UnderlineFormatDefinition.cs" />
-    <Compile Include="Infra\Utility\ProcessActions.cs" />
-    <Compile Include="Infra\Utility\SolutionActions.cs" />
-    <Compile Include="Infra\Utility\Utils.cs" />
+    <Compile Include="Utility\MessageBoxDisplay.cs" />
+    <Compile Include="Utility\ProcessActions.cs" />
+    <Compile Include="Utility\SolutionActions.cs" />
+    <Compile Include="Utility\Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="FileFinder\FileTypesResources.resx">
