@@ -116,10 +116,9 @@ namespace System
         public static bool EndsWithAny(this string input, params string[] listOfEndings)
         {
             foreach (var option in listOfEndings)
-            {
                 if (input.EndsWith(option))
                     return true;
-            }
+
 
             return false;
         }
@@ -372,20 +371,19 @@ namespace System
             return retval;
         }
 
-        const string SingleQuote = "'";
-        const string DoubleQuote = "\"";
+        const string SINGLE_QUOTE = "'", DOUBLE_QUOTE = "\"";
 
         public static string StripQuotation(this string str)
         {
-            if (str.StartsWith(SingleQuote))
+            if (str.StartsWith(SINGLE_QUOTE))
                 return str
-                    .TrimStart(SingleQuote)
-                    .TrimEnd(SingleQuote);
+                    .TrimStart(SINGLE_QUOTE)
+                    .TrimEnd(SINGLE_QUOTE);
 
-            if (str.StartsWith(DoubleQuote))
+            if (str.StartsWith(DOUBLE_QUOTE))
                 return str
-                    .TrimStart(DoubleQuote)
-                    .TrimEnd(DoubleQuote);
+                    .TrimStart(DOUBLE_QUOTE)
+                    .TrimEnd(DOUBLE_QUOTE);
 
             return str;
         }

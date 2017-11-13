@@ -21,9 +21,9 @@ namespace Geeks.GeeksProductivityTools
     {
         public UnderlineFormatDefinition()
         {
-            this.DisplayName = "Underline";
-            this.TextDecorations = System.Windows.TextDecorations.Underline;
-            this.ForegroundColor = Colors.Blue;
+            DisplayName = "Underline";
+            TextDecorations = System.Windows.TextDecorations.Underline;
+            ForegroundColor = Colors.Blue;
         }
     }
 
@@ -81,7 +81,7 @@ namespace Geeks.GeeksProductivityTools
 
         void SendEvent(SnapshotSpan span)
         {
-            var temp = this.TagsChanged;
+            var temp = TagsChanged;
             if (temp != null)
                 temp(this, new SnapshotSpanEventArgs(span));
         }
@@ -90,7 +90,7 @@ namespace Geeks.GeeksProductivityTools
 
         #region UnderlineClassification public members
 
-        public SnapshotSpan? CurrentUnderlineSpan => _underlineSpan; 
+        public SnapshotSpan? CurrentUnderlineSpan => _underlineSpan;
 
         public void SetUnderlineSpan(SnapshotSpan? span)
         {
@@ -105,7 +105,7 @@ namespace Geeks.GeeksProductivityTools
 
             if (!_underlineSpan.HasValue)
             {
-                this.SendEvent(oldSpan.Value);
+                SendEvent(oldSpan.Value);
             }
             else
             {
@@ -115,7 +115,7 @@ namespace Geeks.GeeksProductivityTools
                         Span.FromBounds(Math.Min(updateSpan.Start, oldSpan.Value.Start),
                                         Math.Max(updateSpan.End, oldSpan.Value.End)));
 
-                this.SendEvent(updateSpan);
+                SendEvent(updateSpan);
             }
         }
 

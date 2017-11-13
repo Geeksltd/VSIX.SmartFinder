@@ -3,9 +3,9 @@ using System.Drawing;
 using System.Linq;
 using EnvDTE;
 using EnvDTE80;
+using Geeks.VSIX.SmartFinder.Base;
 using Geeks.VSIX.SmartFinder.Properties;
 using GeeksAddin;
-using Geeks.VSIX.SmartFinder.Base;
 
 namespace Geeks.VSIX.SmartFinder.FileFinder
 {
@@ -99,6 +99,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
                             solutionExplorerPath = CurrentItem.Name;
                             return CurrentItem;
                         }
+
                         i = (short)(i + 1);
                     }
                 }
@@ -110,6 +111,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
                     return childItem;
                 }
             }
+
             solutionExplorerPath = "";
             return null;
         }

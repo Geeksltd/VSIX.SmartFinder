@@ -3,9 +3,9 @@ using System.Drawing;
 using System.Windows.Forms;
 using Geeks.VSIX.SmartFinder.Definition;
 using Geeks.VSIX.SmartFinder.FileFinder.FileDrawers;
+using Geeks.VSIX.SmartFinder.FileFinder.FileFinder;
 using Geeks.VSIX.SmartFinder.FileFinder.FinderDrawerUtility;
 using Geeks.VSIX.SmartFinder.FileFinder.MemberDrawers;
-using Geeks.VSIX.SmartFinder.FileFinder.FileFinder;
 
 namespace Geeks.VSIX.SmartFinder.FileFinder
 {
@@ -23,24 +23,24 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             ImageAnimator.Animate(LoadingIcon, new EventHandler(OnFrameChanged));
         }
 
-        EmptyBehaviour _EmptyBehaviour;
+        EmptyBehaviour emptyBehaviour;
         public EmptyBehaviour EmptyBehaviour
         {
-            get { return _EmptyBehaviour; }
+            get { return emptyBehaviour; }
             set
             {
-                _EmptyBehaviour = value;
+                emptyBehaviour = value;
                 Invalidate();
             }
         }
 
-        bool _ShowLoadingAtTheEndOfList;
+        bool showLoadingAtTheEndOfList;
         public bool ShowLoadingAtTheEndOfList
         {
-            get { return _ShowLoadingAtTheEndOfList; }
+            get { return showLoadingAtTheEndOfList; }
             set
             {
-                _ShowLoadingAtTheEndOfList = value;
+                showLoadingAtTheEndOfList = value;
                 Invalidate();
             }
         }
@@ -127,14 +127,14 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
         }
 
         // -------------------------------------------- </Drawing Items> --------------------------------------------- //
-        const string MSharp_File1 = "@Model.cs";
-        const string MSharp_File2 = "@UI.cs";
+        const string MSHARP__FILE1 = "@Model.cs";
+        const string MSHARP__FILE2 = "@UI.cs";
 
         Image GetItemImage(Item item)
         {
             var fileName = System.IO.Path.GetFileName(item.FileName);
 
-            if (string.Compare(MSharp_File1, fileName, true) == 0 || string.Compare(MSharp_File2, fileName, true) == 0)
+            if (string.Compare(MSHARP__FILE1, fileName, true) == 0 || string.Compare(MSHARP__FILE2, fileName, true) == 0)
             {
                 return IconDictionary.MSharpIcon;
             }
@@ -164,31 +164,32 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             var iRegion = new Region(e.ClipRectangle);
             var g = e.Graphics;
 
-            g.FillRegion(new SolidBrush(this.BackColor), iRegion);
+            g.FillRegion(new SolidBrush(BackColor), iRegion);
 
-            if (this.Items.Count > 0)
+            if (Items.Count > 0)
             {
-                for (int i = 0; i < this.Items.Count; ++i)
+                for (int i = 0; i < Items.Count; ++i)
                 {
-                    var irect = this.GetItemRectangle(i);
+                    var irect = GetItemRectangle(i);
                     if (e.ClipRectangle.IntersectsWith(irect))
                     {
-                        if ((this.SelectionMode == SelectionMode.One && this.SelectedIndex == i)
-                        || (this.SelectionMode == SelectionMode.MultiSimple && this.SelectedIndices.Contains(i))
-                        || (this.SelectionMode == SelectionMode.MultiExtended && this.SelectedIndices.Contains(i)))
+                        if ((SelectionMode == SelectionMode.One && SelectedIndex == i)
+                        || (SelectionMode == SelectionMode.MultiSimple && SelectedIndices.Contains(i))
+                        || (SelectionMode == SelectionMode.MultiExtended && SelectedIndices.Contains(i)))
                         {
-                            OnDrawItem(new DrawItemEventArgs(g, this.Font,
+                            OnDrawItem(new DrawItemEventArgs(g, Font,
                                 irect, i,
-                                DrawItemState.Selected, this.ForeColor,
-                                this.BackColor));
+                                DrawItemState.Selected, ForeColor,
+                                BackColor));
                         }
                         else
                         {
-                            OnDrawItem(new DrawItemEventArgs(g, this.Font,
+                            OnDrawItem(new DrawItemEventArgs(g, Font,
                                 irect, i,
-                                DrawItemState.Default, this.ForeColor,
-                                this.BackColor));
+                                DrawItemState.Default, ForeColor,
+                                BackColor));
                         }
+
                         iRegion.Complement(irect);
                     }
                 }
@@ -206,9 +207,10 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
                 var rect = new Rectangle(0, 0, Width, ItemHeight);
                 if (Items.Count >= 1)
                 {
-                    var lastRect = this.GetItemRectangle(Items.Count - 1);
+                    var lastRect = GetItemRectangle(Items.Count - 1);
                     rect.Y = lastRect.Y + ItemHeight;
                 }
+
                 ImageAnimator.UpdateFrames(LoadingIcon);
                 g.DrawImage(LoadingIcon, rect.X, rect.Y);
                 g.DrawString("Loading...", Parent.Font, Brushes.Firebrick, LoadingIcon.Width + 3, rect.Y);

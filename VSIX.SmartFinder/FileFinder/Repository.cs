@@ -6,18 +6,18 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
     internal class Repository
     {
         List<Item> Items = new List<Item>();
-        //string[] BasePaths;
+        // string[] BasePaths;
         bool Suspended;
         List<Item> ItemsWhileSuspension = new List<Item>();
 
         public Repository(/*string[] basePaths*/)
         {
-            //BasePaths = basePaths;
+            // BasePaths = basePaths;
         }
 
         public Item ItemAt(int index) => Items[index];
 
-        public int Length => Items.Count; 
+        public int Length => Items.Count;
 
         public void AppendRange(IEnumerable<Item> items)
         {
@@ -42,10 +42,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             }
         }
 
-        internal void SuspendAppend()
-        {
-            Suspended = true;
-        }
+        internal void SuspendAppend() => Suspended = true;
 
         internal void ContinueAppend()
         {
@@ -55,9 +52,6 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             ItemsWhileSuspension.Clear();
         }
 
-        internal void Clear()
-        {
-            Items.Clear();
-        }
+        internal void Clear() => Items.Clear();
     }
 }

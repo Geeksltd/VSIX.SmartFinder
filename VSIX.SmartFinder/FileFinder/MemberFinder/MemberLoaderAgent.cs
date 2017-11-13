@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Geeks.VSIX.SmartFinder.Definition;
+using Geeks.VSIX.SmartFinder.Properties;
 using ICSharpCode.NRefactory;
 using ICSharpCode.NRefactory.Ast;
-using Geeks.VSIX.SmartFinder.Properties;
 
 namespace Geeks.VSIX.SmartFinder.FileFinder
 {
@@ -28,19 +28,15 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             WorkerSupportsCancellation = true;
         }
 
-        protected override void OnDoWork(DoWorkEventArgs e)
-        {
-            AddFilesInPaths(e);
-        }
+        protected override void OnDoWork(DoWorkEventArgs e) => AddFilesInPaths(e);
 
         void AddFilesInPaths(DoWorkEventArgs e)
         {
             if (e.Cancel) return;
 
             foreach (var basePath in BasePaths)
-            {
                 AddFilesInPath(e, projectBasePath: basePath, directory: basePath);
-            }
+
         }
 
         void AddFilesInPath(DoWorkEventArgs e, string projectBasePath, string directory)
@@ -83,6 +79,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
                         var methodsInsideCsFile = ExtractMethods(projectBasePath, csFile, parser.CompilationUnit.Children);
                         Repository.AppendRange(methodsInsideCsFile);
                     }
+
                     if (Settings.Default.ShowProperties)
                     {
                         var propertiesInsideCsFile = ExtractProperties(projectBasePath, csFile, parser.CompilationUnit.Children);
@@ -104,6 +101,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
                     {
                         description.AppendFormat("{0}.", (method.Parent as TypeDeclaration).Name);
                     }
+
                     description.Append(method.Name);
                     description.Append("(");
                     if (Settings.Default.ShowMethodParameters)
@@ -131,9 +129,8 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
                     if (node.Children.Count > 0)
                     {
                         foreach (var item in ExtractMethods(projectBasePath, fileName, node.Children))
-                        {
                             yield return item;
-                        }
+
                     }
                 }
             }
@@ -256,6 +253,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
 
                 Settings.Default.Save();
             }
+
             if (toolStripMenuItem == showMethodParametersToolStripMenuItem)
             {
                 showMethodParametersToolStripMenuItem.Checked = !showMethodParametersToolStripMenuItem.Checked;
@@ -264,6 +262,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
                 loadAgain = true;
                 Settings.Default.Save();
             }
+
             if (toolStripMenuItem == showMethodReturnTypesToolStripMenuItem)
             {
                 showMethodReturnTypesToolStripMenuItem.Checked = !showMethodReturnTypesToolStripMenuItem.Checked;
@@ -272,6 +271,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
                 loadAgain = true;
                 Settings.Default.Save();
             }
+
             if (toolStripMenuItem == showClassNamesToolStripMenuItem)
             {
                 showClassNamesToolStripMenuItem.Checked = !showClassNamesToolStripMenuItem.Checked;
@@ -280,6 +280,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
                 loadAgain = true;
                 Settings.Default.Save();
             }
+
             if (toolStripMenuItem == showPropertiesToolStripMenuItem)
             {
                 showPropertiesToolStripMenuItem.Checked = !showPropertiesToolStripMenuItem.Checked;

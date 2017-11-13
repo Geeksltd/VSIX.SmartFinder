@@ -9,8 +9,8 @@ namespace GeeksAddin
         public string ShortKey { get; protected set; }
         public string ToolTip { get; protected set; }
 
-        public string CommandName => "Tools." + Name; 
-        public string Binding => "Global::" + ShortKey; 
+        public string CommandName => "Tools." + Name;
+        public string Binding => "Global::" + ShortKey;
 
         public abstract void Run(DTE2 app);
     }

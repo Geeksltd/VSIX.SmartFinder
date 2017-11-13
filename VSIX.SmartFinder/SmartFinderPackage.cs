@@ -2,13 +2,13 @@ using System;
 using System.ComponentModel.Design;
 using System.Runtime.InteropServices;
 using EnvDTE80;
-using Microsoft.VisualStudio.ComponentModelHost;
-using Microsoft.VisualStudio.Shell;
-using Geeks.VSIX.SmartFinder.FileFinder;
-using Geeks.VSIX.SmartFinder.GoTo;
-using Geeks.VSIX.SmartFinder.FileToggle;
 using Geeks.GeeksProductivityTools;
 using Geeks.VSIX.SmartFinder.Base;
+using Geeks.VSIX.SmartFinder.FileFinder;
+using Geeks.VSIX.SmartFinder.FileToggle;
+using Geeks.VSIX.SmartFinder.GoTo;
+using Microsoft.VisualStudio.ComponentModelHost;
+using Microsoft.VisualStudio.Shell;
 
 namespace Geeks.VSIX.SmartFinder
 {
@@ -37,22 +37,22 @@ namespace Geeks.VSIX.SmartFinder
 
             Instance = this;
 
-            var componentModel = (IComponentModel)this.GetService(typeof(SComponentModel));
+            var componentModel = (IComponentModel)GetService(typeof(SComponentModel));
 
             // Add our command handlers for menu (commands must exist in the .vsct file)
             var menuCommandService = GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
 
             if (null != menuCommandService)
             {
-                ////var mainMenu = new CommandID(GuidList.GuidGeeksProductivityToolsCmdSet, (int)PkgCmdIDList.CmdidMainMenu);
-                ////var founded = menuCommandService.FindCommand(mainMenu);
-                ////if (founded == null)
-                ////{
-                ////    var menuCommand2 = new OleMenuCommand(null, mainMenu);
-                ////    menuCommandService.AddCommand(menuCommand2);
-                ////    menuCommand2.BeforeQueryStatus += MenuCommand2_BeforeQueryStatus;
-                ////    menuCommand2.Visible = false;
-                ////}
+                // //var mainMenu = new CommandID(GuidList.GuidGeeksProductivityToolsCmdSet, (int)PkgCmdIDList.CmdidMainMenu);
+                // //var founded = menuCommandService.FindCommand(mainMenu);
+                // //if (founded == null)
+                // //{
+                // //    var menuCommand2 = new OleMenuCommand(null, mainMenu);
+                // //    menuCommandService.AddCommand(menuCommand2);
+                // //    menuCommand2.BeforeQueryStatus += MenuCommand2_BeforeQueryStatus;
+                // //    menuCommand2.Visible = false;
+                // //}
                 var menuCommand = new OleMenuCommand(CallWebFileToggle,
                     new CommandID(GuidList.GuidGeeksProductivityToolsCmdSet,
                                                             (int)PkgCmdIDList.CmdidWebFileToggle));
@@ -83,7 +83,6 @@ namespace Geeks.VSIX.SmartFinder
                 menuCommandService.AddCommand(new MenuCommand(CallGotoPreviousFoundItem,
                                                new CommandID(GuidList.GuidGeeksProductivityToolsCmdSet,
                                                             (int)PkgCmdIDList.CmdidGotoPreviousFoundItem)));
-
             }
 
             SetCommandBindings();
@@ -95,23 +94,23 @@ namespace Geeks.VSIX.SmartFinder
             docEvents.DocumentSaved += DocumentEvents_DocumentSaved;
             solEvents.Opened += delegate { App.Initialize(GetDialogPage(typeof(OptionsPage)) as OptionsPage); };
 
-            ////ServiceCreatorCallback callback = new ServiceCreatorCallback(CreateService);
+            // //ServiceCreatorCallback callback = new ServiceCreatorCallback(CreateService);
 
-            ////((IServiceContainer)this).AddService(typeof(SMyService), callback);
+            // //((IServiceContainer)this).AddService(typeof(SMyService), callback);
         }
 
-        ////private object CreateService(IServiceContainer container, Type serviceType)
-        ////{
-        ////    if (typeof(SMyService) == serviceType)
-        ////        return new MyService(this);
-        ////    return null;
-        ////}
+        // //private object CreateService(IServiceContainer container, Type serviceType)
+        // //{
+        // //    if (typeof(SMyService) == serviceType)
+        // //        return new MyService(this);
+        // //    return null;
+        // //}
 
-        private void MenuCommand2_BeforeQueryStatus(object sender, EventArgs e)
+        void MenuCommand2_BeforeQueryStatus(object sender, EventArgs e)
         {
             var menuCommandService = GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
-            const uint CmdidAttacher = 0x100;
-            var CmdidAttacherId = new CommandID(GuidList.GuidGeeksProductivityToolsCmdSet, (int)CmdidAttacher);
+            const uint CMDID_ATTACHER = 0x100;
+            var CmdidAttacherId = new CommandID(GuidList.GuidGeeksProductivityToolsCmdSet, (int)CMDID_ATTACHER);
             var mainMenuCommand = menuCommandService.FindCommand(CmdidAttacherId);
 
             var cmd = sender as OleMenuCommand;
@@ -124,13 +123,13 @@ namespace Geeks.VSIX.SmartFinder
         protected void MenuCommand_BeforeQueryStatus(object sender, EventArgs e)
         {
             var cmd = sender as OleMenuCommand;
-            //var activeDoc = App.DTE.ActiveDocument;
+            // var activeDoc = App.DTE.ActiveDocument;
 
-            //if (null != cmd && activeDoc != null)
-            //{
+            // if (null != cmd && activeDoc != null)
+            // {
             //    var fileName = App.DTE.ActiveDocument.FullName.ToUpper();
             //    cmd.Visible = true;
-            //}
+            // }
         }
 
         void DocumentEvents_DocumentSaved(EnvDTE.Document document)
@@ -149,7 +148,6 @@ namespace Geeks.VSIX.SmartFinder
             }
             catch
             {
-
             }
         }
 
@@ -171,7 +169,6 @@ namespace Geeks.VSIX.SmartFinder
                 }
             }
         }
-
 
         void CallWebFileToggle(object sender, EventArgs e) => new FileToggleGadget().Run(App.DTE);
 

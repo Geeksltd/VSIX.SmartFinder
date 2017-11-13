@@ -2,15 +2,14 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using Geeks.VSIX.SmartFinder.Definition;
-using Geeks.VSIX.SmartFinder.FileFinder;
 
 namespace Geeks.VSIX.SmartFinder.FileFinder.FinderDrawerUtility
 {
     internal class FinderDrawer
     {
-        const string pathIndicator = "----->";
+        const string PATH_INDICATOR = "----->";
 
-        protected static string PathIndicator => pathIndicator;
+        protected static string PathIndicator => PATH_INDICATOR;
 
         protected static int CalculateStringWidth(string value, DrawItemEventArgs e)
         {
@@ -52,6 +51,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder.FinderDrawerUtility
                 {
                     e.Graphics.FillRectangle(highlightBrush, position.X, position.Y, stringWidth, e.Bounds.Height);
                 }
+
                 var widthValue = Convert.ToInt32(stringWidth);
                 position.X += widthValue;
             }

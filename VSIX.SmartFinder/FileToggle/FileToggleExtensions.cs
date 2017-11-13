@@ -126,8 +126,8 @@ namespace Geeks.VSIX.SmartFinder.FileToggle
             return otherFile;
         }
 
-        const string ZebbleGeneratedCssFileName = "zebble-generated-css.cs";
-        const string ZebbleGeneratedCssClassFileName = "zebble-generated.cs";
+        const string ZEBBLE_GENERATED_CSS_FILE_NAME = "zebble-generated-css.cs";
+        const string ZEBBLE_GENERATED_CSS_CLASS_FILE_NAME = "zebble-generated.cs";
 
         static string FindZebblBasedSisterFile(this string zebbleFile)
         {
@@ -143,27 +143,27 @@ namespace Geeks.VSIX.SmartFinder.FileToggle
 
                 if (File.Exists(sisterFile)) return sisterFile;
 
-                return sisterFile.Substring(0, sisterFile.IndexOf("app.ui\\") + "app.ui\\".Length) + ZebbleGeneratedCssClassFileName;
+                return sisterFile.Substring(0, sisterFile.IndexOf("app.ui\\") + "app.ui\\".Length) + ZEBBLE_GENERATED_CSS_CLASS_FILE_NAME;
             }
 
             else
             {
                 string sisterFile;
-                if (zebbleFile.Contains("." + ZebbleGeneratedCssFileName))
+                if (zebbleFile.Contains("." + ZEBBLE_GENERATED_CSS_FILE_NAME))
                 {
                     sisterFile = zebbleFile.Replace("-css", string.Empty);
                 }
-                else if (zebbleFile.Contains("." + ZebbleGeneratedCssClassFileName))
+                else if (zebbleFile.Contains("." + ZEBBLE_GENERATED_CSS_CLASS_FILE_NAME))
                 {
-                    sisterFile = zebbleFile.Replace(ZebbleGeneratedCssClassFileName, ZebbleGeneratedCssFileName);
+                    sisterFile = zebbleFile.Replace(ZEBBLE_GENERATED_CSS_CLASS_FILE_NAME, ZEBBLE_GENERATED_CSS_FILE_NAME);
                 }
                 else
                 {
                     sisterFile = zebbleFile.Remove(".cs");
                 }
 
-                if (!File.Exists(sisterFile) && !zebbleFile.Contains(ZebbleGeneratedCssFileName))
-                    return sisterFile.Substring(0, sisterFile.IndexOf("app.ui\\") + "app.ui\\".Length) + ZebbleGeneratedCssClassFileName;
+                if (!File.Exists(sisterFile) && !zebbleFile.Contains(ZEBBLE_GENERATED_CSS_FILE_NAME))
+                    return sisterFile.Substring(0, sisterFile.IndexOf("app.ui\\") + "app.ui\\".Length) + ZEBBLE_GENERATED_CSS_CLASS_FILE_NAME;
 
                 return sisterFile;
             }

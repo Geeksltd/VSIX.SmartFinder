@@ -16,7 +16,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder.MemberDrawers
         {
             if (!Settings.Default.ShowMethods) return;
 
-            string className = ColorizeClassName(text, e, position);
+            var className = ColorizeClassName(text, e, position);
 
             if (className != string.Empty)
             {
@@ -94,7 +94,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder.MemberDrawers
 
         static string ColorizeClassName(string text, DrawItemEventArgs e, Point position)
         {
-            string className = string.Empty;
+            var className = string.Empty;
             if (Settings.Default.ShowClassNames)
             {
                 className = text.Substring(0, text.IndexOf('.'));
