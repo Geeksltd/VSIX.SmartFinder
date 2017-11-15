@@ -29,7 +29,6 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             foreach (var item in e.Items)
                 if (item.MatchesWith(Words))
                     AnnounceItem(item);
-
         }
 
         List<Item> foundItems;
@@ -73,7 +72,6 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             var sortedFoundItems = foundItems.OrderBy(i => i.ToString().Length);
             foreach (var item in sortedFoundItems)
                 AnnounceItem(item);
-
 
             IsBusy = false;
         }

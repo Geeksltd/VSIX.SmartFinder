@@ -1,8 +1,8 @@
-using System;
-using System.IO;
 using EnvDTE80;
 using Geeks.VSIX.SmartFinder.Base;
 using GeeksAddin;
+using System;
+using System.IO;
 
 namespace Geeks.VSIX.SmartFinder.FileToggle
 {

@@ -1,7 +1,7 @@
+using Geeks.VSIX.SmartFinder.Definition;
 using System;
 using System.IO;
 using System.Linq;
-using Geeks.VSIX.SmartFinder.Definition;
 
 namespace Geeks.VSIX.SmartFinder.FileFinder
 {

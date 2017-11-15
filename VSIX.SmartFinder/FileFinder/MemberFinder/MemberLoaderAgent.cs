@@ -1,3 +1,7 @@
+using Geeks.VSIX.SmartFinder.Definition;
+using Geeks.VSIX.SmartFinder.Properties;
+using ICSharpCode.NRefactory;
+using ICSharpCode.NRefactory.Ast;
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
@@ -6,10 +10,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using Geeks.VSIX.SmartFinder.Definition;
-using Geeks.VSIX.SmartFinder.Properties;
-using ICSharpCode.NRefactory;
-using ICSharpCode.NRefactory.Ast;
 
 namespace Geeks.VSIX.SmartFinder.FileFinder
 {
@@ -36,7 +36,6 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
 
             foreach (var basePath in BasePaths)
                 AddFilesInPath(e, projectBasePath: basePath, directory: basePath);
-
         }
 
         void AddFilesInPath(DoWorkEventArgs e, string projectBasePath, string directory)
@@ -130,7 +129,6 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
                     {
                         foreach (var item in ExtractMethods(projectBasePath, fileName, node.Children))
                             yield return item;
-
                     }
                 }
             }

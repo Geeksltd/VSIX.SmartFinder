@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using Microsoft.VisualStudio.Shell;
+using System.Collections.Generic;
 
 namespace Geeks.VSIX.SmartFinder.Base
 {

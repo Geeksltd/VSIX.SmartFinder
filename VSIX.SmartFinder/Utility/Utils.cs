@@ -1,12 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using EnvDTE;
 using EnvDTE80;
 using Geeks.VSIX.SmartFinder;
 using Geeks.VSIX.SmartFinder.Base;
 using Microsoft.VisualStudio.Shell.Interop;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace GeeksAddin
 {

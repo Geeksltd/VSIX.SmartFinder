@@ -1,10 +1,10 @@
+using Geeks.VSIX.SmartFinder.Definition;
+using Geeks.VSIX.SmartFinder.Properties;
 using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using Geeks.VSIX.SmartFinder.Definition;
-using Geeks.VSIX.SmartFinder.Properties;
 
 namespace Geeks.VSIX.SmartFinder.FileFinder
 {
@@ -138,7 +138,6 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
                 var selStart = txtSearchBox.SelectionStart;
                 while (selStart > 0 && txtSearchBox.Text.Substring(selStart - 1, 1) == " ")
                     selStart--;
-
 
                 var prevSpacePos = -1;
                 if (selStart != 0)

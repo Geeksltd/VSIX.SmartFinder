@@ -1,11 +1,11 @@
 namespace GeeksAddin
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using EnvDTE;
     using EnvDTE80;
     using Geeks.VSIX.SmartFinder.Base;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     static class DteExtensions
     {

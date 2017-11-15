@@ -119,7 +119,6 @@ namespace System
                 if (input.EndsWith(option))
                     return true;
 
-
             return false;
         }
 

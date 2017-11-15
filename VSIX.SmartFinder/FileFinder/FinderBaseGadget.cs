@@ -1,11 +1,11 @@
-using System;
-using System.Drawing;
-using System.Linq;
 using EnvDTE;
 using EnvDTE80;
 using Geeks.VSIX.SmartFinder.Base;
 using Geeks.VSIX.SmartFinder.Properties;
 using GeeksAddin;
+using System;
+using System.Drawing;
+using System.Linq;
 
 namespace Geeks.VSIX.SmartFinder.FileFinder
 {

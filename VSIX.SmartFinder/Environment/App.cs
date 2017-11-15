@@ -1,7 +1,7 @@
-using System;
 using EnvDTE80;
 using Geeks.GeeksProductivityTools;
 using Microsoft.VisualStudio.Shell.Interop;
+using System;
 
 namespace Geeks.VSIX.SmartFinder.Base
 {

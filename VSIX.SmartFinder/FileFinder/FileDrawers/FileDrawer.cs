@@ -1,7 +1,7 @@
-using System.Drawing;
-using System.Windows.Forms;
 using Geeks.VSIX.SmartFinder.Definition;
 using Geeks.VSIX.SmartFinder.FileFinder.FinderDrawerUtility;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Geeks.VSIX.SmartFinder.FileFinder.FileDrawers
 {

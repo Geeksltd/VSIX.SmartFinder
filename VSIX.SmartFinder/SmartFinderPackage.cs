@@ -1,6 +1,3 @@
-using System;
-using System.ComponentModel.Design;
-using System.Runtime.InteropServices;
 using EnvDTE80;
 using Geeks.GeeksProductivityTools;
 using Geeks.VSIX.SmartFinder.Base;
@@ -9,6 +6,9 @@ using Geeks.VSIX.SmartFinder.FileToggle;
 using Geeks.VSIX.SmartFinder.GoTo;
 using Microsoft.VisualStudio.ComponentModelHost;
 using Microsoft.VisualStudio.Shell;
+using System;
+using System.ComponentModel.Design;
+using System.Runtime.InteropServices;
 
 namespace Geeks.VSIX.SmartFinder
 {

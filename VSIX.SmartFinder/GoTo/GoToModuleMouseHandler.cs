@@ -1,9 +1,3 @@
-using System;
-using System.ComponentModel.Composition;
-using System.IO;
-using System.Linq;
-using System.Windows;
-using System.Windows.Input;
 using EnvDTE80;
 using Geeks.GeeksProductivityTools;
 using Geeks.VSIX.SmartFinder.Base;
@@ -15,6 +9,12 @@ using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Text.Operations;
 using Microsoft.VisualStudio.Utilities;
+using System;
+using System.ComponentModel.Composition;
+using System.IO;
+using System.Linq;
+using System.Windows;
+using System.Windows.Input;
 
 namespace Geeks.VSIX.SmartFinder.GoTo
 {
