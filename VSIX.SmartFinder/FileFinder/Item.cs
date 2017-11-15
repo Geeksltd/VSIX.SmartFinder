@@ -61,7 +61,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             if (filterWords == null || filterWords.IsEmpty())
                 return true;
 
-            return filterWords.All(w => this.ToString().Contains(w, false));
+            return filterWords.All(w => ToString().Contains(w, false));
         }
 
         public string FullPath
@@ -73,7 +73,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             }
         }
 
-        public bool Exists() => File.Exists(FullPath); 
+        public bool Exists() => File.Exists(FullPath);
 
         #region IEquatable<Item> Members
 

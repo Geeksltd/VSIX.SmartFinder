@@ -1,5 +1,3 @@
-using Geeks.VSIX.SmartFinder.FileFinder;
-
 namespace Geeks.VSIX.SmartFinder.FileFinder
 {
     internal class StyleFinderGadget : FinderBaseGadget

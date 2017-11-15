@@ -1,7 +1,7 @@
 using System;
 using EnvDTE80;
-using Microsoft.VisualStudio.Shell.Interop;
 using Geeks.GeeksProductivityTools;
+using Microsoft.VisualStudio.Shell.Interop;
 
 namespace Geeks.VSIX.SmartFinder.Base
 {

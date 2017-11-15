@@ -1,4 +1,3 @@
-using Geeks.VSIX.SmartFinder.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using Geeks.VSIX.SmartFinder.Properties;
 
 namespace Geeks.VSIX.SmartFinder.FileFinder
 {
@@ -155,6 +155,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
                 Settings.Default.Save();
                 searchAgain = true;
             }
+
             if (toolStripMenuItem == trackFoundIteToolStripMenuItem)
             {
                 trackFoundIteToolStripMenuItem.Checked = !trackFoundIteToolStripMenuItem.Checked;

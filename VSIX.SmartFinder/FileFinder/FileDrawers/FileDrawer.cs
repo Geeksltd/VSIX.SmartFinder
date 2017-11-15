@@ -48,7 +48,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder.FileDrawers
                                                         DrawItemEventArgs e,
                                                         ref Point position)
         {
-            string className = string.Empty;
+            var className = string.Empty;
             var pathInidcatorStartChar = '-';
             className = text.Substring(0, text.IndexOf(pathInidcatorStartChar));
 
@@ -82,7 +82,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder.FileDrawers
             if (!string.IsNullOrEmpty(text) ||
                 !string.IsNullOrEmpty(pathValue))
             {
-                string pathText = BuildPathTextValue(text, pathValue);
+                var pathText = BuildPathTextValue(text, pathValue);
                 var textColor = e.State == DrawItemState.Selected ? Color.White : Color.Gray;
 
                 TextRenderer.DrawText(e.Graphics, pathText, e.Font, position, textColor, TextFormatFlags.NoPadding);

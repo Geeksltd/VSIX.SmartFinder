@@ -5,17 +5,16 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using EnvDTE80;
+using Geeks.GeeksProductivityTools;
+using Geeks.VSIX.SmartFinder.Base;
 using GeeksAddin;
 using Microsoft.VisualStudio.OLE.Interop;
-using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Text.Operations;
 using Microsoft.VisualStudio.Utilities;
-using Geeks.GeeksProductivityTools;
-using Geeks.VSIX.SmartFinder.Base;
 
 namespace Geeks.VSIX.SmartFinder.GoTo
 {
@@ -44,14 +43,14 @@ namespace Geeks.VSIX.SmartFinder.GoTo
             return view.Properties.GetOrCreateSingletonProperty(typeof(CtrlKeyState), () => new CtrlKeyState());
         }
 
-        bool _enabled = false;
+        bool _enabled;
 
         internal bool Enabled
         {
             get
             {
                 // Check and see if ctrl is down but we missed it somehow.
-                bool ctrlDown = (Keyboard.Modifiers & ModifierKeys.Control) != 0 &&
+                var ctrlDown = (Keyboard.Modifiers & ModifierKeys.Control) != 0 &&
                                 (Keyboard.Modifiers & ModifierKeys.Shift) == 0;
                 if (ctrlDown != _enabled)
                     Enabled = ctrlDown;
@@ -60,7 +59,7 @@ namespace Geeks.VSIX.SmartFinder.GoTo
             }
             set
             {
-                bool oldVal = _enabled;
+                var oldVal = _enabled;
                 _enabled = value;
                 if (oldVal != _enabled)
                 {
@@ -92,15 +91,9 @@ namespace Geeks.VSIX.SmartFinder.GoTo
                              (args.KeyboardDevice.Modifiers & ModifierKeys.Shift) == 0;
         }
 
-        public override void PreviewKeyDown(KeyEventArgs args)
-        {
-            UpdateState(args);
-        }
+        public override void PreviewKeyDown(KeyEventArgs args) => UpdateState(args);
 
-        public override void PreviewKeyUp(KeyEventArgs args)
-        {
-            UpdateState(args);
-        }
+        public override void PreviewKeyUp(KeyEventArgs args) => UpdateState(args);
     }
 
     [Export(typeof(IMouseProcessorProvider))]
@@ -126,7 +119,7 @@ namespace Geeks.VSIX.SmartFinder.GoTo
 
             var buffer = view.TextBuffer;
 
-            IOleCommandTarget shellCommandDispatcher = GetShellCommandDispatcher(view);
+            var shellCommandDispatcher = GetShellCommandDispatcher(view);
 
             if (shellCommandDispatcher == null)
                 return null;
@@ -173,7 +166,7 @@ namespace Geeks.VSIX.SmartFinder.GoTo
             ITextStructureNavigator navigator,
             CtrlKeyState state)
         {
-            this.App = app;
+            App = app;
             _view = view;
             _commandTarget = commandTarget;
             _state = state;
@@ -183,13 +176,13 @@ namespace Geeks.VSIX.SmartFinder.GoTo
             _state.CtrlKeyStateChanged += (sender, args) =>
             {
                 if (_state.Enabled)
-                    this.TryHighlightItemUnderMouse(RelativeToView(Mouse.PrimaryDevice.GetPosition(_view.VisualElement)));
+                    TryHighlightItemUnderMouse(RelativeToView(Mouse.PrimaryDevice.GetPosition(_view.VisualElement)));
                 else
-                    this.SetHighlightSpan(null);
+                    SetHighlightSpan(null);
             };
 
-            _view.LostAggregateFocus += (sender, args) => this.SetHighlightSpan(null);
-            _view.VisualElement.MouseLeave += (sender, args) => this.SetHighlightSpan(null);
+            _view.LostAggregateFocus += (sender, args) => SetHighlightSpan(null);
+            _view.VisualElement.MouseLeave += (sender, args) => SetHighlightSpan(null);
         }
 
         #region Mouse processor overrides
@@ -216,7 +209,7 @@ namespace Geeks.VSIX.SmartFinder.GoTo
                 if (InDragOperation(_mouseDownAnchorPoint.Value, currentMousePosition))
                 {
                     _mouseDownAnchorPoint = null;
-                    this.SetHighlightSpan(null);
+                    SetHighlightSpan(null);
                 }
             }
         }
@@ -228,10 +221,7 @@ namespace Geeks.VSIX.SmartFinder.GoTo
                    Math.Abs(anchorPoint.Y - currentPoint.Y) >= SystemParameters.MinimumVerticalDragDistance;
         }
 
-        public override void PreprocessMouseLeave(MouseEventArgs e)
-        {
-            _mouseDownAnchorPoint = null;
-        }
+        public override void PreprocessMouseLeave(MouseEventArgs e) => _mouseDownAnchorPoint = null;
 
         public override void PreprocessMouseUp(MouseButtonEventArgs e)
         {
@@ -249,12 +239,12 @@ namespace Geeks.VSIX.SmartFinder.GoTo
                         value = CurrentUnderlineSpan.Value.GetText().StripQuotation();
                     }
 
-                    this.SetHighlightSpan(null);
+                    SetHighlightSpan(null);
                     _view.Selection.Clear();
 
                     if (value.HasValue())
                     {
-                        this.DispatchClick(value);
+                        DispatchClick(value);
                     }
 
                     e.Handled = true;

@@ -1,10 +1,10 @@
-using Geeks.VSIX.SmartFinder.Definition;
-using Geeks.VSIX.SmartFinder.Properties;
 using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Geeks.VSIX.SmartFinder.Definition;
+using Geeks.VSIX.SmartFinder.Properties;
 
 namespace Geeks.VSIX.SmartFinder.FileFinder
 {
@@ -105,10 +105,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             Search();
         }
 
-        public void CallFiltererRepositoryUpdate()
-        {
-            Filterer.UpdateRepositoryItems(Loader);
-        }
+        public void CallFiltererRepositoryUpdate() => Filterer.UpdateRepositoryItems(Loader);
 
         void Search()
         {
@@ -140,14 +137,15 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
                 e.SuppressKeyPress = true;
                 var selStart = txtSearchBox.SelectionStart;
                 while (selStart > 0 && txtSearchBox.Text.Substring(selStart - 1, 1) == " ")
-                {
                     selStart--;
-                }
+
+
                 var prevSpacePos = -1;
                 if (selStart != 0)
                 {
                     prevSpacePos = txtSearchBox.Text.LastIndexOf(' ', selStart - 1);
                 }
+
                 txtSearchBox.Select(prevSpacePos + 1, txtSearchBox.SelectionStart - prevSpacePos - 1);
                 txtSearchBox.SelectedText = "";
 
@@ -156,13 +154,11 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
                 txtSearchBox.Text = txtSearchBox.Text.Replace("\x7f", "");
                 txtSearchBox.SelectionStart = Math.Max(0, currentCaretPostition - 1);
             }
+
             HandleCommonKeys(e);
         }
 
-        void lstFiles_KeyDown(object sender, KeyEventArgs e)
-        {
-            HandleCommonKeys(e);
-        }
+        void lstFiles_KeyDown(object sender, KeyEventArgs e) => HandleCommonKeys(e);
 
         void HandleCommonKeys(KeyEventArgs e)
         {
@@ -188,10 +184,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
 
         #endregion
 
-        void lstFiles_DoubleClick(object sender, EventArgs e)
-        {
-            SelectCurrentItem();
-        }
+        void lstFiles_DoubleClick(object sender, EventArgs e) => SelectCurrentItem();
 
         void SelectCurrentItem()
         {
@@ -239,10 +232,12 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
                 if (!Loader.IsBusy)
                     Loader.RunWorkerAsync(Filterer);
             }
+
             if (searchAgain)
             {
                 Search();
             }
+
             txtSearchBox.Focus();
         }
 

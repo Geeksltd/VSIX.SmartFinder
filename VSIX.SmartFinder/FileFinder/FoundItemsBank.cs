@@ -6,13 +6,13 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
     {
         public static int Pointer { get; set; }
 
-        static List<Item> _Items;
+        static List<Item> items;
         public static List<Item> Items
         {
-            get { return _Items; }
+            get { return items; }
             set
             {
-                _Items = value;
+                items = value;
                 Pointer = 0;
             }
         }

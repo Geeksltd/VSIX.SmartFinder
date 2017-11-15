@@ -4,9 +4,9 @@ using System.IO;
 using System.Linq;
 using EnvDTE;
 using EnvDTE80;
-using Microsoft.VisualStudio.Shell.Interop;
-using Geeks.VSIX.SmartFinder.Base;
 using Geeks.VSIX.SmartFinder;
+using Geeks.VSIX.SmartFinder.Base;
+using Microsoft.VisualStudio.Shell.Interop;
 
 namespace GeeksAddin
 {

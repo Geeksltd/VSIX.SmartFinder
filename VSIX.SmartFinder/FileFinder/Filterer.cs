@@ -6,7 +6,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
 {
     internal class Filterer
     {
-        const int MaxAnnounces = 20;
+        const int MAX_ANNOUNCES = 20;
 
         public Repository Repository { get; private set; }
         string[] BasePaths;
@@ -27,34 +27,33 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
         void Repository_ItemsAppended(object sender, ItemsEventArgs e)
         {
             foreach (var item in e.Items)
-            {
                 if (item.MatchesWith(Words))
                     AnnounceItem(item);
-            }
+
         }
 
-        List<Item> _FoundItems;
+        List<Item> foundItems;
 
-        public List<Item> FoundItems => _FoundItems;
+        public List<Item> FoundItems => foundItems;
 
         public void SetFilter(string filter)
         {
             AnnouncedItemsCount = 0;
 
             // Tell repository not notify item append may be necessary here
-            //Repository.SuspendAppend();
+            // Repository.SuspendAppend();
             Filter = StringUntils.ToValidFileName(filter);
             Words = Filter.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             AnnounceMatchingItems();
             OnAnnouncementOfExistingItemsFinished();
             // Tell repository it can continue notifying may be necessary here
-            //Repository.ContinueAppend();
+            // Repository.ContinueAppend();
         }
 
         void AnnounceMatchingItems()
         {
             IsBusy = true;
-            _FoundItems = new List<Item>();
+            foundItems = new List<Item>();
             var toAnnouncedItemsCount = AnnouncedItemsCount;
 
             for (int i = 0; i < Repository.Length; i++)
@@ -64,18 +63,17 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
                     continue;
                 if (item.MatchesWith(Words))
                 {
-                    _FoundItems.Add(item);
+                    foundItems.Add(item);
                     toAnnouncedItemsCount++;
-                    if (toAnnouncedItemsCount >= MaxAnnounces)
+                    if (toAnnouncedItemsCount >= MAX_ANNOUNCES)
                         break;
                 }
             }
 
-            var sortedFoundItems = _FoundItems.OrderBy(i => i.ToString().Length);
+            var sortedFoundItems = foundItems.OrderBy(i => i.ToString().Length);
             foreach (var item in sortedFoundItems)
-            {
                 AnnounceItem(item);
-            }
+
 
             IsBusy = false;
         }
@@ -95,7 +93,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             if (ItemIsExcluded(item)) // for calls directly from Loader (instead of AnnounceMatchingItems())
                 return;
 
-            if (AnnouncedItemsCount < MaxAnnounces)
+            if (AnnouncedItemsCount < MAX_ANNOUNCES)
             {
                 OnItemsFound(new[] { item });
                 AnnouncedItemsCount++;

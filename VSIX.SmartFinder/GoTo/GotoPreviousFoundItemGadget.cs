@@ -1,6 +1,6 @@
+using System.Linq;
 using Geeks.VSIX.SmartFinder.FileFinder;
 using GeeksAddin;
-using System.Linq;
 
 namespace Geeks.VSIX.SmartFinder.GoTo
 {

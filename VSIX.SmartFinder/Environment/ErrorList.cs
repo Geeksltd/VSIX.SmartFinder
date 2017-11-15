@@ -1,12 +1,11 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.Shell;
-using Geeks.GeeksProductivityTools;
 
 namespace Geeks.VSIX.SmartFinder.Base
 {
     public static class ErrorList
     {
-        static ErrorListProvider _errorListProvider = null;
+        static ErrorListProvider errorListProvider;
         static Dictionary<string, Microsoft.VisualStudio.Shell.Task> ListOfErrors = new Dictionary<string, Microsoft.VisualStudio.Shell.Task>();
 
         public static void AddOrOverrideError(string key, Microsoft.VisualStudio.Shell.Task task)
@@ -39,7 +38,7 @@ namespace Geeks.VSIX.SmartFinder.Base
 
                 if (task is ErrorTask)
                 {
-                    _errorListProvider.Tasks.Remove(task);
+                    errorListProvider.Tasks.Remove(task);
                 }
 
                 ListOfErrors.Remove(key);
@@ -51,14 +50,14 @@ namespace Geeks.VSIX.SmartFinder.Base
         /// </summary>
         static void WriteVisualStudioErrorList(ErrorTask errorTask)
         {
-            if (_errorListProvider == null)
+            if (errorListProvider == null)
             {
-                _errorListProvider = new ErrorListProvider(SmartFinderPackage.Instance);
+                errorListProvider = new ErrorListProvider(SmartFinderPackage.Instance);
             }
 
             // Check if this error is already in the error list, don't report more than once  
-            bool alreadyReported = false;
-            foreach (ErrorTask task in _errorListProvider.Tasks)
+            var alreadyReported = false;
+            foreach (ErrorTask task in errorListProvider.Tasks)
             {
                 if (task.ErrorCategory == errorTask.ErrorCategory &&
                     task.Document == errorTask.Document &&
@@ -74,7 +73,7 @@ namespace Geeks.VSIX.SmartFinder.Base
             if (!alreadyReported)
             {
                 // Add error to task list
-                _errorListProvider.Tasks.Add(errorTask);
+                errorListProvider.Tasks.Add(errorTask);
             }
         }
     }
