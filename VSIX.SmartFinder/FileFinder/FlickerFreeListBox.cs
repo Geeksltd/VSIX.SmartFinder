@@ -127,14 +127,12 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
         }
 
         // -------------------------------------------- </Drawing Items> --------------------------------------------- //
-        const string MSHARP__FILE1 = "@Model.cs";
-        const string MSHARP__FILE2 = "@UI.cs";
 
         Image GetItemImage(Item item)
         {
             var fileName = System.IO.Path.GetFileName(item.FileName);
 
-            if (string.Compare(MSHARP__FILE1, fileName, true) == 0 || string.Compare(MSHARP__FILE2, fileName, true) == 0)
+            if (item.IsMSharp())
             {
                 return IconDictionary.MSharpIcon;
             }

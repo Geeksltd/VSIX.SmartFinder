@@ -1,6 +1,8 @@
 namespace System
 {
+    using Geeks.VSIX.SmartFinder.FileFinder;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Text;
 
@@ -109,6 +111,15 @@ namespace System
             }
 
             return result.ToString();
+        }
+
+        internal static bool IsMSharp(this Item item)
+        {
+            if (item.FileName.Contains("UI") || item.FileName.Contains("Model"))
+                if (File.Exists(item.BasePath + @"\#UI.csproj") || File.Exists(item.BasePath + @"\#Model.csproj"))
+                    return true;
+
+            return false;
         }
 
         public static bool IsEmpty<T>(this IEnumerable<T> list) => list == null || list.Count() == 0;
