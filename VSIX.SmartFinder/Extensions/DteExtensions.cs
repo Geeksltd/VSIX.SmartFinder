@@ -14,18 +14,24 @@ namespace GeeksAddin
         /// </summary>
         public static string GetSelectedText(this DTE2 app)
         {
-            if (app.ActiveDocument != null)
+            try
             {
-                dynamic selection = app.ActiveDocument.Selection;
-                if (selection != null)
+                if (app.ActiveDocument != null)
                 {
-                    var selectedText = selection.Text as string;
-                    if (selectedText.HasValue())
-                        return selectedText;
+                    dynamic selection = app.ActiveDocument.Selection;
+                    if (selection != null)
+                    {
+                        var selectedText = selection.Text as string;
+                        if (selectedText.HasValue())
+                            return selectedText;
+                    }
                 }
+                return null;
             }
-
-            return null;
+            catch
+            {
+                return null;
+            }
         }
 
         public static string GetCurrentProjectPath(this DTE2 app)
