@@ -91,7 +91,6 @@ namespace Geeks.VSIX.SmartFinder
             events = App.DTE.Events;
             docEvents = events.DocumentEvents;
             solEvents = events.SolutionEvents;
-            docEvents.DocumentSaved += DocumentEvents_DocumentSaved;
             solEvents.Opened += delegate { App.Initialize(GetDialogPage(typeof(OptionsPage)) as OptionsPage); };
 
             // //ServiceCreatorCallback callback = new ServiceCreatorCallback(CreateService);
@@ -132,24 +131,6 @@ namespace Geeks.VSIX.SmartFinder
             // }
         }
 
-        void DocumentEvents_DocumentSaved(EnvDTE.Document document)
-        {
-            try
-            {
-                if (document.Name.EndsWith(".cs") ||
-                    document.Name.EndsWith(".css") ||
-                    document.Name.EndsWith(".js") ||
-                    document.Name.EndsWith(".ts"))
-                {
-                    document.DTE.ExecuteCommand("Edit.FormatDocument");
-                }
-
-                if (!document.Saved) document.Save();
-            }
-            catch
-            {
-            }
-        }
 
         void SetCommandBindings()
         {
