@@ -6,10 +6,8 @@ namespace System.Windows.Forms
     {
         public static void SafeAction<T>(this T control, Action<T> action) where T : Control
         {
-            if (control.IsDisposed)
-                return;
-            if (!control.InvokeRequired)
-                action(control);
+            if (control.IsDisposed) return;
+            if (!control.InvokeRequired) action(control);
             else
                 control.Invoke(new MethodInvoker(delegate { SafeAction(control, action); }));
         }
@@ -24,10 +22,8 @@ namespace System.Windows.Forms
 
         public static T SafeGet<T>(this Control control, Func<T> expr)
         {
-            if (!control.InvokeRequired)
-                return expr.Invoke();
-            else
-                return (T)(control.Invoke(expr));
+            if (!control.InvokeRequired) return expr.Invoke();
+            else return (T)(control.Invoke(expr));
         }
     }
 }

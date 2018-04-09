@@ -1,8 +1,8 @@
+using System;
+using System.Collections.Generic;
 using EnvDTE;
 using EnvDTE80;
 using Geeks.VSIX.SmartFinder.Base;
-using System;
-using System.Collections.Generic;
 
 namespace Geeks.GeeksProductivityTools.Utils
 {

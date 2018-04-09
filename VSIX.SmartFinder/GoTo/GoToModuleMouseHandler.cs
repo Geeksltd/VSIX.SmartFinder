@@ -1,3 +1,9 @@
+using System;
+using System.ComponentModel.Composition;
+using System.IO;
+using System.Linq;
+using System.Windows;
+using System.Windows.Input;
 using EnvDTE80;
 using Geeks.GeeksProductivityTools;
 using Geeks.VSIX.SmartFinder.Base;
@@ -9,12 +15,6 @@ using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Text.Operations;
 using Microsoft.VisualStudio.Utilities;
-using System;
-using System.ComponentModel.Composition;
-using System.IO;
-using System.Linq;
-using System.Windows;
-using System.Windows.Input;
 
 namespace Geeks.VSIX.SmartFinder.GoTo
 {
@@ -52,8 +52,7 @@ namespace Geeks.VSIX.SmartFinder.GoTo
                 // Check and see if ctrl is down but we missed it somehow.
                 var ctrlDown = (Keyboard.Modifiers & ModifierKeys.Control) != 0 &&
                                 (Keyboard.Modifiers & ModifierKeys.Shift) == 0;
-                if (ctrlDown != _enabled)
-                    Enabled = ctrlDown;
+                if (ctrlDown != _enabled) Enabled = ctrlDown;
 
                 return _enabled;
             }
@@ -64,8 +63,7 @@ namespace Geeks.VSIX.SmartFinder.GoTo
                 if (oldVal != _enabled)
                 {
                     var temp = CtrlKeyStateChanged;
-                    if (temp != null)
-                        temp(this, new EventArgs());
+                    if (temp != null) temp(this, new EventArgs());
                 }
             }
         }
@@ -121,8 +119,7 @@ namespace Geeks.VSIX.SmartFinder.GoTo
 
             var shellCommandDispatcher = GetShellCommandDispatcher(view);
 
-            if (shellCommandDispatcher == null)
-                return null;
+            if (shellCommandDispatcher == null) return null;
 
             return new GoToModuleMouseHandler(
                                            (DTE2)GlobalServiceProvider.GetService(typeof(SDTE)),
@@ -242,10 +239,7 @@ namespace Geeks.VSIX.SmartFinder.GoTo
                     SetHighlightSpan(null);
                     _view.Selection.Clear();
 
-                    if (value.HasValue())
-                    {
-                        DispatchClick(value);
-                    }
+                    if (value.HasValue()) DispatchClick(value);
 
                     e.Handled = true;
                 }
@@ -272,13 +266,11 @@ namespace Geeks.VSIX.SmartFinder.GoTo
             try
             {
                 var line = _view.TextViewLines.GetTextViewLineContainingYCoordinate(position.Y);
-                if (line == null)
-                    return false;
+                if (line == null) return false;
 
                 var bufferPosition = line.GetBufferPositionFromXCoordinate(position.X);
 
-                if (!bufferPosition.HasValue)
-                    return false;
+                if (!bufferPosition.HasValue) return false;
 
                 // Quick check - if the mouse is still inside the current underline span, we're already set
                 var currentSpan = CurrentUnderlineSpan;
@@ -289,8 +281,7 @@ namespace Geeks.VSIX.SmartFinder.GoTo
                 }
 
                 var extent = _navigator.GetExtentOfWord(bufferPosition.Value);
-                if (!extent.IsSignificant)
-                    return false;
+                if (!extent.IsSignificant) return false;
 
                 var contentType = _view.TextBuffer.ContentType;
                 if (!contentType.IsOfType(aspDotNetWebFormContentType) && !contentType.IsOfType(zebbleContentType))
@@ -316,8 +307,7 @@ namespace Geeks.VSIX.SmartFinder.GoTo
 
             finally
             {
-                if (!updated)
-                    SetHighlightSpan(null);
+                if (!updated) SetHighlightSpan(null);
             }
         }
 

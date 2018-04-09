@@ -1,10 +1,10 @@
-using Geeks.VSIX.SmartFinder.Definition;
-using Geeks.VSIX.SmartFinder.Properties;
 using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Geeks.VSIX.SmartFinder.Definition;
+using Geeks.VSIX.SmartFinder.Properties;
 
 namespace Geeks.VSIX.SmartFinder.FileFinder
 {
@@ -196,8 +196,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             var index = -1;
             if (lstFiles.SelectedIndex >= 0)
                 index = lstFiles.SelectedIndex;
-            else if (lstFiles.Items.Count > 0)
-                index = 0;
+            else if (lstFiles.Items.Count > 0) index = 0;
 
             if (index != -1)
             {
@@ -232,10 +231,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
                     Loader.RunWorkerAsync(Filterer);
             }
 
-            if (searchAgain)
-            {
-                Search();
-            }
+            if (searchAgain) Search();
 
             txtSearchBox.Focus();
         }

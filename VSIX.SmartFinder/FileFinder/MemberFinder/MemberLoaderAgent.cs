@@ -1,7 +1,3 @@
-using Geeks.VSIX.SmartFinder.Definition;
-using Geeks.VSIX.SmartFinder.Properties;
-using ICSharpCode.NRefactory;
-using ICSharpCode.NRefactory.Ast;
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
@@ -10,6 +6,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Geeks.VSIX.SmartFinder.Definition;
+using Geeks.VSIX.SmartFinder.Properties;
+using ICSharpCode.NRefactory;
+using ICSharpCode.NRefactory.Ast;
 
 namespace Geeks.VSIX.SmartFinder.FileFinder
 {
@@ -40,8 +40,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
 
         void AddFilesInPath(DoWorkEventArgs e, string projectBasePath, string directory)
         {
-            if (!Directory.Exists(directory) || DirectoryExcluded(directory))
-                return;
+            if (!Directory.Exists(directory) || DirectoryExcluded(directory)) return;
 
             AddCsFiles(e, projectBasePath, directory);
 
@@ -65,8 +64,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             var csFiles = Directory.GetFiles(directory, "*.cs");
             foreach (var csFile in csFiles)
             {
-                if (e.Cancel)
-                    return;
+                if (e.Cancel) return;
 
                 using (var parser = ParserFactory.CreateParser(csFile))
                 {
@@ -183,8 +181,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
         {
             var dirs = Settings.Default.ExcludedDirectories.Split(';');
             foreach (var dir in dirs)
-                if (basePath.Contains(dir.Trim()))
-                    return true;
+                if (basePath.Contains(dir.Trim())) return true;
             return false;
         }
 

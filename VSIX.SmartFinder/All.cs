@@ -1,8 +1,8 @@
+using System.Collections.Generic;
 using Geeks.VSIX.SmartFinder.FileFinder;
 using Geeks.VSIX.SmartFinder.FileToggle;
 using Geeks.VSIX.SmartFinder.GoTo;
 using GeeksAddin;
-using System.Collections.Generic;
 // //using GeeksAddin.Attacher;
 
 namespace Geeks.VSIX.SmartFinder

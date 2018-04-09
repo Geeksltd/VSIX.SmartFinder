@@ -1,5 +1,5 @@
-using Microsoft.VisualStudio.Shell;
 using System.Collections.Generic;
+using Microsoft.VisualStudio.Shell;
 
 namespace Geeks.VSIX.SmartFinder.Base
 {
@@ -27,14 +27,12 @@ namespace Geeks.VSIX.SmartFinder.Base
 
         public static void RemoveError(string key)
         {
-            if (string.IsNullOrEmpty(key))
-                return;
+            if (string.IsNullOrEmpty(key)) return;
 
             if (ListOfErrors.ContainsKey(key))
             {
                 var task = ListOfErrors[key];
-                if (task == null)
-                    return;
+                if (task == null) return;
 
                 if (task is ErrorTask)
                 {
