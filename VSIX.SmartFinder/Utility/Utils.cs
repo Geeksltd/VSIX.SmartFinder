@@ -5,6 +5,7 @@ using Geeks.VSIX.SmartFinder.Base;
 using Microsoft.VisualStudio.Shell.Interop;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 
@@ -61,6 +62,11 @@ namespace GeeksAddin
                     for (var i = 1; i <= projectItem.ProjectItems.Count; i++)
                         AddPathFromProjectItem(basePaths, projectItem.ProjectItems.Item(i).Object as Project);
                 }
+            }
+            //An unloaded project
+            catch (NotImplementedException ex)
+            {
+                Debug.WriteLine(ex);
             }
             catch (Exception err)
             {
