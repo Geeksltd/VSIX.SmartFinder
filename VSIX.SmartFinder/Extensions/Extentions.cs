@@ -1,10 +1,10 @@
 namespace System
 {
-    using Geeks.VSIX.SmartFinder.FileFinder;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Text;
+    using Geeks.VSIX.SmartFinder.FileFinder;
 
     public static class Extensions
     {
@@ -57,8 +57,7 @@ namespace System
             if (numberOfCharacters < 0)
                 throw new ArgumentException("numberOfCharacters must be greater than 0.");
 
-            if (numberOfCharacters == 0)
-                return text;
+            if (numberOfCharacters == 0) return text;
 
             if (text.IsEmpty() || text.Length <= numberOfCharacters)
                 return string.Empty;
@@ -70,8 +69,7 @@ namespace System
 
         public static string Remove(this string text, params string[] substringsToExclude)
         {
-            if (text.IsEmpty())
-                return text;
+            if (text.IsEmpty()) return text;
 
             var result = text;
 
@@ -127,8 +125,7 @@ namespace System
         public static bool EndsWithAny(this string input, params string[] listOfEndings)
         {
             foreach (var option in listOfEndings)
-                if (input.EndsWith(option))
-                    return true;
+                if (input.EndsWith(option)) return true;
 
             return false;
         }
@@ -138,11 +135,9 @@ namespace System
             if (text == null && subString == null)
                 return true;
 
-            if (text == null)
-                return false;
+            if (text == null) return false;
 
-            if (subString.IsEmpty())
-                return true;
+            if (subString.IsEmpty()) return true;
 
             if (caseSensitive)
             {

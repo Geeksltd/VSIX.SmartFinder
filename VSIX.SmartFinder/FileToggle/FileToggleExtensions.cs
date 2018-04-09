@@ -1,7 +1,7 @@
-using Geeks.VSIX.SmartFinder.Definition;
 using System;
 using System.IO;
 using System.Linq;
+using Geeks.VSIX.SmartFinder.Definition;
 
 namespace Geeks.VSIX.SmartFinder.FileToggle
 {
@@ -116,10 +116,7 @@ namespace Geeks.VSIX.SmartFinder.FileToggle
                 if (!File.Exists(otherFile))
                 {
                     otherFile = thisFile.Replace("\\Test\\@Logic\\", "\\Model\\Entities\\").Replace("Fixture.cs", ".cs");
-                    if (!File.Exists(otherFile))
-                    {
-                        otherFile = "";
-                    }
+                    if (!File.Exists(otherFile)) otherFile = "";
                 }
             }
 

@@ -1,12 +1,12 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.Windows.Media;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Text.Tagging;
 using Microsoft.VisualStudio.Utilities;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Windows.Media;
 
 namespace Geeks.GeeksProductivityTools
 {
@@ -45,8 +45,7 @@ namespace Geeks.GeeksProductivityTools
         static IClassificationType UnderlineClassification;
         public static UnderlineClassifier GetClassifierForView(ITextView view)
         {
-            if (UnderlineClassification == null)
-                return null;
+            if (UnderlineClassification == null) return null;
 
             return view.Properties.GetOrCreateSingletonProperty(() => new UnderlineClassifier(view, UnderlineClassification));
         }
@@ -56,8 +55,7 @@ namespace Geeks.GeeksProductivityTools
             if (UnderlineClassification == null)
                 UnderlineClassification = ClassificationRegistry.GetClassificationType("UnderlineClassification");
 
-            if (textView.TextBuffer != buffer)
-                return null;
+            if (textView.TextBuffer != buffer) return null;
 
             return GetClassifierForView(textView) as ITagger<T>;
         }
@@ -97,11 +95,9 @@ namespace Geeks.GeeksProductivityTools
             var oldSpan = _underlineSpan;
             _underlineSpan = span;
 
-            if (!oldSpan.HasValue && !_underlineSpan.HasValue)
-                return;
+            if (!oldSpan.HasValue && !_underlineSpan.HasValue) return;
 
-            else if (oldSpan.HasValue && _underlineSpan.HasValue && oldSpan == _underlineSpan)
-                return;
+            else if (oldSpan.HasValue && _underlineSpan.HasValue && oldSpan == _underlineSpan) return;
 
             if (!_underlineSpan.HasValue)
             {

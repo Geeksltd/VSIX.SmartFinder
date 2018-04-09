@@ -1,4 +1,3 @@
-using Geeks.VSIX.SmartFinder.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using Geeks.VSIX.SmartFinder.Properties;
 
 namespace Geeks.VSIX.SmartFinder.FileFinder
 {
@@ -36,8 +36,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
 
         void AddFilesInPath(DoWorkEventArgs e, string projectBasePath, string directory)
         {
-            if (!Directory.Exists(directory) || DirectoryExcluded(directory))
-                return;
+            if (!Directory.Exists(directory) || DirectoryExcluded(directory)) return;
 
             AddFilesInDirectory(projectBasePath, directory);
 
@@ -126,8 +125,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
         {
             var dirs = Settings.Default.ExcludedDirectories.Split(';');
             foreach (var dir in dirs)
-                if (directory.Contains(dir))
-                    return true;
+                if (directory.Contains(dir)) return true;
             return false;
         }
 

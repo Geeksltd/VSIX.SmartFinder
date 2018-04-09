@@ -1,11 +1,11 @@
 namespace GeeksAddin
 {
-    using EnvDTE;
-    using EnvDTE80;
-    using Geeks.VSIX.SmartFinder.Base;
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using EnvDTE;
+    using EnvDTE80;
+    using Geeks.VSIX.SmartFinder.Base;
 
     static class DteExtensions
     {
@@ -22,10 +22,10 @@ namespace GeeksAddin
                     if (selection != null)
                     {
                         var selectedText = selection.Text as string;
-                        if (selectedText.HasValue())
-                            return selectedText;
+                        if (selectedText.HasValue()) return selectedText;
                     }
                 }
+
                 return null;
             }
             catch
@@ -36,8 +36,7 @@ namespace GeeksAddin
 
         public static string GetCurrentProjectPath(this DTE2 app)
         {
-            if (app.ActiveDocument == null)
-                return null;
+            if (app.ActiveDocument == null) return null;
 
             var documentPath = app.ActiveDocument.Path.ToLower();
             var allProjectPaths = Utils.FindSolutionDirectories(app);

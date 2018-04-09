@@ -1,6 +1,6 @@
+using System.Linq;
 using Geeks.VSIX.SmartFinder.FileFinder;
 using GeeksAddin;
-using System.Linq;
 
 namespace Geeks.VSIX.SmartFinder.GoTo
 {
@@ -16,8 +16,7 @@ namespace Geeks.VSIX.SmartFinder.GoTo
         public override void Run(EnvDTE80.DTE2 app)
         {
             var basePath = Utils.FindSolutionDirectories(app);
-            if (basePath == null || basePath.Count() == 0)
-                return;
+            if (basePath == null || basePath.Count() == 0) return;
 
             if (FoundItemsBank.Items != null)
             {

@@ -1,5 +1,5 @@
-using Newtonsoft.Json;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace Geeks.VSIX.SmartFinder.Base
 {
@@ -18,8 +18,7 @@ namespace Geeks.VSIX.SmartFinder.Base
             get
             {
                 var solutionPath = GetSolutionFilePath();
-                if (solutionPath == null)
-                    return string.Empty;
+                if (solutionPath == null) return string.Empty;
 
                 return Path.Combine(solutionPath, SETTINGS_FILE_NAME);
             }
