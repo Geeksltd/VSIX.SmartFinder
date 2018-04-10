@@ -8,8 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 using Geeks.VSIX.SmartFinder.Definition;
 using Geeks.VSIX.SmartFinder.Properties;
-using ICSharpCode.NRefactory;
-using ICSharpCode.NRefactory.Ast;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Geeks.VSIX.SmartFinder.FileFinder
 {
@@ -66,75 +67,77 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             {
                 if (e.Cancel) return;
 
-                using (var parser = ParserFactory.CreateParser(csFile))
+                var porcupineTree = CSharpSyntaxTree.ParseText(File.ReadAllText(csFile));
+                var root = porcupineTree.GetRoot();
+
+
+                if (Settings.Default.ShowMethods)
                 {
-                    parser.ParseMethodBodies = false;
-                    parser.Parse();
+                    var methodsInsideCsFile = ExtractMethods(projectBasePath, csFile, root.DescendantNodes().OfType<MethodDeclarationSyntax>());
+                    Repository.AppendRange(methodsInsideCsFile);
 
-                    if (Settings.Default.ShowMethods)
-                    {
-                        var methodsInsideCsFile = ExtractMethods(projectBasePath, csFile, parser.CompilationUnit.Children);
-                        Repository.AppendRange(methodsInsideCsFile);
-                    }
-
-                    if (Settings.Default.ShowProperties)
-                    {
-                        var propertiesInsideCsFile = ExtractProperties(projectBasePath, csFile, parser.CompilationUnit.Children);
-                        Repository.AppendRange(propertiesInsideCsFile);
-                    }
                 }
+
+                if (Settings.Default.ShowProperties)
+                {
+                    var propertiesInsideCsFile = ExtractProperties(projectBasePath, csFile, root.DescendantNodes().OfType<PropertyDeclarationSyntax>());
+                    Repository.AppendRange(propertiesInsideCsFile);
+                }
+
             }
         }
 
-        IEnumerable<Item> ExtractMethods(string projectBasePath, string fileName, List<INode> nodes)
+        IEnumerable<Item> ExtractMethods(string projectBasePath, string fileName, IEnumerable<MethodDeclarationSyntax> nodes)
         {
-            foreach (var node in nodes)
+            foreach (var method in nodes)
             {
-                var method = node as MethodDeclaration;
-                if (method != null)
+                var description = new StringBuilder();
+                if (Settings.Default.ShowClassNames)
                 {
-                    var description = new StringBuilder();
-                    if (Settings.Default.ShowClassNames)
+                    switch (method.Parent.Kind())
                     {
-                        description.AppendFormat("{0}.", (method.Parent as TypeDeclaration).Name);
+                        case SyntaxKind.ClassDeclaration:
+                            description.AppendFormat("{0}.", (method.Parent as ClassDeclarationSyntax).Identifier);
+                            break;
+                        case SyntaxKind.InterfaceDeclaration:
+                            description.AppendFormat("{0}.", (method.Parent as InterfaceDeclarationSyntax).Identifier);
+                            break;
+                        case SyntaxKind.StructDeclaration:
+                            description.AppendFormat("{0}.", (method.Parent as StructDeclarationSyntax).Identifier);
+                            break;
+                        default:
+                            throw new Exception("Unsupported Decleration");
                     }
 
-                    description.Append(method.Name);
-                    description.Append("(");
-                    if (Settings.Default.ShowMethodParameters)
-                    {
-                        description.Append(method.Parameters.Select(p => "{0} {1}".FormatWith(SimplifizePrimitiveTypes(p.TypeReference), p.ParameterName)).ToString(", "));
-                    }
-
-                    description.Append(")");
-                    if (Settings.Default.ShowMethodReturnTypes)
-                    {
-                        description.AppendFormat(" :{0}", SimplifizePrimitiveTypes(method.TypeReference));
-                    }
-
-                    yield return new Item(projectBasePath, fileName)
-                    {
-                        Phrase = description.ToString(),
-                        Column = method.StartLocation.Column,
-                        Icon = IconType.Method,
-                        MemberType = MemberType.Method,
-                        LineNumber = method.StartLocation.Line
-                    };
                 }
-                else
+
+                description.Append(method.Identifier);
+                description.Append("(");
+                if (Settings.Default.ShowMethodParameters)
                 {
-                    if (node.Children.Count > 0)
-                    {
-                        foreach (var item in ExtractMethods(projectBasePath, fileName, node.Children))
-                            yield return item;
-                    }
+                    description.Append(method.ParameterList.Parameters.Select(p => "{0} {1}".FormatWith(SimplifizePrimitiveTypes(p.Type.ToString()), p.Identifier.ToString())).ToString(", "));
                 }
+
+                description.Append(")");
+                if (Settings.Default.ShowMethodReturnTypes)
+                {
+                    description.AppendFormat(" :{0}", SimplifizePrimitiveTypes(method.ReturnType.ToString()));
+                }
+
+                yield return new Item(projectBasePath, fileName)
+                {
+                    Phrase = description.ToString(),
+                    Column = method.SyntaxTree.GetLineSpan(method.Span).StartLinePosition.Character + 1,
+                    Icon = IconType.Method,
+                    MemberType = MemberType.Method,
+                    LineNumber = method.SyntaxTree.GetLineSpan(method.Span).StartLinePosition.Line + 1
+                };
             }
         }
 
-        string SimplifizePrimitiveTypes(TypeReference tr)
+        string SimplifizePrimitiveTypes(string tr)
         {
-            return tr.ToString()
+            return tr
                      .Remove("System.")
                      .Replace("Int32", "int")
                      .Replace("Int64", "long")
@@ -148,32 +151,39 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
                      .Replace("String", "string");
         }
 
-        IEnumerable<Item> ExtractProperties(string projectBasePath, string fileName, List<INode> nodes)
+        IEnumerable<Item> ExtractProperties(string projectBasePath, string fileName, IEnumerable<PropertyDeclarationSyntax> nodes)
         {
-            foreach (var node in nodes)
+            foreach (var property in nodes)
             {
-                var property = node as PropertyDeclaration;
-                if (property != null)
+                SyntaxToken parentName;
+
+                switch (property.Parent.Kind())
                 {
-                    var description = "{0}{1} :{2}".FormatWith(
-                        Settings.Default.ShowClassNames ? (property.Parent as TypeDeclaration).Name + "." : "",
-                        property.Name,
-                        SimplifizePrimitiveTypes(property.TypeReference));
-                    yield return new Item(projectBasePath, fileName)
-                    {
-                        Phrase = description,
-                        Column = property.StartLocation.Column,
-                        Icon = IconType.Property,
-                        MemberType = MemberType.Property,
-                        LineNumber = property.StartLocation.Line
-                    };
+                    case SyntaxKind.ClassDeclaration:
+                        parentName = (property.Parent as ClassDeclarationSyntax).Identifier;
+                        break;
+                    case SyntaxKind.InterfaceDeclaration:
+                        parentName = (property.Parent as InterfaceDeclarationSyntax).Identifier;
+                        break;
+                    case SyntaxKind.StructDeclaration:
+                        parentName = (property.Parent as StructDeclarationSyntax).Identifier;
+                        break;
+                    default:
+                        throw new Exception("Unsupported Decleration");
                 }
-                else
+
+                var description = "{0}{1} :{2}".FormatWith(
+                    Settings.Default.ShowClassNames ? parentName + "." : "",
+                    property.Identifier,
+                    SimplifizePrimitiveTypes(property.Type.ToString()));
+                yield return new Item(projectBasePath, fileName)
                 {
-                    if (node.Children.Count > 0)
-                        foreach (var item in ExtractProperties(projectBasePath, fileName, node.Children))
-                            yield return item;
-                }
+                    Phrase = description,
+                    Column = property.SyntaxTree.GetLineSpan(property.Span).StartLinePosition.Character + 1,
+                    Icon = IconType.Property,
+                    MemberType = MemberType.Property,
+                    LineNumber = property.SyntaxTree.GetLineSpan(property.Span).StartLinePosition.Line + 1
+                };
             }
         }
 
