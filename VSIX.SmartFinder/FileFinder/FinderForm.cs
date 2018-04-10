@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Geeks.VSIX.SmartFinder.Base;
 using Geeks.VSIX.SmartFinder.Definition;
 using Geeks.VSIX.SmartFinder.Properties;
 
@@ -246,5 +247,32 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             var form = new FormOptions();
             form.ShowDialog(this);
         }
+
+        private void FileFilderButton_Click(object sender, EventArgs e) => SwitchFinder(sender);
+        private void CssFinder_Click(object sender, EventArgs e) => SwitchFinder(sender);
+        private void MemberFinder_Click(object sender, EventArgs e) => SwitchFinder(sender);
+
+        private void SwitchFinder(object sender)
+        {
+            var button = sender as Button;
+            switch (button.Tag.ToString().ToLower())
+            {
+                case "file":
+                    new FileFinderGadget().Run(App.DTE);
+                    break;
+                case "css":
+                    new StyleFinderGadget().Run(App.DTE);
+                    break;
+                case "member":
+                    new MemberFinderGadget().Run(App.DTE);
+                    break;
+
+                default:
+                    break;
+            }
+            this.Close();
+        }
+
+
     }
 }

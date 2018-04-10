@@ -40,12 +40,15 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             this.btnOptions = new System.Windows.Forms.Button();
             this.btnShowOptions = new System.Windows.Forms.Button();
             this.lstFiles = new Geeks.VSIX.SmartFinder.FileFinder.FlickerFreeListBox();
+            this.FileFilderButton = new System.Windows.Forms.Button();
+            this.CssFinder = new System.Windows.Forms.Button();
+            this.MemberFinder = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnSelect
             // 
             this.btnSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSelect.Location = new System.Drawing.Point(608, 418);
+            this.btnSelect.Location = new System.Drawing.Point(608, 487);
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.Size = new System.Drawing.Size(58, 23);
             this.btnSelect.TabIndex = 9;
@@ -57,7 +60,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(546, 418);
+            this.btnCancel.Location = new System.Drawing.Point(546, 487);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(56, 23);
             this.btnCancel.TabIndex = 8;
@@ -70,7 +73,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             this.txtSearchBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSearchBox.BackColor = System.Drawing.SystemColors.Window;
-            this.txtSearchBox.Location = new System.Drawing.Point(12, 9);
+            this.txtSearchBox.Location = new System.Drawing.Point(12, 55);
             this.txtSearchBox.Name = "txtSearchBox";
             this.txtSearchBox.Size = new System.Drawing.Size(654, 20);
             this.txtSearchBox.TabIndex = 5;
@@ -86,7 +89,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             // 
             this.btnOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnOptions.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnOptions.Location = new System.Drawing.Point(12, 418);
+            this.btnOptions.Location = new System.Drawing.Point(12, 487);
             this.btnOptions.Name = "btnOptions";
             this.btnOptions.Size = new System.Drawing.Size(92, 23);
             this.btnOptions.TabIndex = 11;
@@ -98,7 +101,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             // btnShowOptions
             // 
             this.btnShowOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnShowOptions.Location = new System.Drawing.Point(458, 418);
+            this.btnShowOptions.Location = new System.Drawing.Point(458, 487);
             this.btnShowOptions.Name = "btnShowOptions";
             this.btnShowOptions.Size = new System.Drawing.Size(68, 23);
             this.btnShowOptions.TabIndex = 8;
@@ -118,13 +121,49 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             this.lstFiles.ForeColor = System.Drawing.SystemColors.WindowText;
             this.lstFiles.FormattingEnabled = true;
             this.lstFiles.HighlightWords = null;
-            this.lstFiles.Location = new System.Drawing.Point(12, 36);
+            this.lstFiles.Location = new System.Drawing.Point(12, 88);
             this.lstFiles.Name = "lstFiles";
             this.lstFiles.ShowLoadingAtTheEndOfList = false;
-            this.lstFiles.Size = new System.Drawing.Size(654, 355);
+            this.lstFiles.Size = new System.Drawing.Size(654, 368);
             this.lstFiles.TabIndex = 7;
             this.lstFiles.DoubleClick += new System.EventHandler(this.lstFiles_DoubleClick);
             this.lstFiles.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lstFiles_KeyDown);
+            // 
+            // FileFilderButton
+            // 
+            this.FileFilderButton.BackColor = System.Drawing.Color.Transparent;
+            this.FileFilderButton.Location = new System.Drawing.Point(12, 10);
+            this.FileFilderButton.Name = "FileFilderButton";
+            this.FileFilderButton.Size = new System.Drawing.Size(92, 39);
+            this.FileFilderButton.TabIndex = 12;
+            this.FileFilderButton.Tag = "File";
+            this.FileFilderButton.Text = "File Finder";
+            this.FileFilderButton.UseVisualStyleBackColor = false;
+            this.FileFilderButton.Click += new System.EventHandler(this.FileFilderButton_Click);
+            // 
+            // CssFinder
+            // 
+            this.CssFinder.BackColor = System.Drawing.Color.Transparent;
+            this.CssFinder.Location = new System.Drawing.Point(208, 10);
+            this.CssFinder.Name = "CssFinder";
+            this.CssFinder.Size = new System.Drawing.Size(92, 39);
+            this.CssFinder.TabIndex = 13;
+            this.CssFinder.Tag = "CSS";
+            this.CssFinder.Text = "Css Finder";
+            this.CssFinder.UseVisualStyleBackColor = false;
+            this.CssFinder.Click += new System.EventHandler(this.CssFinder_Click);
+            // 
+            // MemberFinder
+            // 
+            this.MemberFinder.BackColor = System.Drawing.Color.Transparent;
+            this.MemberFinder.Location = new System.Drawing.Point(110, 10);
+            this.MemberFinder.Name = "MemberFinder";
+            this.MemberFinder.Size = new System.Drawing.Size(92, 39);
+            this.MemberFinder.TabIndex = 14;
+            this.MemberFinder.Tag = "Member";
+            this.MemberFinder.Text = "Member Finder";
+            this.MemberFinder.UseVisualStyleBackColor = false;
+            this.MemberFinder.Click += new System.EventHandler(this.MemberFinder_Click);
             // 
             // FinderForm
             // 
@@ -132,7 +171,10 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(678, 453);
+            this.ClientSize = new System.Drawing.Size(678, 522);
+            this.Controls.Add(this.MemberFinder);
+            this.Controls.Add(this.CssFinder);
+            this.Controls.Add(this.FileFilderButton);
             this.Controls.Add(this.btnSelect);
             this.Controls.Add(this.btnOptions);
             this.Controls.Add(this.btnCancel);
@@ -159,6 +201,9 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
         System.Windows.Forms.Button btnOptions;
         public System.Windows.Forms.ContextMenuStrip mnuOptions;
         System.Windows.Forms.Button btnShowOptions;
+        private System.Windows.Forms.Button FileFilderButton;
+        private System.Windows.Forms.Button CssFinder;
+        private System.Windows.Forms.Button MemberFinder;
     }
 }
 
