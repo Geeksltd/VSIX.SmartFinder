@@ -32,13 +32,14 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
         void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FinderForm));
             this.btnSelect = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.txtSearchBox = new System.Windows.Forms.TextBox();
             this.mnuOptions = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.btnOptions = new System.Windows.Forms.Button();
             this.btnShowOptions = new System.Windows.Forms.Button();
-            this.lstFiles = new FlickerFreeListBox();
+            this.lstFiles = new Geeks.VSIX.SmartFinder.FileFinder.FlickerFreeListBox();
             this.SuspendLayout();
             // 
             // btnSelect
@@ -66,7 +67,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             // 
             // txtSearchBox
             // 
-            this.txtSearchBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.txtSearchBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSearchBox.BackColor = System.Drawing.SystemColors.Window;
             this.txtSearchBox.Location = new System.Drawing.Point(12, 9);
@@ -84,7 +85,6 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             // btnOptions
             // 
             this.btnOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnOptions.Image = global::Geeks.VSIX.SmartFinder.FileFinder.FileFinder.FileTypesResources.options;
             this.btnOptions.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnOptions.Location = new System.Drawing.Point(12, 418);
             this.btnOptions.Name = "btnOptions";
@@ -108,21 +108,20 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             // 
             // lstFiles
             // 
-            this.lstFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.lstFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lstFiles.BackColor = System.Drawing.SystemColors.Window;
             this.lstFiles.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.lstFiles.EmptyBehaviour = EmptyBehaviour.None;
+            this.lstFiles.EmptyBehaviour = Geeks.VSIX.SmartFinder.Definition.EmptyBehaviour.None;
             this.lstFiles.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstFiles.ForeColor = System.Drawing.SystemColors.WindowText;
             this.lstFiles.FormattingEnabled = true;
             this.lstFiles.HighlightWords = null;
-            this.lstFiles.ItemHeight = CalculateItemHeight();
             this.lstFiles.Location = new System.Drawing.Point(12, 36);
             this.lstFiles.Name = "lstFiles";
             this.lstFiles.ShowLoadingAtTheEndOfList = false;
-            this.lstFiles.Size = new System.Drawing.Size(654, 361);
+            this.lstFiles.Size = new System.Drawing.Size(654, 355);
             this.lstFiles.TabIndex = 7;
             this.lstFiles.DoubleClick += new System.EventHandler(this.lstFiles_DoubleClick);
             this.lstFiles.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lstFiles_KeyDown);
@@ -141,12 +140,14 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             this.Controls.Add(this.btnShowOptions);
             this.Controls.Add(this.txtSearchBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FinderForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Finder";
             this.Load += new System.EventHandler(this.FinderForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion
