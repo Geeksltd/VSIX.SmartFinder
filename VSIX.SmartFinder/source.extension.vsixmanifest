@@ -5,8 +5,8 @@
         <DisplayName>Smart Finder</DisplayName>
         <Description xml:space="preserve">Ctrl + Alt + F for file finder. Ctrl + Alt + M for member finder. Ctrl + Alt + S for CSS finder.</Description>
         <MoreInfo>http://www.geeks.ltd.uk</MoreInfo>
-        <Icon>Resources\icon.png</Icon>
-        <PreviewImage>Resources\preview.png</PreviewImage>
+        <Icon>icon.png</Icon>
+        <PreviewImage>Preview.png</PreviewImage>
         <Tags>extensions, geeks, geeks ltd, productivity tools, productivity</Tags>
     </Metadata>
     <Installation InstalledByMsi="false">
