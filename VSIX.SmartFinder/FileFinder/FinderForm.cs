@@ -24,6 +24,11 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
         public FinderForm(string title, Color color, Loader loader, Filterer filterer, string defaultSearchTerm)
         {
             InitializeComponent();
+            lstFiles.ItemHeight = 20;
+
+            if (loader.GetType() == typeof(MemberLoaderAgent)) MemberFinder.Enabled = false;
+            if (loader.GetType() == typeof(StyleLoaderAgent)) CssFinder.Enabled = false;
+            if (loader.GetType() == typeof(FileLoaderAgent)) FileFilderButton.Enabled = false;
 
             Text = title;
             BackColor = color;
@@ -254,6 +259,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
 
         private void SwitchFinder(object sender)
         {
+            this.Hide();
             var button = sender as Button;
             switch (button.Tag.ToString().ToLower())
             {
