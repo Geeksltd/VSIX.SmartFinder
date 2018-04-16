@@ -37,7 +37,6 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             this.btnCancel = new System.Windows.Forms.Button();
             this.txtSearchBox = new System.Windows.Forms.TextBox();
             this.mnuOptions = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.btnOptions = new System.Windows.Forms.Button();
             this.btnShowOptions = new System.Windows.Forms.Button();
             this.lstFiles = new Geeks.VSIX.SmartFinder.FileFinder.FlickerFreeListBox();
             this.FileFilderButton = new System.Windows.Forms.Button();
@@ -85,23 +84,10 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             this.mnuOptions.Name = "contextMenuStrip1";
             this.mnuOptions.Size = new System.Drawing.Size(61, 4);
             // 
-            // btnOptions
-            // 
-            this.btnOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnOptions.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnOptions.Location = new System.Drawing.Point(12, 487);
-            this.btnOptions.Name = "btnOptions";
-            this.btnOptions.Size = new System.Drawing.Size(92, 23);
-            this.btnOptions.TabIndex = 11;
-            this.btnOptions.Text = "     Options";
-            this.btnOptions.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnOptions.UseVisualStyleBackColor = true;
-            this.btnOptions.Click += new System.EventHandler(this.btnOptions_Click);
-            // 
             // btnShowOptions
             // 
             this.btnShowOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnShowOptions.Location = new System.Drawing.Point(458, 487);
+            this.btnShowOptions.Location = new System.Drawing.Point(472, 487);
             this.btnShowOptions.Name = "btnShowOptions";
             this.btnShowOptions.Size = new System.Drawing.Size(68, 23);
             this.btnShowOptions.TabIndex = 8;
@@ -176,7 +162,6 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             this.Controls.Add(this.CssFinder);
             this.Controls.Add(this.FileFilderButton);
             this.Controls.Add(this.btnSelect);
-            this.Controls.Add(this.btnOptions);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.lstFiles);
             this.Controls.Add(this.btnShowOptions);
@@ -198,7 +183,6 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
         System.Windows.Forms.Button btnCancel;
         FlickerFreeListBox lstFiles;
         System.Windows.Forms.TextBox txtSearchBox;
-        System.Windows.Forms.Button btnOptions;
         public System.Windows.Forms.ContextMenuStrip mnuOptions;
         System.Windows.Forms.Button btnShowOptions;
         private System.Windows.Forms.Button FileFilderButton;

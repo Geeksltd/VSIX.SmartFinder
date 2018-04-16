@@ -73,8 +73,8 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             var iconImage = GetItemImage(item);
             graphic.DrawImage(iconImage, position);
 
-            position.X += iconImage.Width + 2; // padding
-            position.Y += 2; // padding
+            position.X += iconImage.Width + 6; // padding
+            position.Y += 4; // padding
 
             var finderMode = FinderDrawer.DetectFinderMode(Parent);
 

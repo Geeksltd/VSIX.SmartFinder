@@ -33,7 +33,6 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             this.lblFileTypes = new System.Windows.Forms.Label();
             this.txtResources = new System.Windows.Forms.TextBox();
             this.chkBoxExcludeResources = new System.Windows.Forms.CheckBox();
-            this.chkBoxTrackItems = new System.Windows.Forms.CheckBox();
             this.chkBoxMethodParams = new System.Windows.Forms.CheckBox();
             this.chkBoxMethods = new System.Windows.Forms.CheckBox();
             this.chkBoxMethodReturnTypes = new System.Windows.Forms.CheckBox();
@@ -96,19 +95,6 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             this.chkBoxExcludeResources.TabIndex = 18;
             this.chkBoxExcludeResources.Text = "Exclude Resources";
             this.chkBoxExcludeResources.UseVisualStyleBackColor = true;
-            // 
-            // chkBoxTrackItems
-            // 
-            this.chkBoxTrackItems.AutoSize = true;
-            this.chkBoxTrackItems.Checked = global::Geeks.VSIX.SmartFinder.Properties.Settings.Default.TrackItemInSolutionExplorer;
-            this.chkBoxTrackItems.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkBoxTrackItems.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Geeks.VSIX.SmartFinder.Properties.Settings.Default, "TrackItemInSolutionExplorer", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkBoxTrackItems.Location = new System.Drawing.Point(15, 157);
-            this.chkBoxTrackItems.Name = "chkBoxTrackItems";
-            this.chkBoxTrackItems.Size = new System.Drawing.Size(204, 17);
-            this.chkBoxTrackItems.TabIndex = 19;
-            this.chkBoxTrackItems.Text = "Track found items in Solution Explorer";
-            this.chkBoxTrackItems.UseVisualStyleBackColor = true;
             // 
             // chkBoxMethodParams
             // 
@@ -195,7 +181,6 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             this.Controls.Add(this.chkBoxMethodReturnTypes);
             this.Controls.Add(this.chkBoxMethods);
             this.Controls.Add(this.chkBoxMethodParams);
-            this.Controls.Add(this.chkBoxTrackItems);
             this.Controls.Add(this.chkBoxExcludeResources);
             this.Controls.Add(this.txtResources);
             this.Controls.Add(this.lblFileTypes);
@@ -208,6 +193,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             this.Load += new System.EventHandler(this.FormOptions_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion
@@ -217,7 +203,6 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
         System.Windows.Forms.Label lblFileTypes;
         System.Windows.Forms.TextBox txtResources;
         System.Windows.Forms.CheckBox chkBoxExcludeResources;
-        System.Windows.Forms.CheckBox chkBoxTrackItems;
         System.Windows.Forms.CheckBox chkBoxMethodParams;
         System.Windows.Forms.CheckBox chkBoxMethods;
         System.Windows.Forms.CheckBox chkBoxMethodReturnTypes;

@@ -242,11 +242,6 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             txtSearchBox.Focus();
         }
 
-        void btnOptions_Click(object sender, EventArgs e)
-        {
-            mnuOptions.Show(btnOptions, new Point(0, btnOptions.Height), ToolStripDropDownDirection.BelowRight);
-        }
-
         void btnShowOptions_Click(object sender, EventArgs e)
         {
             var form = new FormOptions();
