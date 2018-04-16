@@ -133,6 +133,10 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             {
                 return IconDictionary.MSharpIcon;
             }
+            if (item.IsMSharpUI())
+            {
+                return IconDictionary.MSharpUIIcon;
+            }
 
             if (item.Icon == IconType.Auto)
             {

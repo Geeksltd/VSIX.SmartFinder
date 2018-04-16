@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Geeks.VSIX.SmartFinder.FileFinder.FileFinder {
+namespace Geeks.VSIX.SmartFinder.FileFinder {
     using System;
     
     
@@ -273,6 +273,16 @@ namespace Geeks.VSIX.SmartFinder.FileFinder.FileFinder {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap json {
+            get {
+                object obj = ResourceManager.GetObject("json", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap klass {
             get {
                 object obj = ResourceManager.GetObject("klass", resourceCulture);
@@ -316,6 +326,16 @@ namespace Geeks.VSIX.SmartFinder.FileFinder.FileFinder {
         internal static System.Drawing.Bitmap MSharp {
             get {
                 object obj = ResourceManager.GetObject("MSharp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap MSharpUI {
+            get {
+                object obj = ResourceManager.GetObject("MSharpUI", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

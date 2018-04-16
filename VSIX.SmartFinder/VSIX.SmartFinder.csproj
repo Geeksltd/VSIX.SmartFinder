@@ -403,6 +403,7 @@
     <EmbeddedResource Include="FileFinder\FileTypesResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>FileTypesResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FileFinder\FinderForm.resx">
       <DependentUpon>FinderForm.cs</DependentUpon>
@@ -454,6 +455,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Resource Include="Resources\json.png" />
+    <Resource Include="Resources\MSharpUI.png" />
     <Content Include="Resources\Preview.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>

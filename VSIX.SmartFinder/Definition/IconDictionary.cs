@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using System.Drawing;
-using Geeks.VSIX.SmartFinder.FileFinder.FileFinder;
+using Geeks.VSIX.SmartFinder.FileFinder;
 
 namespace Geeks.VSIX.SmartFinder.Definition
 {
     public class IconDictionary
     {
         public static Image MSharpIcon => FileTypesResources.MSharp;
+        public static Image MSharpUIIcon => FileTypesResources.MSharpUI;
 
         public static Dictionary<string, Image> Icons;
         static IconDictionary()
@@ -59,6 +60,7 @@ namespace Geeks.VSIX.SmartFinder.Definition
             { ".vbproj", FileTypesResources.vbproj},
             { ".vdproj", FileTypesResources.vdproj},
             { ".xml", FileTypesResources.xml},
+            { ".json", FileTypesResources.json},
         };
         }
     }
