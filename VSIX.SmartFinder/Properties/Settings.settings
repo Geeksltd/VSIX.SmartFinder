@@ -12,8 +12,7 @@
       <Value Profile="(Default)">.gif;.jpg;.png;.bmp;.resx;.ico;.bat;.tif;.psd;.sln;.suo;.csproj;.user;.cd;.lic;_reset.css;.html;.jsm;.map;.cache;vsdoc;.dat;.force;.map;.md;.rtf;.tmp</Value>
     </Setting>
      <Setting Name="ExcludedDirectories" Type="System.String" Scope="User">
-      <Value Profile="(Default)">@Temp\Validation;@CuteSoft;@Coder.Meta;.svn;node_modules;bower_components;public;obj
-</Value>
+      <Value Profile="(Default)">@Temp\Validation;@CuteSoft;@Coder.Meta;.svn;node_modules;bower_components;public;obj;bin;wwwroot\lib;[GEN-DAL]</Value>
     </Setting>
 	<Setting Name="ShowMethodParameters" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

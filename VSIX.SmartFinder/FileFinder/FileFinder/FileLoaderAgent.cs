@@ -123,6 +123,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
 
         bool DirectoryExcluded(string directory)
         {
+            string sex = Settings.Default.ExcludedDirectories;
             var dirs = Settings.Default.ExcludedDirectories.Split(';');
             foreach (var dir in dirs)
                 if (directory.Contains(dir)) return true;
