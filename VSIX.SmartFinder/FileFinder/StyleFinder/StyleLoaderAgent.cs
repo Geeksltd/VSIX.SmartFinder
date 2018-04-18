@@ -25,7 +25,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
         {
             if (e.Cancel) return;
 
-            var basePaths = BasePaths.Where(p => StyleFinderUtils.IsFrontEndProject(p) && Directory.Exists(p));
+            var basePaths = BasePaths.Where(p => Directory.Exists(p));
             foreach (var directoryPath in basePaths)
                 AddFilesInPath(e, directoryPath, directoryPath);
         }
@@ -34,16 +34,17 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
         {
             if (StyleFinderUtils.IsMSharpFrontEnd(projectBasePath))
             {
-                if (directory.Contains("Website\\Styles") || directory.Contains("Website\\Styles\\"))
+                if (directory.Contains("styles"))
+                {
+                    //AddStyleFiles(projectBasePath, directory, "*.sass");
+                    //AddStyleFiles(projectBasePath, directory, "*.scss");
                     AddStyleFiles(projectBasePath, directory, "*.less");
-
-                /* Commented du to: This would be an extra job as Geeks do not work with CSS directly
-                    AddCssFiles(projectBasePath, directory); 
-                */
+                    AddStyleFiles(projectBasePath, directory, "*.css");
+                }
             }
 
             else
-                AddStyleFiles(projectBasePath, directory, "*.scss");
+                AddStyleFiles(projectBasePath, directory, "*.css");
 
             if (e.Cancel) return;
 
