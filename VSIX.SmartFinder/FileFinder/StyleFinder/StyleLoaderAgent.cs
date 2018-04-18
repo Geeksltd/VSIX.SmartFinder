@@ -36,15 +36,18 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             {
                 if (directory.Contains("styles"))
                 {
-                    //AddStyleFiles(projectBasePath, directory, "*.sass");
-                    //AddStyleFiles(projectBasePath, directory, "*.scss");
+                    AddStyleFiles(projectBasePath, directory, "*.scss");
+                    AddStyleFiles(projectBasePath, directory, "*.scss");
                     AddStyleFiles(projectBasePath, directory, "*.less");
-                    AddStyleFiles(projectBasePath, directory, "*.css");
                 }
             }
-
             else
+            {
                 AddStyleFiles(projectBasePath, directory, "*.css");
+                AddStyleFiles(projectBasePath, directory, "*.sass");
+                AddStyleFiles(projectBasePath, directory, "*.scss");
+                AddStyleFiles(projectBasePath, directory, "*.less");
+            }
 
             if (e.Cancel) return;
 

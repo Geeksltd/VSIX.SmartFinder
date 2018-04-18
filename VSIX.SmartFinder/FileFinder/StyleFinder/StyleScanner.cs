@@ -51,8 +51,16 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
                     {
                         i++;
 
-                        currentCharacter = fileInfo.FileContent[i];
-                        nextCharacter = (i == contentLength - 1) ? currentCharacter : fileInfo.FileContent[i + 1];
+                        try
+                        {
+                            currentCharacter = fileInfo.FileContent[i];
+                            nextCharacter = (i == contentLength - 1) ? currentCharacter : fileInfo.FileContent[i + 1];
+                        }
+                        catch
+                        {
+                            nextCharacter = '\n';
+                        }
+
                     }
 
                     if (i >= contentLength) yield break;
