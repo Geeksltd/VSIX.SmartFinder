@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel.Design;
 using System.Runtime.InteropServices;
+using System.Threading;
 using EnvDTE80;
 using Geeks.GeeksProductivityTools;
 using Geeks.VSIX.SmartFinder.Base;
@@ -13,13 +14,13 @@ using Microsoft.VisualStudio.Shell;
 namespace Geeks.VSIX.SmartFinder
 {
     [ProvideAutoLoad("ADFC4E64-0397-11D1-9F4E-00A0C911004F")]    // Microsoft.VisualStudio.VSConstants.UICONTEXT_NoSolution
-    [PackageRegistration(UseManagedResourcesOnly = true)]
+    [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
     [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [ProvideOptionPage(typeof(OptionsPage), "Geeks productivity tools", "General", 0, 0, true)]
     [Guid(GuidList.GuidGeeksProductivityToolsPkgString)]
     ////[ProvideService(typeof(SMyService))]
-    public sealed class SmartFinderPackage : Package
+    public sealed class SmartFinderPackage : AsyncPackage
     {
         public SmartFinderPackage() { }
 
@@ -30,9 +31,10 @@ namespace Geeks.VSIX.SmartFinder
 
         public static SmartFinderPackage Instance { get; private set; }
 
-        protected override void Initialize()
+        protected override async System.Threading.Tasks.Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
-            base.Initialize();
+            await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+
             App.Initialize(GetDialogPage(typeof(OptionsPage)) as OptionsPage);
 
             Instance = this;
@@ -116,7 +118,7 @@ namespace Geeks.VSIX.SmartFinder
             if (mainMenuCommand == null) cmd.Visible = true;
         }
 
-        protected void MenuCommand_BeforeQueryStatus(object sender, EventArgs e)
+        public void MenuCommand_BeforeQueryStatus(object sender, EventArgs e)
         {
             var cmd = sender as OleMenuCommand;
             // var activeDoc = App.DTE.ActiveDocument;
