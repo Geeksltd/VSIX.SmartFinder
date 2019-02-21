@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="c6136957-c61c-4beb-8cd8-e7c0170b0bf4" Version="2.37" Language="en-US" Publisher="Geeks Ltd"/>
+        <Identity Id="c6136957-c61c-4beb-8cd8-e7c0170b0bf4" Version="2.6.5" Language="en-US" Publisher="Geeks Ltd"/>
         <DisplayName>Smart Finder</DisplayName>
         <Description xml:space="preserve">Ctrl + Alt + F for file finder. Ctrl + Alt + M for member finder. Ctrl + Alt + S for CSS finder.</Description>
         <MoreInfo>http://www.geeks.ltd.uk</MoreInfo>

@@ -58,6 +58,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             }
             catch (UnauthorizedAccessException err)
             {
+                throw err;
                 MessageBox.Show(err.Message,
                                 "Error",
                                 MessageBoxButtons.OK,
@@ -80,6 +81,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             }
             catch (UnauthorizedAccessException err)
             {
+                throw err;
                 MessageBox.Show(err.Message,
                                 "Error",
                                 MessageBoxButtons.OK,
