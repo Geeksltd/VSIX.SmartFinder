@@ -3,9 +3,10 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Geeks.SmartFinder.Properties;
 using Geeks.VSIX.SmartFinder.Base;
 using Geeks.VSIX.SmartFinder.Definition;
-using Geeks.VSIX.SmartFinder.Properties;
+//using Geeks.VSIX.SmartFinder.Properties;
 
 namespace Geeks.VSIX.SmartFinder.FileFinder
 {

@@ -3,8 +3,9 @@ using System.Drawing;
 using System.Linq;
 using EnvDTE;
 using EnvDTE80;
+using Geeks.SmartFinder.Properties;
 using Geeks.VSIX.SmartFinder.Base;
-using Geeks.VSIX.SmartFinder.Properties;
+//using Geeks.VSIX.SmartFinder.Properties;
 using GeeksAddin;
 
 namespace Geeks.VSIX.SmartFinder.FileFinder

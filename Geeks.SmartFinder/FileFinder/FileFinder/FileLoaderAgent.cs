@@ -5,7 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using Geeks.VSIX.SmartFinder.Properties;
+using Geeks.SmartFinder.Properties;
+
+//using Geeks.VSIX.SmartFinder.Properties;
 
 namespace Geeks.VSIX.SmartFinder.FileFinder
 {

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Geeks.VSIX.SmartFinder.FileFinder {
+namespace Geeks.SmartFinder.FileFinder {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Geeks.VSIX.SmartFinder.FileFinder.FileTypesResources", typeof(FileTypesResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Geeks.SmartFinder.FileFinder.FileTypesResources", typeof(FileTypesResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

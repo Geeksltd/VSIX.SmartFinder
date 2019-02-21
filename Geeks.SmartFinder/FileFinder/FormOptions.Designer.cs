@@ -54,13 +54,13 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             // 
             this.txtExcludedDirectories.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtExcludedDirectories.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Geeks.VSIX.SmartFinder.Properties.Settings.Default, "ExcludedDirectories", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.txtExcludedDirectories.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Geeks.SmartFinder.Properties.Settings.Default, "ExcludedDirectories", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.txtExcludedDirectories.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtExcludedDirectories.Location = new System.Drawing.Point(12, 25);
             this.txtExcludedDirectories.Name = "txtExcludedDirectories";
             this.txtExcludedDirectories.Size = new System.Drawing.Size(498, 23);
             this.txtExcludedDirectories.TabIndex = 14;
-            this.txtExcludedDirectories.Text = global::Geeks.VSIX.SmartFinder.Properties.Settings.Default.ExcludedDirectories;
+            this.txtExcludedDirectories.Text = global::Geeks.SmartFinder.Properties.Settings.Default.ExcludedDirectories;
             // 
             // lblFileTypes
             // 
@@ -75,20 +75,20 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             // 
             this.txtResources.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtResources.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Geeks.VSIX.SmartFinder.Properties.Settings.Default, "ResourceFileTypes", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.txtResources.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Geeks.SmartFinder.Properties.Settings.Default, "ResourceFileTypes", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.txtResources.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtResources.Location = new System.Drawing.Point(12, 83);
             this.txtResources.Name = "txtResources";
             this.txtResources.Size = new System.Drawing.Size(498, 23);
             this.txtResources.TabIndex = 17;
-            this.txtResources.Text = global::Geeks.VSIX.SmartFinder.Properties.Settings.Default.ResourceFileTypes;
+            this.txtResources.Text = global::Geeks.SmartFinder.Properties.Settings.Default.ResourceFileTypes;
             // 
             // chkBoxExcludeResources
             // 
             this.chkBoxExcludeResources.AutoSize = true;
-            this.chkBoxExcludeResources.Checked = global::Geeks.VSIX.SmartFinder.Properties.Settings.Default.ExcludeResources;
+            this.chkBoxExcludeResources.Checked = global::Geeks.SmartFinder.Properties.Settings.Default.ExcludeResources;
             this.chkBoxExcludeResources.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkBoxExcludeResources.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Geeks.VSIX.SmartFinder.Properties.Settings.Default, "ExcludeResources", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkBoxExcludeResources.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Geeks.SmartFinder.Properties.Settings.Default, "ExcludeResources", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkBoxExcludeResources.Location = new System.Drawing.Point(15, 134);
             this.chkBoxExcludeResources.Name = "chkBoxExcludeResources";
             this.chkBoxExcludeResources.Size = new System.Drawing.Size(118, 17);
@@ -99,8 +99,8 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             // chkBoxMethodParams
             // 
             this.chkBoxMethodParams.AutoSize = true;
-            this.chkBoxMethodParams.Checked = global::Geeks.VSIX.SmartFinder.Properties.Settings.Default.ShowMethodParameters;
-            this.chkBoxMethodParams.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Geeks.VSIX.SmartFinder.Properties.Settings.Default, "ShowMethodParameters", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkBoxMethodParams.Checked = global::Geeks.SmartFinder.Properties.Settings.Default.ShowMethodParameters;
+            this.chkBoxMethodParams.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Geeks.SmartFinder.Properties.Settings.Default, "ShowMethodParameters", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkBoxMethodParams.Location = new System.Drawing.Point(255, 134);
             this.chkBoxMethodParams.Name = "chkBoxMethodParams";
             this.chkBoxMethodParams.Size = new System.Drawing.Size(148, 17);
@@ -111,9 +111,9 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             // chkBoxMethods
             // 
             this.chkBoxMethods.AutoSize = true;
-            this.chkBoxMethods.Checked = global::Geeks.VSIX.SmartFinder.Properties.Settings.Default.ShowMethods;
+            this.chkBoxMethods.Checked = global::Geeks.SmartFinder.Properties.Settings.Default.ShowMethods;
             this.chkBoxMethods.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkBoxMethods.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Geeks.VSIX.SmartFinder.Properties.Settings.Default, "ShowMethods", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkBoxMethods.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Geeks.SmartFinder.Properties.Settings.Default, "ShowMethods", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkBoxMethods.Location = new System.Drawing.Point(255, 157);
             this.chkBoxMethods.Name = "chkBoxMethods";
             this.chkBoxMethods.Size = new System.Drawing.Size(97, 17);
@@ -125,8 +125,8 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             // chkBoxMethodReturnTypes
             // 
             this.chkBoxMethodReturnTypes.AutoSize = true;
-            this.chkBoxMethodReturnTypes.Checked = global::Geeks.VSIX.SmartFinder.Properties.Settings.Default.ShowMethodReturnTypes;
-            this.chkBoxMethodReturnTypes.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Geeks.VSIX.SmartFinder.Properties.Settings.Default, "ShowMethodReturnTypes", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkBoxMethodReturnTypes.Checked = global::Geeks.SmartFinder.Properties.Settings.Default.ShowMethodReturnTypes;
+            this.chkBoxMethodReturnTypes.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Geeks.SmartFinder.Properties.Settings.Default, "ShowMethodReturnTypes", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkBoxMethodReturnTypes.Location = new System.Drawing.Point(255, 180);
             this.chkBoxMethodReturnTypes.Name = "chkBoxMethodReturnTypes";
             this.chkBoxMethodReturnTypes.Size = new System.Drawing.Size(159, 17);
@@ -137,8 +137,8 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             // chkBoxClassNames
             // 
             this.chkBoxClassNames.AutoSize = true;
-            this.chkBoxClassNames.Checked = global::Geeks.VSIX.SmartFinder.Properties.Settings.Default.ShowClassNames;
-            this.chkBoxClassNames.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Geeks.VSIX.SmartFinder.Properties.Settings.Default, "ShowClassNames", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkBoxClassNames.Checked = global::Geeks.SmartFinder.Properties.Settings.Default.ShowClassNames;
+            this.chkBoxClassNames.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Geeks.SmartFinder.Properties.Settings.Default, "ShowClassNames", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkBoxClassNames.Location = new System.Drawing.Point(255, 203);
             this.chkBoxClassNames.Name = "chkBoxClassNames";
             this.chkBoxClassNames.Size = new System.Drawing.Size(117, 17);
@@ -149,9 +149,9 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             // chkBoxProperties
             // 
             this.chkBoxProperties.AutoSize = true;
-            this.chkBoxProperties.Checked = global::Geeks.VSIX.SmartFinder.Properties.Settings.Default.ShowProperties;
+            this.chkBoxProperties.Checked = global::Geeks.SmartFinder.Properties.Settings.Default.ShowProperties;
             this.chkBoxProperties.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkBoxProperties.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Geeks.VSIX.SmartFinder.Properties.Settings.Default, "ShowProperties", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkBoxProperties.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Geeks.SmartFinder.Properties.Settings.Default, "ShowProperties", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkBoxProperties.Location = new System.Drawing.Point(255, 227);
             this.chkBoxProperties.Name = "chkBoxProperties";
             this.chkBoxProperties.Size = new System.Drawing.Size(103, 17);

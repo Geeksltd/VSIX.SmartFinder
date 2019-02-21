@@ -1,10 +1,12 @@
+using Geeks.SmartFinder.Properties;
+
 namespace Geeks.VSIX.SmartFinder.FileFinder
 {
     using System.ComponentModel;
     using System.IO;
     using System.Linq;
     using System.Windows.Forms;
-    using Geeks.VSIX.SmartFinder.Properties;
+    //using Geeks.VSIX.SmartFinder.Properties;
 
     class StyleLoaderAgent : Loader
     {

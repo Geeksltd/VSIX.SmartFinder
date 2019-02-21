@@ -18,8 +18,8 @@
     <OutputType>Library</OutputType>
     <VsixType>v3</VsixType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Geeks.VSIX.SmartFinder</RootNamespace>
-    <AssemblyName>GeeksVSIX.SmartFinder</AssemblyName>
+    <RootNamespace>Geeks.SmartFinder</RootNamespace>
+    <AssemblyName>Geeks.SmartFinder</AssemblyName>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -683,6 +683,9 @@
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.2.6.2\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.VisualStudio.SDK.Analyzers.15.8.36\analyzers\cs\Microsoft.VisualStudio.SDK.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.VisualStudio.Threading.Analyzers.15.8.168\analyzers\cs\Microsoft.VisualStudio.Threading.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Geeks\VSIX\SmartFinder\" />
   </ItemGroup>
   <PropertyGroup>
     <UseCodebase>true</UseCodebase>

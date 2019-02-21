@@ -1,6 +1,6 @@
 using System;
 using System.Windows.Forms;
-using Geeks.VSIX.SmartFinder.Properties;
+using Geeks.SmartFinder.Properties;
 
 namespace Geeks.VSIX.SmartFinder.FileFinder
 {

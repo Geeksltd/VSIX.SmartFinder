@@ -6,8 +6,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Geeks.SmartFinder.Properties;
 using Geeks.VSIX.SmartFinder.Definition;
-using Geeks.VSIX.SmartFinder.Properties;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;

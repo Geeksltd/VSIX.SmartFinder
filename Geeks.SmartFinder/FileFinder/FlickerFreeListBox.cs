@@ -2,6 +2,7 @@ using System;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Geeks.SmartFinder.FileFinder;
 using Geeks.VSIX.SmartFinder.Definition;
 using Geeks.VSIX.SmartFinder.FileFinder.FileDrawers;
 using Geeks.VSIX.SmartFinder.FileFinder.FinderDrawerUtility;
