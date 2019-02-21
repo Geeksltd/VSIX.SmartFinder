@@ -10,26 +10,15 @@ namespace Geeks.VSIX.SmartFinder
     public static class All
     {
         static List<Gadget> gadgets;
-        public static List<Gadget> Gadgets
+        public static List<Gadget> Gadgets => gadgets ?? (gadgets = new List<Gadget>
         {
-            get
-            {
-                if (gadgets == null)
-                {
-                    gadgets = new List<Gadget>();
-
-                    gadgets.Add(new FileToggleGadget());
-                    gadgets.Add(new FixtureFileToggleGadget());
-
-                    gadgets.Add(new FileFinderGadget());
-                    gadgets.Add(new StyleFinderGadget());
-                    gadgets.Add(new MemberFinderGadget());
-                    gadgets.Add(new GotoNextFoundItemGadget());
-                    gadgets.Add(new GotoPreviousFoundItemGadget());
-                }
-
-                return gadgets;
-            }
-        }
+            new FileToggleGadget(),
+            new FixtureFileToggleGadget(),
+            new FileFinderGadget(),
+            new StyleFinderGadget(),
+            new MemberFinderGadget(),
+            new GotoNextFoundItemGadget(),
+            new GotoPreviousFoundItemGadget()
+        });
     }
 }

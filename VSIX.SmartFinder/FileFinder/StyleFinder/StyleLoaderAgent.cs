@@ -25,7 +25,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
         {
             if (e.Cancel) return;
 
-            var basePaths = BasePaths.Where(p => Directory.Exists(p));
+            var basePaths = BasePaths.Where(Directory.Exists);
             foreach (var directoryPath in basePaths)
                 AddFilesInPath(e, directoryPath, directoryPath);
         }
@@ -43,10 +43,11 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             }
             else
             {
-                AddStyleFiles(projectBasePath, directory, "*.css");
                 AddStyleFiles(projectBasePath, directory, "*.sass");
                 AddStyleFiles(projectBasePath, directory, "*.scss");
                 AddStyleFiles(projectBasePath, directory, "*.less");
+                AddStyleFiles(projectBasePath, directory, "*.css");
+
             }
 
             if (e.Cancel) return;

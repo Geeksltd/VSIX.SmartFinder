@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Diagnostics;
+using Microsoft.VisualStudio.Shell;
 
 namespace GeeksAddin
 {
@@ -41,7 +42,7 @@ namespace GeeksAddin
             app.StatusBar.Text = "No solution or project is identified. app.Solution is " +
                 (app.Solution?.GetType().Name).Or("NULL");
 
-            App.DTE = (DTE2)SmartFinderPackage.GetGlobalService(typeof(SDTE));
+            App.DTE = (DTE2)Package.GetGlobalService(typeof(SDTE));
 
             return null;
         }

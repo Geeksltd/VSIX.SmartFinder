@@ -114,7 +114,7 @@ namespace System
         internal static bool IsMSharp(this Item item)
         {
             if (item.FileName.Contains("UI") || item.FileName.Contains("Model"))
-                if (File.Exists(item.BasePath + @"\#Model.csproj"))
+                if (File.Exists(item.BasePath + @"\#Model.csproj") || File.Exists(item.BasePath + @"\#UI.csproj"))
                     return true;
 
             return false;

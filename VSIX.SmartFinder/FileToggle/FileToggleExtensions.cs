@@ -12,14 +12,13 @@ namespace Geeks.VSIX.SmartFinder.FileToggle
             if (activeDocument.IsZebbleOrOfFile())
                 return activeDocument.FindZebblBasedSisterFile();
 
-            else if (activeDocument.IsEntityOrLogicBasedFile())
+            if (activeDocument.IsEntityOrLogicBasedFile())
                 return activeDocument.FindLogicBasedSisterFile();
 
-            else if (activeDocument.IsMvcBasedFile())
+            if (activeDocument.IsMvcBasedFile())
                 return activeDocument.FindMvcBasedSisterFile();
 
-            else
-                return activeDocument.FindAspxBasedSisterFile();
+            return activeDocument.FindAspxBasedSisterFile();
         }
 
         static bool IsZebbleOrOfFile(this string activeDocument)
@@ -63,10 +62,12 @@ namespace Geeks.VSIX.SmartFinder.FileToggle
 
         static string FindAspxBasedSisterFile(this string activeDocument)
         {
-            if (Path.GetExtension(activeDocument).EndsWith(FileExtensionTypes.CSHARP))
-                return activeDocument.Remove(activeDocument.Length - FileExtensionTypes.CSHARP.Length);
-            else
-                return activeDocument + FileExtensionTypes.CSHARP;
+            var extension = Path.GetExtension(activeDocument);
+            if (extension == null)
+                return null;
+            return extension.EndsWith(FileExtensionTypes.CSHARP)
+                ? activeDocument.Remove(activeDocument.Length - FileExtensionTypes.CSHARP.Length)
+                : activeDocument + FileExtensionTypes.CSHARP;
         }
 
         static string FindMvcBasedSisterFile(this string activeDocument)
@@ -140,7 +141,7 @@ namespace Geeks.VSIX.SmartFinder.FileToggle
 
                 if (File.Exists(sisterFile)) return sisterFile;
 
-                return sisterFile.Substring(0, sisterFile.IndexOf("app.ui\\") + "app.ui\\".Length) + ZEBBLE_GENERATED_CSS_CLASS_FILE_NAME;
+                return sisterFile.Substring(0, sisterFile.IndexOf("app.ui\\", StringComparison.Ordinal) + "app.ui\\".Length) + ZEBBLE_GENERATED_CSS_CLASS_FILE_NAME;
             }
 
             else
@@ -160,7 +161,7 @@ namespace Geeks.VSIX.SmartFinder.FileToggle
                 }
 
                 if (!File.Exists(sisterFile) && !zebbleFile.Contains(ZEBBLE_GENERATED_CSS_FILE_NAME))
-                    return sisterFile.Substring(0, sisterFile.IndexOf("app.ui\\") + "app.ui\\".Length) + ZEBBLE_GENERATED_CSS_CLASS_FILE_NAME;
+                    return sisterFile.Substring(0, sisterFile.IndexOf("app.ui\\", StringComparison.Ordinal) + "app.ui\\".Length) + ZEBBLE_GENERATED_CSS_CLASS_FILE_NAME;
 
                 return sisterFile;
             }

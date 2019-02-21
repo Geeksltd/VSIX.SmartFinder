@@ -70,6 +70,8 @@ namespace Geeks.VSIX.SmartFinder.FileFinder.FileDrawers
                                               DrawItemEventArgs e,
                                               bool isCshtml)
         {
+            //var fontClone = new Font(e.Font.FontFamily,e.Font.Size , FontStyle.Bold );
+            
             var textColor = e.State == DrawItemState.Selected ? Color.White : !isCshtml ? Color.DarkCyan : Color.Maroon;
             TextRenderer.DrawText(e.Graphics, className, e.Font, position, textColor, TextFormatFlags.NoPadding);
         }
@@ -79,16 +81,14 @@ namespace Geeks.VSIX.SmartFinder.FileFinder.FileDrawers
                                              DrawItemEventArgs e,
                                              ref Point position)
         {
-            if (!string.IsNullOrEmpty(text) ||
-                !string.IsNullOrEmpty(pathValue))
-            {
-                var pathText = BuildPathTextValue(text, pathValue);
-                var textColor = e.State == DrawItemState.Selected ? Color.White : Color.Gray;
+            if (string.IsNullOrEmpty(text) && string.IsNullOrEmpty(pathValue)) return;
 
-                TextRenderer.DrawText(e.Graphics, pathText, e.Font, position, textColor, TextFormatFlags.NoPadding);
+            var pathText = BuildPathTextValue(text, pathValue);
+            var textColor = e.State == DrawItemState.Selected ? Color.White : Color.Gray;
 
-                position.X += CalculateStringWidth(pathValue, e);
-            }
+            TextRenderer.DrawText(e.Graphics, pathText, e.Font, position, textColor, TextFormatFlags.NoPadding);
+
+            position.X += CalculateStringWidth(pathValue, e);
         }
 
         static string BuildPathTextValue(string text, string pathValue)
@@ -110,7 +110,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder.FileDrawers
         static void ColorizePathIndicator(DrawItemEventArgs e, ref Point position)
         {
             var textColor = e.State == DrawItemState.Selected ? Color.White : Color.Purple;
-            position.X += 10;
+            position.X += 15;
 
             TextRenderer.DrawText(e.Graphics, PathIndicator, e.Font, position, textColor, TextFormatFlags.NoPadding);
             position.X += CalculateStringWidth(PathIndicator, e);

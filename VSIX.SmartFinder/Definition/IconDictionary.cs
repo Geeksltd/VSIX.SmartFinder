@@ -61,6 +61,9 @@ namespace Geeks.VSIX.SmartFinder.Definition
             { ".vdproj", FileTypesResources.vdproj},
             { ".xml", FileTypesResources.xml},
             { ".json", FileTypesResources.json},
+            { ".zbl", FileTypesResources.Zebble},
+            { ".zebble-generated.cs", FileTypesResources.Zebble2},
+            { ".zebble-generated-css.cs", FileTypesResources.Zebble2},
         };
         }
     }

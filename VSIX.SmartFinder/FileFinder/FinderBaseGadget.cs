@@ -11,26 +11,60 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
 {
     internal abstract class FinderBaseGadget : Gadget
     {
-        public FinderBaseGadget() { }
+        protected FinderBaseGadget() { }
 
         public abstract Loader GetLoaderAgent(string[] basePaths, Repository repository);
 
         public virtual string GetTitle() => FinderLiterals.BaseFileFinderTitle;
 
         public virtual Color GetColor() => Color.FromArgb(0xF0, 0xF0, 0xF0);
+        string GetSourceFilePath(DTE2 app)
+        {
+            var uih = app.ToolWindows.SolutionExplorer;
+            var selectedItems = (Array)uih.SelectedItems;
+            if (null == selectedItems) return string.Empty;
+
+            foreach (UIHierarchyItem selItem in selectedItems)
+            {
+                var projectItem = selItem.Object as ProjectItem;
+                if(projectItem == null)
+                    return selItem.Name;
+
+                var itemProperties = projectItem?.Properties;
+                return itemProperties?.Item("FullPath").Value.ToString();
+            }
+
+            return string.Empty;
+        }
 
         public override void Run(DTE2 app)
         {
             try
             {
-                var basePaths = Utils.FindSolutionDirectories(app);
+                var currentSelectedFilepath = GetSourceFilePath(app) ?? "";
 
-                if (basePaths == null || basePaths.Count() == 0) return;
+                var basePathsList = Utils.FindSolutionDirectories(app).ToList();
 
-                var repository = new Repository(/*basePath*/);
+                if (!basePathsList.Any()) return;
+
+                var basePath = basePathsList.FirstOrDefault(p=>currentSelectedFilepath.StartsWith(p,StringComparison.OrdinalIgnoreCase)) ??
+                               basePathsList.FirstOrDefault(p => p.EndsWith($"{currentSelectedFilepath}\\".Replace("#",null), StringComparison.OrdinalIgnoreCase));
+
+                if (basePath.HasValue())
+                {
+                    basePathsList.Remove(basePath);
+                    basePathsList.Insert(0,basePath);
+                }
+
+                var basePaths = basePathsList.ToArray();
+                var repository = new Repository( /*basePath*/);
                 var loader = GetLoaderAgent(basePaths, repository);
                 var filterer = new Filterer(basePaths, repository);
-                var form = new FinderForm(GetTitle(), GetColor(), loader, filterer, defaultSearchTerm: app.GetSelectedText());
+                var form = new FinderForm(GetTitle(),
+                    GetColor(),
+                    loader,
+                    filterer,
+                    defaultSearchTerm: app.GetSelectedText());
 
                 if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
@@ -39,25 +73,27 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
                     GotoItem(app, basePaths, foundItem);
                 }
 
-                else app.StatusBar.Text = "Ready";
+                else app.StatusBar.Text = "Ready ...";
             }
-            catch (Exception e) { ErrorNotification.EmailError(e); }
+            catch (Exception e)
+            {
+                ErrorNotification.EmailError(e);
+            }
         }
 
         public static void GotoItem(DTE2 app, string[] basePaths, Item item)
         {
             try
             {
-                if (item.FileName.HasValue())
-                {
-                    app.ItemOperations.OpenFile(item.FullPath, EnvDTE.Constants.vsViewKindAny);
-                    var selection = app.ActiveDocument.Selection as TextSelection;
+                if (!item.FileName.HasValue()) return;
 
-                    selection?.MoveTo(item.LineNumber, item.Column, Extend: false);
+                app.ItemOperations.OpenFile(item.FullPath, EnvDTE.Constants.vsViewKindAny);
+                var selection = app.ActiveDocument.Selection as TextSelection;
 
-                    if (Settings.Default.TrackItemInSolutionExplorer)
-                        TrackInSolutionExplorer(app, item);
-                }
+                selection?.MoveTo(item.LineNumber, item.Column, Extend: false);
+
+                if (Settings.Default.TrackItemInSolutionExplorer)
+                    TrackInSolutionExplorer(app, item);
             }
             catch (Exception err)
             {
@@ -67,6 +103,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
 
         static void TrackInSolutionExplorer(DTE2 app, Item item)
         {
+            Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
             try
             {
                 app.ExecuteCommand("SolutionExplorer.SyncWithActiveDocument");
@@ -87,14 +124,15 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
 
         static object FindItem(UIHierarchyItems children, string fileName, out string solutionExplorerPath)
         {
+            Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
             foreach (UIHierarchyItem CurrentItem in children)
             {
-                if (CurrentItem.Object is EnvDTE.ProjectItem projectitem)
+                if (CurrentItem.Object is ProjectItem projectItem)
                 {
                     short i = 1;
-                    while (i <= projectitem.FileCount)
+                    while (i <= projectItem.FileCount)
                     {
-                        if (projectitem.get_FileNames(i) == fileName)
+                        if (projectItem.FileNames[i] == fileName)
                         {
                             solutionExplorerPath = CurrentItem.Name;
                             return CurrentItem;
@@ -104,12 +142,11 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
                     }
                 }
 
-                if (FindItem(CurrentItem.UIHierarchyItems, fileName, out solutionExplorerPath)
-                    is UIHierarchyItem childItem)
-                {
-                    solutionExplorerPath = CurrentItem.Name + "\\" + solutionExplorerPath;
-                    return childItem;
-                }
+                if (!(FindItem(CurrentItem.UIHierarchyItems, fileName, out solutionExplorerPath)
+                    is UIHierarchyItem childItem)) continue;
+
+                solutionExplorerPath = CurrentItem.Name + "\\" + solutionExplorerPath;
+                return childItem;
             }
 
             solutionExplorerPath = "";

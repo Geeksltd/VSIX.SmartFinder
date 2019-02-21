@@ -21,13 +21,14 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             Repository = repository;
             BasePaths = basePaths;
 
-            Repository.ItemsAppended += new EventHandler<ItemsEventArgs>(Repository_ItemsAppended);
+            Repository.ItemsAppended += Repository_ItemsAppended;
         }
 
         void Repository_ItemsAppended(object sender, ItemsEventArgs e)
         {
             foreach (var item in e.Items)
-                if (item.MatchesWith(Words)) AnnounceItem(item);
+                if (item.MatchesWith(Words)) 
+                    AnnounceItem(item);
         }
 
         List<Item> foundItems;
@@ -54,12 +55,13 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             foundItems = new List<Item>();
             var toAnnouncedItemsCount = AnnouncedItemsCount;
 
-            for (int i = 0; i < Repository.Length; i++)
+            for (int i = 0; i < Repository.Count; i++)
             {
-                var item = Repository.ItemAt(i);
+                var item = Repository[i];
                 if (ItemIsExcluded(item)) continue;
                 if (item.MatchesWith(Words))
                 {
+                    item.Words = Words;
                     foundItems.Add(item);
                     toAnnouncedItemsCount++;
                     if (toAnnouncedItemsCount >= MAX_ANNOUNCES) break;
@@ -82,7 +84,8 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
 
         void AnnounceItem(Item item)
         {
-            if (!item.Exists()) return;
+            if (!item.Exists()) 
+                return;
 
             if (ItemIsExcluded(item)) // for calls directly from Loader (instead of AnnounceMatchingItems())
                 return;

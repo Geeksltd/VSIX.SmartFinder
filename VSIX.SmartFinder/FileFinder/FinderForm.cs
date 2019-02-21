@@ -36,7 +36,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             Filterer = filterer;
             Filterer.ExcludedFileTypes = (Settings.Default.ExcludeResources) ? Settings.Default.ResourceFileTypes.Split(';') : null;
 
-            Filterer.ItemsFound += new EventHandler<ItemsEventArgs>(Filterer_ItemsFound);
+            Filterer.ItemsFound += Filterer_ItemsFound;
             Filterer.AnnouncementOfExistingItemsFinished += new EventHandler(Filterer_AnnouncementOfExistingItemsFinished);
 
             Loader = loader;
@@ -71,7 +71,14 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
 
         void Filterer_ItemsFound(object sender, ItemsEventArgs e)
         {
-            lstFiles.SafeAction(x => x.Items.AddRange(e.Items.ToArray()));
+            lstFiles.SafeAction(x =>
+            {
+                if (e.Items != null)
+                {
+                    x.Items.AddRange(e.Items.ToArray());
+                    x.SortList();
+                }
+            });
         }
 
         void SearchStarted()

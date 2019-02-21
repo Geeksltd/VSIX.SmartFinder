@@ -1,7 +1,9 @@
 using System;
 using System.ComponentModel.Design;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
+using EnvDTE;
 using EnvDTE80;
 using Geeks.GeeksProductivityTools;
 using Geeks.VSIX.SmartFinder.Base;
@@ -10,9 +12,14 @@ using Geeks.VSIX.SmartFinder.FileToggle;
 using Geeks.VSIX.SmartFinder.GoTo;
 using Microsoft.VisualStudio.ComponentModelHost;
 using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Interop;
 
 namespace Geeks.VSIX.SmartFinder
 {
+    [ProvideAutoLoad(UIContextGuids80.SolutionExists, PackageAutoLoadFlags.BackgroundLoad)]
+    [ProvideAutoLoad(UIContextGuids80.SolutionHasMultipleProjects, PackageAutoLoadFlags.BackgroundLoad)]
+    [ProvideAutoLoad(UIContextGuids80.SolutionHasSingleProject, PackageAutoLoadFlags.BackgroundLoad)]
+
     [ProvideAutoLoad("ADFC4E64-0397-11D1-9F4E-00A0C911004F")]    // Microsoft.VisualStudio.VSConstants.UICONTEXT_NoSolution
     [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
     [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)]
@@ -39,12 +46,11 @@ namespace Geeks.VSIX.SmartFinder
 
             Instance = this;
 
-            var componentModel = (IComponentModel)GetService(typeof(SComponentModel));
+            //var componentModel = (IComponentModel)GetService(typeof(SComponentModel));
 
             // Add our command handlers for menu (commands must exist in the .vsct file)
-            var menuCommandService = GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
 
-            if (null != menuCommandService)
+            if (GetService(typeof(IMenuCommandService)) is OleMenuCommandService menuCommandService)
             {
                 // //var mainMenu = new CommandID(GuidList.GuidGeeksProductivityToolsCmdSet, (int)PkgCmdIDList.CmdidMainMenu);
                 // //var founded = menuCommandService.FindCommand(mainMenu);
@@ -55,9 +61,7 @@ namespace Geeks.VSIX.SmartFinder
                 // //    menuCommand2.BeforeQueryStatus += MenuCommand2_BeforeQueryStatus;
                 // //    menuCommand2.Visible = false;
                 // //}
-                var menuCommand = new OleMenuCommand(CallWebFileToggle,
-                    new CommandID(GuidList.GuidGeeksProductivityToolsCmdSet,
-                                                            (int)PkgCmdIDList.CmdidWebFileToggle));
+                var menuCommand = new OleMenuCommand(CallWebFileToggle, new CommandID(GuidList.GuidGeeksProductivityToolsCmdSet, (int)PkgCmdIDList.CmdidWebFileToggle));
                 menuCommand.BeforeQueryStatus += MenuCommand_BeforeQueryStatus;
 
                 menuCommandService.AddCommand(menuCommand);
@@ -110,12 +114,18 @@ namespace Geeks.VSIX.SmartFinder
         void MenuCommand2_BeforeQueryStatus(object sender, EventArgs e)
         {
             var menuCommandService = GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
-            const uint CMDID_ATTACHER = 0x100;
-            var CmdidAttacherId = new CommandID(GuidList.GuidGeeksProductivityToolsCmdSet, (int)CMDID_ATTACHER);
-            var mainMenuCommand = menuCommandService.FindCommand(CmdidAttacherId);
+            if (menuCommandService == null)
+                return;
 
-            var cmd = sender as OleMenuCommand;
-            if (mainMenuCommand == null) cmd.Visible = true;
+            const uint CMDID_ATTACHER = 0x100;
+
+            var mainMenuCommand = menuCommandService.FindCommand(
+                new CommandID(GuidList.GuidGeeksProductivityToolsCmdSet, (int)CMDID_ATTACHER));
+
+            if (mainMenuCommand != null) return;
+
+            if (sender is OleMenuCommand cmd)
+                cmd.Visible = true;
         }
 
         public void MenuCommand_BeforeQueryStatus(object sender, EventArgs e)
@@ -132,20 +142,16 @@ namespace Geeks.VSIX.SmartFinder
 
         void SetCommandBindings()
         {
-            var commands = (Commands2)App.DTE.Commands;
-            foreach (EnvDTE.Command cmd in commands)
-            {
-                if (cmd.Name == "File.CloseAllButThis")
-                    cmd.Bindings = "Global::CTRL+SHIFT+F4";
+            var singleOrDefault = ((Commands2) App.DTE.Commands).Cast<Command>()
+                .SingleOrDefault(cmd => cmd.Name == "File.CloseAllButThis");
+            if (singleOrDefault != null) 
+                singleOrDefault.Bindings = "Global::CTRL+SHIFT+F4";
 
-                foreach (var gadget in All.Gadgets)
-                {
-                    if (gadget.CommandName == cmd.Name)
-                    {
-                        cmd.Bindings = gadget.Binding;
-                        break;
-                    }
-                }
+            foreach (Command cmd in (Commands2)App.DTE.Commands)
+            {
+                var systemGadget = All.Gadgets.FirstOrDefault(g => g.CommandName == cmd.Name);
+                if (systemGadget != null)
+                    cmd.Bindings = systemGadget.Binding;
             }
         }
 

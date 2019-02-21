@@ -1,15 +1,15 @@
 using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using Geeks.VSIX.SmartFinder.Definition;
 using Geeks.VSIX.SmartFinder.FileFinder.FileDrawers;
-using Geeks.VSIX.SmartFinder.FileFinder.FileFinder;
 using Geeks.VSIX.SmartFinder.FileFinder.FinderDrawerUtility;
 using Geeks.VSIX.SmartFinder.FileFinder.MemberDrawers;
 
 namespace Geeks.VSIX.SmartFinder.FileFinder
 {
-    public class FlickerFreeListBox : ListBox
+    public sealed class FlickerFreeListBox : ListBox
     {
         Image LoadingIcon = FileTypesResources.loading2;
         StringFormat ItemFormat = new StringFormat();
@@ -20,13 +20,25 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
 
             DrawMode = DrawMode.OwnerDrawFixed;
 
-            ImageAnimator.Animate(LoadingIcon, new EventHandler(OnFrameChanged));
+            ImageAnimator.Animate(LoadingIcon, OnFrameChanged);
         }
+
+        public void SortList()
+        {
+            Sort();
+        }
+        protected override void Sort()
+        {
+            var sortedItems = Items.Cast<Item>().ToArray().OrderBy(i => i).ToArray();
+            Items.Clear();
+            Items.AddRange(sortedItems);
+        }
+
 
         EmptyBehaviour emptyBehaviour;
         public EmptyBehaviour EmptyBehaviour
         {
-            get { return emptyBehaviour; }
+            get => emptyBehaviour;
             set
             {
                 emptyBehaviour = value;
@@ -37,7 +49,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
         bool showLoadingAtTheEndOfList;
         public bool ShowLoadingAtTheEndOfList
         {
-            get { return showLoadingAtTheEndOfList; }
+            get => showLoadingAtTheEndOfList;
             set
             {
                 showLoadingAtTheEndOfList = value;
@@ -53,7 +65,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
         // TODO: Ali - Apply Interface seggregation
         // -------------------------------------------- <Drawing Items> -------------------------------------------- //
 
-        Brush brshHighlight = new SolidBrush(Color.FromArgb(250, 209, 245, 247));
+        readonly Brush brshHighlight = new SolidBrush(Color.FromArgb(250, 209, 245, 247));
 
         public string[] HighlightWords { get; set; }
 
@@ -66,7 +78,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             e.DrawBackground();
 
             var graphic = e.Graphics;
-            var item = Items[e.Index] as Item;
+            var item = (Item)Items[e.Index];
             var position = new Point(e.Bounds.X, e.Bounds.Y);
             var text = item.ToString();
 
@@ -77,7 +89,6 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             position.Y += 4; // padding
 
             var finderMode = FinderDrawer.DetectFinderMode(Parent);
-
             switch (finderMode)
             {
                 case FinderMode.Member:
@@ -95,6 +106,8 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
                 case FinderMode.StyleSheet:
                     StyleSheetDrawer.
                         DrawStyleSheets(e, graphic, position, text, HighlightWords, DummySize, brshHighlight);
+                    break;
+                case FinderMode.Unspecified:
                     break;
                 default:
                     break;
@@ -138,22 +151,26 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
                 return IconDictionary.MSharpUIIcon;
             }
 
-            if (item.Icon == IconType.Auto)
+            switch (item.Icon)
             {
-                var file = item.FileName.ToLowerInvariant();
+                case IconType.Auto:
+                {
+                    var file = item.FileName.ToLowerInvariant();
 
-                foreach (var icon in IconDictionary.Icons)
-                    if (file.EndsWith(icon.Key)) return icon.Value;
+                    foreach (var icon in IconDictionary.Icons)
+                        if (file.EndsWith(icon.Key)) 
+                            return icon.Value;
+                    break;
+                }
+                case IconType.Method:
+                    return FileTypesResources.method;
+                case IconType.Class:
+                    return FileTypesResources.klass;
+                case IconType.Property:
+                    return FileTypesResources.property;
+                default:
+                    break;
             }
-
-            else if (item.Icon == IconType.Method)
-                return FileTypesResources.method;
-
-            else if (item.Icon == IconType.Class)
-                return FileTypesResources.klass;
-
-            else if (item.Icon == IconType.Property)
-                return FileTypesResources.property;
 
             return FileTypesResources.generic;
         }
@@ -167,30 +184,29 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
 
             if (Items.Count > 0)
             {
-                for (int i = 0; i < Items.Count; ++i)
+                for (var i = 0; i < Items.Count; ++i)
                 {
-                    var irect = GetItemRectangle(i);
-                    if (e.ClipRectangle.IntersectsWith(irect))
-                    {
-                        if ((SelectionMode == SelectionMode.One && SelectedIndex == i)
+                    var rect = GetItemRectangle(i);
+                    if (!e.ClipRectangle.IntersectsWith(rect)) continue;
+
+                    if ((SelectionMode == SelectionMode.One && SelectedIndex == i)
                         || (SelectionMode == SelectionMode.MultiSimple && SelectedIndices.Contains(i))
                         || (SelectionMode == SelectionMode.MultiExtended && SelectedIndices.Contains(i)))
-                        {
-                            OnDrawItem(new DrawItemEventArgs(g, Font,
-                                irect, i,
-                                DrawItemState.Selected, ForeColor,
-                                BackColor));
-                        }
-                        else
-                        {
-                            OnDrawItem(new DrawItemEventArgs(g, Font,
-                                irect, i,
-                                DrawItemState.Default, ForeColor,
-                                BackColor));
-                        }
-
-                        iRegion.Complement(irect);
+                    {
+                        OnDrawItem(new DrawItemEventArgs(g, Font,
+                            rect, i,
+                            DrawItemState.Selected, ForeColor,
+                            BackColor));
                     }
+                    else
+                    {
+                        OnDrawItem(new DrawItemEventArgs(g, Font,
+                            rect, i,
+                            DrawItemState.Default, ForeColor,
+                            BackColor));
+                    }
+
+                    iRegion.Complement(rect);
                 }
             }
             else
@@ -224,4 +240,5 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             base.OnSelectedIndexChanged(e);
         }
     }
+
 }

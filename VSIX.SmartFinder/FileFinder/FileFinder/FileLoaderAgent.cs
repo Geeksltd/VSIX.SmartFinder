@@ -24,7 +24,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
 
         protected override void OnDoWork(DoWorkEventArgs e) => AddFilesInPaths(e);
 
-        static string[] ExcludedFileTypes = new string[] { ".dll", ".exe", ".pdb" };
+        static string[] ExcludedFileTypes = { ".dll", ".exe", ".pdb" , ".zebble-generated.cs" , ".zebble-generated-css.cs" };
 
         void AddFilesInPaths(DoWorkEventArgs e)
         {

@@ -60,30 +60,30 @@ namespace Geeks.VSIX.SmartFinder.GoTo
             {
                 var oldVal = _enabled;
                 _enabled = value;
-                if (oldVal != _enabled)
-                {
-                    var temp = CtrlKeyStateChanged;
-                    if (temp != null) temp(this, new EventArgs());
-                }
+                if (oldVal == _enabled) return;
+
+                var temp = CtrlKeyStateChanged;
+                temp?.Invoke(this, new EventArgs());
             }
         }
 
         internal event EventHandler<EventArgs> CtrlKeyStateChanged;
     }
 
+    /// <inheritdoc />
     /// <summary>
     /// Listen for the control key being pressed or released to update the CtrlKeyStateChanged for a view.
     /// </summary>
     internal sealed class GoToModuleKeyProcessor : KeyProcessor
     {
-        CtrlKeyState _state;
+        readonly CtrlKeyState _state;
 
         public GoToModuleKeyProcessor(CtrlKeyState state)
         {
             _state = state;
         }
 
-        void UpdateState(KeyEventArgs args)
+        void UpdateState(KeyboardEventArgs args)
         {
             _state.Enabled = (args.KeyboardDevice.Modifiers & ModifierKeys.Control) != 0 &&
                              (args.KeyboardDevice.Modifiers & ModifierKeys.Shift) == 0;
@@ -115,57 +115,41 @@ namespace Geeks.VSIX.SmartFinder.GoTo
             if (App.OptionsPage?.DisableShiftClick == null)
                 return null;
 
-            var buffer = view.TextBuffer;
-
-            var shellCommandDispatcher = GetShellCommandDispatcher(view);
-
-            if (shellCommandDispatcher == null) return null;
+            //if (!(GlobalServiceProvider.GetService(typeof(SUIHostCommandDispatcher)) is IOleCommandTarget shellCommandDispatcher)) 
+            //    return null;
 
             return new GoToModuleMouseHandler(
                                            (DTE2)GlobalServiceProvider.GetService(typeof(SDTE)),
                                            view,
-                                           shellCommandDispatcher,
-                                           AggregatorFactory.GetClassifier(buffer),
-                                           NavigatorService.GetTextStructureNavigator(buffer),
+                                           //shellCommandDispatcher,
+                                           AggregatorFactory.GetClassifier(view.TextBuffer),
+                                           NavigatorService.GetTextStructureNavigator(view.TextBuffer),
                                            CtrlKeyState.GetStateForView(view));
         }
-
-        #region Private helpers
-
-        /// <summary>
-        /// Get the SUIHostCommandDispatcher from the global service provider.
-        /// </summary>
-        IOleCommandTarget GetShellCommandDispatcher(ITextView view)
-        {
-            return GlobalServiceProvider.GetService(typeof(SUIHostCommandDispatcher)) as IOleCommandTarget;
-        }
-
-        #endregion
     }
 
+    /// <inheritdoc />
     /// <summary>
     /// handle mouse moves (when control is pressed) to highlight references for which GoToModule will be valid.
     /// </summary>
     internal sealed class GoToModuleMouseHandler : MouseProcessorBase
     {
-        DTE2 App;
-        IWpfTextView _view;
-        CtrlKeyState _state;
-        IClassifier _aggregator;
-        ITextStructureNavigator _navigator;
-        IOleCommandTarget _commandTarget;
+        readonly DTE2 App;
+        readonly IWpfTextView _view;
+        readonly CtrlKeyState _state;
+        readonly IClassifier _aggregator;
+        readonly ITextStructureNavigator _navigator;
 
         public GoToModuleMouseHandler(
             DTE2 app,
             IWpfTextView view,
-            IOleCommandTarget commandTarget,
+            //IOleCommandTarget commandTarget,
             IClassifier aggregator,
             ITextStructureNavigator navigator,
             CtrlKeyState state)
         {
             App = app;
             _view = view;
-            _commandTarget = commandTarget;
             _state = state;
             _aggregator = aggregator;
             _navigator = navigator;
@@ -203,15 +187,13 @@ namespace Geeks.VSIX.SmartFinder.GoTo
             {
                 // Check and see if this is a drag; if so, clear out the highlight.
                 var currentMousePosition = RelativeToView(e.GetPosition(_view.VisualElement));
-                if (InDragOperation(_mouseDownAnchorPoint.Value, currentMousePosition))
-                {
-                    _mouseDownAnchorPoint = null;
-                    SetHighlightSpan(null);
-                }
+                if (_mouseDownAnchorPoint != null && !InDragOperation(_mouseDownAnchorPoint.Value, currentMousePosition)) return;
+                _mouseDownAnchorPoint = null;
+                SetHighlightSpan(null);
             }
         }
 
-        bool InDragOperation(Point anchorPoint, Point currentPoint)
+        static bool InDragOperation(Point anchorPoint, Point currentPoint)
         {
             // If the mouse up is more than a drag away from the mouse down, this is a drag
             return Math.Abs(anchorPoint.X - currentPoint.X) >= SystemParameters.MinimumHorizontalDragDistance ||
@@ -226,7 +208,7 @@ namespace Geeks.VSIX.SmartFinder.GoTo
             {
                 var currentMousePosition = RelativeToView(e.GetPosition(_view.VisualElement));
 
-                if (!InDragOperation(_mouseDownAnchorPoint.Value, currentMousePosition))
+                if (_mouseDownAnchorPoint != null && !InDragOperation(_mouseDownAnchorPoint.Value, currentMousePosition))
                 {
                     _state.Enabled = false;
 
@@ -257,8 +239,8 @@ namespace Geeks.VSIX.SmartFinder.GoTo
             return new Point(position.X + _view.ViewportLeft, position.Y + _view.ViewportTop);
         }
 
-        const string aspDotNetWebFormContentType = "projection";
-        const string zebbleContentType = "xml";
+        const string AspDotNetWebFormContentType = "projection";
+        const string ZebbleContentType = "xml";
         bool TryHighlightItemUnderMouse(Point position)
         {
             var updated = false;
@@ -266,9 +248,8 @@ namespace Geeks.VSIX.SmartFinder.GoTo
             try
             {
                 var line = _view.TextViewLines.GetTextViewLineContainingYCoordinate(position.Y);
-                if (line == null) return false;
 
-                var bufferPosition = line.GetBufferPositionFromXCoordinate(position.X);
+                var bufferPosition = line?.GetBufferPositionFromXCoordinate(position.X);
 
                 if (!bufferPosition.HasValue) return false;
 
@@ -284,22 +265,19 @@ namespace Geeks.VSIX.SmartFinder.GoTo
                 if (!extent.IsSignificant) return false;
 
                 var contentType = _view.TextBuffer.ContentType;
-                if (!contentType.IsOfType(aspDotNetWebFormContentType) && !contentType.IsOfType(zebbleContentType))
+                if (!contentType.IsOfType(AspDotNetWebFormContentType) && !contentType.IsOfType(ZebbleContentType))
                     return false;
 
                 var lineSpan = bufferPosition.Value.GetContainingLine().Extent;
                 var classificationSpans = _aggregator.GetClassificationSpans(lineSpan).Where(FilterBasedOnContentType(contentType.TypeName));
-                foreach (var classification in classificationSpans)
+                if ((from classification in classificationSpans 
+                    let span = classification.Span 
+                    where span.Contains(bufferPosition.Value) 
+                    where contentType.TypeName != AspDotNetWebFormContentType || !HasInvalidFileExtension(span) 
+                    select classification).Any(classification => SetHighlightSpan(classification.Span)))
                 {
-                    var span = classification.Span;
-                    if (!span.Contains(bufferPosition.Value)) continue;
-                    if (contentType.TypeName == aspDotNetWebFormContentType && HasInvalidFileExtension(span)) continue;
-
-                    if (SetHighlightSpan(classification.Span))
-                    {
-                        updated = true;
-                        return true;
-                    }
+                    updated = true;
+                    return true;
                 }
 
                 return false;
@@ -317,10 +295,12 @@ namespace Geeks.VSIX.SmartFinder.GoTo
         {
             switch (typeName)
             {
-                case aspDotNetWebFormContentType:
-                    return s => s.ClassificationType.Classification.ToLower() == "html attribute value";
-                case zebbleContentType:
-                    return s => s.ClassificationType.Classification.ToLower() == "xml name";
+                case AspDotNetWebFormContentType:
+                    return s => string.Equals(s.ClassificationType.Classification, "html attribute value",
+                        StringComparison.OrdinalIgnoreCase);
+                case ZebbleContentType:
+                    return s => string.Equals(s.ClassificationType.Classification, "xml name",
+                        StringComparison.OrdinalIgnoreCase);
                 default:
                     return s => s.ToString() == s.ToString(); // TODO: replace with a correct True value
             }
@@ -331,28 +311,20 @@ namespace Geeks.VSIX.SmartFinder.GoTo
             get
             {
                 var classifier = UnderlineClassifierProvider.GetClassifierForView(_view);
-                if (classifier != null && classifier.CurrentUnderlineSpan.HasValue)
-                    return classifier.CurrentUnderlineSpan.Value.TranslateTo(_view.TextSnapshot, SpanTrackingMode.EdgeExclusive);
-                else
-                    return null;
+                return classifier?.CurrentUnderlineSpan?.TranslateTo(_view.TextSnapshot, SpanTrackingMode.EdgeExclusive);
             }
         }
 
         bool SetHighlightSpan(SnapshotSpan? span)
         {
             var classifier = UnderlineClassifierProvider.GetClassifierForView(_view);
-            if (classifier != null)
-            {
-                if (span.HasValue)
-                    Mouse.OverrideCursor = Cursors.Hand;
-                else
-                    Mouse.OverrideCursor = null;
+            if (classifier == null) return false;
 
-                classifier.SetUnderlineSpan(span);
-                return true;
-            }
+            Mouse.OverrideCursor = span.HasValue ? Cursors.Hand : null;
 
-            return false;
+            classifier.SetUnderlineSpan(span);
+            return true;
+
         }
 
         void OpenZebbleFile(string value, string projectPath)
