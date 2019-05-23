@@ -28,7 +28,7 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             foreach (UIHierarchyItem selItem in selectedItems)
             {
                 var projectItem = selItem.Object as ProjectItem;
-                if(projectItem == null)
+                if (projectItem == null)
                     return selItem.Name;
 
                 var itemProperties = projectItem?.Properties;
@@ -48,13 +48,13 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
 
                 if (!basePathsList.Any()) return;
 
-                var basePath = basePathsList.FirstOrDefault(p=>currentSelectedFilepath.StartsWith(p,StringComparison.OrdinalIgnoreCase)) ??
-                               basePathsList.FirstOrDefault(p => p.EndsWith($"{currentSelectedFilepath}\\".Replace("#",null), StringComparison.OrdinalIgnoreCase));
+                var basePath = basePathsList.FirstOrDefault(p => currentSelectedFilepath.StartsWith(p, StringComparison.OrdinalIgnoreCase)) ??
+                               basePathsList.FirstOrDefault(p => p.EndsWith($"{currentSelectedFilepath}\\".Replace("#", null), StringComparison.OrdinalIgnoreCase));
 
                 if (basePath.HasValue())
                 {
                     basePathsList.Remove(basePath);
-                    basePathsList.Insert(0,basePath);
+                    basePathsList.Insert(0, basePath);
                 }
 
                 var basePaths = basePathsList.ToArray();
@@ -84,21 +84,24 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
 
         public static void GotoItem(DTE2 app, string[] basePaths, Item item)
         {
-            try
+            if (item != null)
             {
-                if (!item.FileName.HasValue()) return;
+                try
+                {
+                    if (!item.FileName.HasValue()) return;
 
-                app.ItemOperations.OpenFile(item.FullPath, EnvDTE.Constants.vsViewKindAny);
-                var selection = app.ActiveDocument.Selection as TextSelection;
+                    app.ItemOperations.OpenFile(item.FullPath, EnvDTE.Constants.vsViewKindAny);
+                    var selection = app.ActiveDocument.Selection as TextSelection;
 
-                selection?.MoveTo(item.LineNumber, item.Column, Extend: false);
+                    selection?.MoveTo(item.LineNumber, item.Column, Extend: false);
 
-                if (Settings.Default.TrackItemInSolutionExplorer)
-                    TrackInSolutionExplorer(app, item);
-            }
-            catch (Exception err)
-            {
-                ErrorNotification.EmailError(err);
+                    if (Settings.Default.TrackItemInSolutionExplorer)
+                        TrackInSolutionExplorer(app, item);
+                }
+                catch (Exception err)
+                {
+                    ErrorNotification.EmailError(err);
+                }
             }
         }
 

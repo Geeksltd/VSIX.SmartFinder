@@ -10,7 +10,6 @@ using Geeks.VSIX.SmartFinder.Base;
 using Geeks.VSIX.SmartFinder.FileFinder;
 using Geeks.VSIX.SmartFinder.FileToggle;
 using Geeks.VSIX.SmartFinder.GoTo;
-using Microsoft.VisualStudio.ComponentModelHost;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 
@@ -20,12 +19,15 @@ namespace Geeks.VSIX.SmartFinder
     [ProvideAutoLoad(UIContextGuids80.SolutionHasMultipleProjects, PackageAutoLoadFlags.BackgroundLoad)]
     [ProvideAutoLoad(UIContextGuids80.SolutionHasSingleProject, PackageAutoLoadFlags.BackgroundLoad)]
 
-    [ProvideAutoLoad("ADFC4E64-0397-11D1-9F4E-00A0C911004F")]    // Microsoft.VisualStudio.VSConstants.UICONTEXT_NoSolution
+    [ProvideAutoLoad("ADFC4E64-0397-11D1-9F4E-00A0C911004F", PackageAutoLoadFlags.BackgroundLoad)]    // Microsoft.VisualStudio.VSConstants.UICONTEXT_NoSolution
     [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
     [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [ProvideOptionPage(typeof(OptionsPage), "Geeks productivity tools", "General", 0, 0, true)]
     [Guid(GuidList.GuidGeeksProductivityToolsPkgString)]
+
+    [ProvideService(typeof(IMenuCommandService), IsAsyncQueryable = true)]
+
     ////[ProvideService(typeof(SMyService))]
     public sealed class SmartFinderPackage : AsyncPackage
     {
@@ -50,7 +52,7 @@ namespace Geeks.VSIX.SmartFinder
 
             // Add our command handlers for menu (commands must exist in the .vsct file)
 
-            if (GetService(typeof(IMenuCommandService)) is OleMenuCommandService menuCommandService)
+            if (await GetServiceAsync(typeof(IMenuCommandService)) is OleMenuCommandService menuCommandService)
             {
                 // //var mainMenu = new CommandID(GuidList.GuidGeeksProductivityToolsCmdSet, (int)PkgCmdIDList.CmdidMainMenu);
                 // //var founded = menuCommandService.FindCommand(mainMenu);
@@ -142,14 +144,15 @@ namespace Geeks.VSIX.SmartFinder
 
         void SetCommandBindings()
         {
+            ThreadHelper.ThrowIfNotOnUIThread();
             var singleOrDefault = ((Commands2) App.DTE.Commands).Cast<Command>()
-                .SingleOrDefault(cmd => cmd.Name == "File.CloseAllButThis");
+                .SingleOrDefault(cmd => {  ThreadHelper.ThrowIfNotOnUIThread(); return cmd.Name == "File.CloseAllButThis"; });
             if (singleOrDefault != null) 
                 singleOrDefault.Bindings = "Global::CTRL+SHIFT+F4";
 
             foreach (Command cmd in (Commands2)App.DTE.Commands)
             {
-                var systemGadget = All.Gadgets.FirstOrDefault(g => g.CommandName == cmd.Name);
+                var systemGadget = All.Gadgets.FirstOrDefault(g => {  ThreadHelper.ThrowIfNotOnUIThread(); return g.CommandName == cmd.Name; });
                 if (systemGadget != null)
                     cmd.Bindings = systemGadget.Binding;
             }
