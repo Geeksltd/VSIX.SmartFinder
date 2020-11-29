@@ -6,6 +6,8 @@ using System.Windows.Forms;
 using Geeks.SmartFinder.Properties;
 using Geeks.VSIX.SmartFinder.Base;
 using Geeks.VSIX.SmartFinder.Definition;
+using GeeksAddin;
+using Microsoft.Win32;
 //using Geeks.VSIX.SmartFinder.Properties;
 
 namespace Geeks.VSIX.SmartFinder.FileFinder
@@ -20,12 +22,19 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
         public FinderForm()
         {
             InitializeComponent();
+            this.Font = SystemFonts.IconTitleFont;
+            SystemEvents.UserPreferenceChanged += new UserPreferenceChangedEventHandler(SystemEvents_UserPreferenceChanged);
+            this.FormClosing += new FormClosingEventHandler(Form_FormClosing);
         }
 
         public FinderForm(string title, Color color, Loader loader, Filterer filterer, string defaultSearchTerm)
         {
             InitializeComponent();
             lstFiles.ItemHeight = 20;
+            this.Font = SystemFonts.IconTitleFont;
+            SystemEvents.UserPreferenceChanged += new UserPreferenceChangedEventHandler(SystemEvents_UserPreferenceChanged);
+            this.FormClosing += new FormClosingEventHandler(Form_FormClosing);
+
 
             if (loader.GetType() == typeof(MemberLoaderAgent)) MemberFinder.Enabled = false;
             if (loader.GetType() == typeof(StyleLoaderAgent)) CssFinder.Enabled = false;
@@ -282,6 +291,17 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
             this.Close();
         }
 
+        void SystemEvents_UserPreferenceChanged(object sender, UserPreferenceChangedEventArgs e)
+        {
+            if (e.Category == UserPreferenceCategory.Window)
+            {
+                this.Font = SystemFonts.IconTitleFont;
+            }
+        }
 
+        void Form_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SystemEvents.UserPreferenceChanged -= new UserPreferenceChangedEventHandler(SystemEvents_UserPreferenceChanged);
+        }
     }
 }

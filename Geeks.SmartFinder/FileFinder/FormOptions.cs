@@ -1,6 +1,9 @@
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 using Geeks.SmartFinder.Properties;
+using GeeksAddin;
+using Microsoft.Win32;
 
 namespace Geeks.VSIX.SmartFinder.FileFinder
 {
@@ -12,6 +15,9 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
         {
             InitializeComponent();
             PreviousExcludedDirectoryText = txtExcludedDirectories.Text;
+            this.Font = SystemFonts.IconTitleFont;
+            SystemEvents.UserPreferenceChanged += new UserPreferenceChangedEventHandler(SystemEvents_UserPreferenceChanged);
+            this.FormClosing += new FormClosingEventHandler(Form_FormClosing);
         }
 
         void btnSaveOptions_Click(object sender, EventArgs e)
@@ -47,6 +53,18 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
                 chkBoxMethodReturnTypes.Enabled = false;
                 chkBoxClassNames.Enabled = false;
             }
+        }
+        void SystemEvents_UserPreferenceChanged(object sender, UserPreferenceChangedEventArgs e)
+        {
+            if (e.Category == UserPreferenceCategory.Window)
+            {
+                this.Font = SystemFonts.IconTitleFont;
+            }
+        }
+
+        void Form_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SystemEvents.UserPreferenceChanged -= new UserPreferenceChangedEventHandler(SystemEvents_UserPreferenceChanged);
         }
     }
 }

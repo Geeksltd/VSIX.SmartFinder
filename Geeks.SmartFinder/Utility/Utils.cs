@@ -13,6 +13,9 @@ using System.IO;
 using System.Linq;
 using System.Diagnostics;
 using Microsoft.VisualStudio.Shell;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Windows;
 
 namespace GeeksAddin
 {
@@ -122,6 +125,44 @@ namespace GeeksAddin
                 if (str.Contains(subString)) return true;
 
             return false;
+        }
+
+        /// <summary>
+        /// Changes fonts of controls contained in font collection recursively. <br/>
+        /// <b>Usage:</b> <c><br/>
+        /// SetAllControlsFont(this.Controls, 20); // This makes fonts 20% bigger. <br/>
+        /// SetAllControlsFont(this.Controls, -4, false); // This makes fonts smaller by 4.</c>
+        /// </summary>
+        /// <param name="ctrls">Control collection containing controls</param>
+        /// <param name="amount">Amount to change: posive value makes it bigger, 
+        /// negative value smaller</param>
+        /// <param name="amountInPercent">True - grow / shrink in percent, 
+        /// False - grow / shrink absolute</param>
+        public static void SetAllControlsFontSize(
+                           System.Windows.Forms.Control.ControlCollection ctrls,
+                           int amount = 0, bool amountInPercent = true)
+        {
+            if (amount == 0) return;
+            foreach (Control ctrl in ctrls)
+            {
+                // recursive
+                if (ctrl.Controls != null) SetAllControlsFontSize(ctrl.Controls,
+                                                                  amount, amountInPercent);
+                if (ctrl != null)
+                {
+                    var oldSize = ctrl.Font.Size;
+                    float newSize =
+                       (amountInPercent) ? oldSize + oldSize * (amount / 100) : oldSize + amount;
+                    if (newSize < 4) newSize = 4; // don't allow less than 4
+                    var fontFamilyName = ctrl.Font.FontFamily.Name;
+                    ctrl.Font = new Font(fontFamilyName, newSize);
+                };
+            };
+        }
+
+        public static int GetWindowsScaling()
+        {
+            return (int)(100 * Screen.PrimaryScreen.Bounds.Width / SystemParameters.PrimaryScreenWidth);
         }
     }
 }
