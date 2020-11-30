@@ -30,8 +30,8 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
         public FinderForm(string title, Color color, Loader loader, Filterer filterer, string defaultSearchTerm)
         {
             InitializeComponent();
-            lstFiles.ItemHeight = 20;
-            this.Font = SystemFonts.IconTitleFont;
+            lstFiles.Font= SystemFonts.IconTitleFont;
+            lstFiles.ItemHeight = lstFiles.Font.Height;
             SystemEvents.UserPreferenceChanged += new UserPreferenceChangedEventHandler(SystemEvents_UserPreferenceChanged);
             this.FormClosing += new FormClosingEventHandler(Form_FormClosing);
 
@@ -295,7 +295,8 @@ namespace Geeks.VSIX.SmartFinder.FileFinder
         {
             if (e.Category == UserPreferenceCategory.Window)
             {
-                this.Font = SystemFonts.IconTitleFont;
+                lstFiles.Font = SystemFonts.IconTitleFont;
+                lstFiles.ItemHeight = lstFiles.Font.Height;
             }
         }
 
